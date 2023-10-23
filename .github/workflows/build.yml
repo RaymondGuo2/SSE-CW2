@@ -21,10 +21,12 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-    - name: Install Pytest
-      run: pip install pytest
+    - name: Install Pytest and Flask
+      run: |
+        pip install flask
+        pip install pytest
     - name: Run Tests
-      run: python -m pytest
+      run: pytest
 
   deploy-to-vercel:
     needs:
