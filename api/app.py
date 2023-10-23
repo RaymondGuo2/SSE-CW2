@@ -15,6 +15,7 @@ def submit():
     return render_template("form.html", name=input_name,
                            email=input_email, message=input_message)
 
+
 def process_query(query):
     if query == "dinosaurs":
         return "Dinosaurs ruled the Earth 200 million years ago"
