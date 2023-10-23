@@ -22,10 +22,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
     - name: Run Tests
-      run: pytest
+      run: Pytest
 
   deploy-to-vercel:
-    needs: python-formatting
+    needs:
+      - python-formatting
+      - run-tests
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
