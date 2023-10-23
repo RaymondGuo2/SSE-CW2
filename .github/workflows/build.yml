@@ -24,7 +24,7 @@ jobs:
     - name: Install Pytest
       run: pip install pytest
     - name: Run Tests
-      run: pytest
+      run: python -m pytest
 
   deploy-to-vercel:
     needs:
