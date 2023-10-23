@@ -14,3 +14,16 @@ def submit():
     input_message = request.form.get("message")
     return render_template("form.html", name=input_name,
                            email=input_email, message=input_message)
+
+def process_query(query):
+    if query == "dinosaurs":
+        return "Dinosaurs ruled the Earth 200 million years ago"
+    else:
+        return "Unknown"
+
+
+@app.route('/query', methods=['GET]')
+def query():
+    query = request.args.get('q')
+    result = process_query(query)
+    return result
