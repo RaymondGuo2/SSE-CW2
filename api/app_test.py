@@ -12,4 +12,4 @@ def test_does_not_know_about_asteroids():
 
 
 def test_what_is_your_name():
-    assert process_query("What is your name?" == "SSE_LEGENDS"
+    assert process_query("What is your name?") == "SSE_LEGENDS"
