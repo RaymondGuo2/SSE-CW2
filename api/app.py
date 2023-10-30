@@ -30,10 +30,6 @@ def process_query(query):
 
 
 def add(query):
-    numeric_query = ''.join(
-        char for char in query if char.isdigit() or char.isspace()
-    )
-    words = numeric_query.split()
     index_plus_start = query.find("plus")
     index_plus_end = index_plus_start + len("plus")
     num1 = int(query[:index_plus_start].strip())
