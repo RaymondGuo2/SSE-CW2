@@ -30,10 +30,15 @@ def process_query(query):
 
 
 def add(query):
-    index_plus_start = query.find("plus")
-    index_plus_end = index_plus_start + len("plus")
-    num1 = int(query[:index_plus_start].strip())
-    num2 = int(query[index_plus_end:].strip())
+    words = query.split()
+    num1 = None
+    num2 = None
+    for word in words:
+        if word.isnumeric():
+            if num1 is None:
+                num1 = int(word)
+            elif num2 is None:
+                num2 = int(word)
     result = num1 + num2
     result = str(result)
     return result
