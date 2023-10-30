@@ -23,21 +23,21 @@ def first_addition():
 
 def largest_number1():
     assert process_query("Which of the following numbers" + 
-                        " is the largest: 87, 13, 84?") == (
+                         " is the largest: 87, 13, 84?") == (
         "87"
-    )   
+    )
 
 
 def largest_number2():
     assert process_query("Which of the following numbers" +
-                        " is the largest: 11, 78, 54?") == (
+                         " is the largest: 11, 78, 54?") == (
         "78"
     )
 
 
 def largest_number3():
     assert process_query("Which of the following numbers" +
-                        " is the largest: 8, 97, 77?") == (
+                         " is the largest: 8, 97, 77?") == (
         "97"
     )
 
@@ -52,6 +52,6 @@ def third_addition():
 
 def largest_number4():
     assert process_query("Which of the following numbers" + 
-                        " is the largest: 45, 70, 89?") == (
+                         " is the largest: 45, 70, 89?") == (
         "89"
     )
