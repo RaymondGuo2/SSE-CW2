@@ -30,7 +30,17 @@ def process_query(query):
 
 
 def add(query):
-    numbers = [int(number) for number in re.findall(r'\d+', query)]
+    numbers = []
+    current_number = ""
+    for char in query:
+        if char.isdigit():
+            current_number += char
+        elif current_number:
+            numbers.append(int(current_number))
+            current_number = ""
+    if current_number:
+        numbers.append(int(current_number))
+
     num1 = numbers[0]
     num2 = numbers[1]    
     result = num1 + num2
