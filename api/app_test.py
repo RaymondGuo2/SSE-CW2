@@ -15,5 +15,5 @@ def test_what_is_your_name():
     assert process_query("What is your name?") == "SSE_LEGENDS"
 
 
-def first_addition():
+def test_first_addition():
     assert process_query("What is 71 plus 61?") == "132"
