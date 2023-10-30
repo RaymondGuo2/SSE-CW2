@@ -34,11 +34,12 @@ def add(query):
     num1 = 0
     num2 = 0
     for i in range(len(words)):
-        if words[i].isdigit() and i + 1 < len(words) and words[i + 1].lower() == "plus":
-            num1 = int(words[i])
-            if i + 2 < len(words) and words[i + 2].isdigit():
-                num2 = int(words[i + 2])
-                break
+        if words[i].isdigit() and i + 1 < len(words):
+            if words[i + 1].lower() == "plus":
+                num1 = int(words[i])
+                if i + 2 < len(words) and words[i + 2].isdigit():
+                    num2 = int(words[i + 2])
+                    break
     result = num1 + num2
     result = str(result)
     return result
