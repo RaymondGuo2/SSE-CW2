@@ -30,19 +30,11 @@ def process_query(query):
 
 
 def add(query):
-    words = query.split()
-    num1 = 0
-    num2 = 0
-    for i in range(len(words)):
-        if words[i].isdigit() and i + 1 < len(words):
-            if words[i + 1].lower() == "plus":
-                num1 = int(words[i])
-                if i + 2 < len(words) and words[i + 2].isdigit():
-                    num2 = int(words[i + 2])
-                    break
+    numbers = [int(number) for number in re.findall(r'\d+', query)]
+    num1 = numbers[0]
+    num2 = numbers[1]    
     result = num1 + num2
-    result = str(result)
-    return result
+    return str(result)
 
 
 @app.route("/query", methods=["GET"])
