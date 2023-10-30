@@ -24,15 +24,19 @@ def process_query(query):
     if query == "What is your name?":
         return "SSE_LEGENDS"
     if "plus" in query:
-        words = query.split()
-        index_plus = words.index("plus")
-        num1 = int(words[index_plus - 1])
-        num2 = int(words[index_plus + 1])
-        result = num1 + num2
-        result = str(result)
-        return result
+        return add(query)
     else:
         return "Unknown"
+
+
+def add(query):
+    words = query.split()
+    index_plus = words.index("plus")
+    num1 = int(words[index_plus - 1])
+    num2 = int(words[index_plus + 1])
+    result = num1 + num2
+    result = str(result)
+    return result
 
 
 @app.route("/query", methods=["GET"])

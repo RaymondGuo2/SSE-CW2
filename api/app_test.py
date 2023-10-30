@@ -16,4 +16,4 @@ def test_what_is_your_name():
 
 
 def first_addition():
-    assert process_query("What is 71 plus 61?") == ("132")
+    assert process_query("What is 71 plus 61?") == "132"
