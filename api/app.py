@@ -37,7 +37,7 @@ def add(query):
         if word.isnumeric():
             if num1 == 0:
                 num1 = int(word)
-            elif num2 == 0:
+            if num2 == 0:
                 num2 = int(word)
     result = num1 + num2
     result = str(result)
