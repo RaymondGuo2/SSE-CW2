@@ -21,20 +21,13 @@ def process_query(query):
         return "Dinosaurs ruled the Earth 200 million years ago"
     if query == "What is your name?":
         return "SSE_LEGENDS"
-    if query == "What is 71 plus 61?":
-        return "132"
-    if query == "Which of the following numbers is the largest: 87, 13, 84?":
-        return "87"
-    if query == "Which of the following numbers is the largest: 11, 78, 54?":
-        return "78"
-    if query == "Which of the following numbers is the largest: 8, 97, 77?":
-        return "97"
-    if query == "What is 44 plus 42?":
-        return "86"
-    if query == "What is 51 plus 48?":
-        return "99"
-    if query == "Which of the following numbers is the largest: 45, 70, 89?":
-        return "89"
+    if "plus" in query:
+        words = query.split()
+        index_plus = words.index("plus")
+        num1 = int(words[index_plus -1])
+        num2 = int(words[index_plus +1])
+        result = num1 + num2
+        return result
     else:
         return "Unknown"
 
