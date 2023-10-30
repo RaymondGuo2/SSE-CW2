@@ -19,6 +19,8 @@ def submit():
 def process_query(query):
     if query == "dinosaurs":
         return "Dinosaurs ruled the Earth 200 million years ago"
+    if query == "What is your name?":
+        return "SSE_LEGENDS"
     else:
         return "Unknown"
 
