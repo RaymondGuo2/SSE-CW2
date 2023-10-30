@@ -30,7 +30,7 @@ def process_query(query):
 
 
 def add(query):
-    numeric_query = "".join(
+    numeric_query = ''.join(
         char for char in query if char.isdigit() or char.isspace()
     )
     words = numeric_query.split()
