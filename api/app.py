@@ -42,7 +42,7 @@ def add(query):
         numbers.append(int(current_number))
 
     num1 = numbers[0]
-    num2 = numbers[1]    
+    num2 = numbers[1]
     result = num1 + num2
     return str(result)
 
