@@ -21,3 +21,7 @@ def test_first_addition():
 
 def test_multiply():
     assert process_query("What is 84 multiplied by 66?") == "5544"
+
+
+def test_subtract():
+    assert process_query("What is 93 minus 81?") == "12"

@@ -27,6 +27,8 @@ def process_query(query):
         return add(query)
     if "multiplied" in query:
         return multiply(query)
+    if "minus" in query:
+        return subtract(query)
     else:
         return "Unknown"
 
@@ -64,6 +66,24 @@ def multiply(query):
     num1 = numbers[0]
     num2 = numbers[1]
     result = num1 * num2
+    return str(result)
+
+
+def subtract(query):
+    numbers = []
+    current_number = ""
+    for char in query:
+        if char.isdigit():
+            current_number += char
+        elif current_number:
+            numbers.append(int(current_number))
+            current_number = ""
+    if current_number:
+        numbers.append(int(current_number))
+
+    num1 = numbers[0]
+    num2 = numbers[1]
+    result = num1 - num2
     return str(result)
 
 
