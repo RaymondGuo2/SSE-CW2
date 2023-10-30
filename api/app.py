@@ -29,6 +29,7 @@ def process_query(query):
         num1 = int(words[index_plus - 1])
         num2 = int(words[index_plus + 1])
         result = num1 + num2
+        result = str(result)
         return result
     else:
         return "Unknown"
