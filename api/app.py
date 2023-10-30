@@ -34,9 +34,10 @@ def add(query):
         char for char in query if char.isdigit() or char.isspace()
     )
     words = numeric_query.split()
-    index_plus = words.index("plus")
-    num1 = int(words[index_plus - 1])
-    num2 = int(words[index_plus + 1])
+    index_plus_start = query.find("plus")
+    index_plus_end = index_plust_start + len("plus")
+    num1 = int(query[:index_plus_start].strip())
+    num2 = int(query[index_plus_end:].strip())
     result = num1 + num2
     result = str(result)
     return result
