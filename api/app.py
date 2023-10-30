@@ -38,7 +38,7 @@ def add(query):
             if num1 == 0:
                 num1 = int(word)
             if num2 == 0:
-                num2 = int(word)
+                num2 = int(word + 2)
     result = num1 + num2
     result = str(result)
     return result
