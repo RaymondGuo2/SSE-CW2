@@ -35,7 +35,7 @@ def add(query):
     )
     words = numeric_query.split()
     index_plus_start = query.find("plus")
-    index_plus_end = index_plust_start + len("plus")
+    index_plus_end = index_plus_start + len("plus")
     num1 = int(query[:index_plus_start].strip())
     num2 = int(query[index_plus_end:].strip())
     result = num1 + num2
