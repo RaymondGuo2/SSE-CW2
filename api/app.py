@@ -110,8 +110,6 @@ def returngithub():
     if response.status_code == 200:
         repos = response.json()
         return jsonify([repo["full_name"] for repo in repos])
-    else:
-        return jsonify({"error: Failed to fetch repositories"}), response.status_code
-
+    
     input_username = request.form.get("username")
     return render_template("returngitname.html", username=input_username)
