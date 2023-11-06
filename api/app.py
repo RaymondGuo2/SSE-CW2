@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, jsonify, request
 import requests
 
 app = Flask(__name__)
@@ -102,8 +102,12 @@ def githubuname():
 
 @app.route("/returngitname", methods=["GET", "POST"])
 def returngithub():
-    username = request.form.get("username")
+    username = request.args.get("username")
+
     response = requests.get(f"https://api.github.com/users/{username}/repos")
     if response.status_code == 200:
         repos = response.json()
-        return render_template("returngitname.html", username=username, repos=repos)
+        return jsonify([repo["full_name"] for repo in repos])
+
+    input_username = request.form.get("username")    
+    return render_template("returngitname.html", username=input_username)
