@@ -104,9 +104,6 @@ def githubuname():
 def returngithub():
     username = request.args.get("username")
 
-    if not username:
-        return jsonify({"error": "Missing username parameter"}, 400)
-
     response = requests.get(f"https://api.github.com/users/{username}/repos")
     if response.status_code == 200:
         repos = response.json()
