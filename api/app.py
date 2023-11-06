@@ -102,12 +102,10 @@ def githubuname():
 
 @app.route("/returngitname", methods=["GET", "POST"])
 def returngithub():
-    username = request.args.get("username")
-
+    input_username = request.form.get("username")
     response = requests.get(f"https://api.github.com/users/{username}/repos")
     if response.status_code == 200:
         repos = response.json()
-        return jsonify([repo["full_name"] for repo in repos])
-
-    input_username = request.form.get("username")
-    return render_template("returngitname.html", username=input_username)
+        return render_template(
+            "returngitname.html", username=input_username, repos=repos
+        )
