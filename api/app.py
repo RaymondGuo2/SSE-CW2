@@ -109,5 +109,5 @@ def returngithub():
         repos = response.json()
         return jsonify([repo["full_name"] for repo in repos])
 
-    input_username = request.form.get("username")    
+    input_username = request.form.get("username")
     return render_template("returngitname.html", username=input_username)
