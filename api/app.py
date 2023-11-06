@@ -99,7 +99,7 @@ def githubuname():
     return render_template("githubuname.html")
 
 
-@app.route("/returngitname", methods=["GET", "POST"])
+@app.route("/returngitname", methods=["POST"])
 def returngitname():
     input_username = request.form.get("username")
     return render_template("returngitname.html", name=input_username)
