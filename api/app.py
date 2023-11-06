@@ -94,9 +94,10 @@ def query():
     return result
 
 
-@app.route("/githubuname")
-def githubuname():
-    return render_template("githubuname.html")
+@app.route("/githubuname", methods=["POST"])
+def submit():
+    input_username = request.form.get("GitHub username")
+    return render_template("githubuname.html", name=input_username)
 
 
 @app.route("/returngitname")
