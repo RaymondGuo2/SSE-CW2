@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, requests
+from flask import Flask, render_template, request, requests, jsonify
 
 app = Flask(__name__)
 
@@ -101,10 +101,17 @@ def githubuname():
 
 @app.route("/returngitname", methods=["GET", "POST"])
 def returngithub():
-    response = requests.get(“https://api.github.com/users/RaymondGuo2/repos”)
+    username = request.args.get('username')
+
+    if not username:
+        return jsonify({'error': 'Missing username parameter'}, 400)
+    
+    response = requests.get(f"https://api.github.com/users/{username}/repos")
     if response.status_code == 200:
-        repos = response.json() # data returned is a list of ‘repository’ entities
-        for repo in repos:
-            print(repo[“full_name”])
+        repos = response.json()
+        return jsonify([repo["full_name"] for repo in repos])
+    else:
+        return jsonify({'error: Failed to fetch repositories'}), response.status_code
+        
     input_username = request.form.get("username")
     return render_template("returngitname.html", username=input_username)
