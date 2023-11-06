@@ -1,12 +1,7 @@
 from flask import Flask, render_template, request, requests
 
-response = requests.get(“https://api.github.com/users/RaymondGuo2/repos”)
-if response.status_code == 200:
-    repos = response.json() # data returned is a list of ‘repository’ entities
-    for repo in repos:
-        print(repo[“full_name”])
-
 app = Flask(__name__)
+
 
 @app.route("/")
 def hello_world():
@@ -106,5 +101,10 @@ def githubuname():
 
 @app.route("/returngitname", methods=["GET", "POST"])
 def returngithub():
+    response = requests.get(“https://api.github.com/users/RaymondGuo2/repos”)
+    if response.status_code == 200:
+        repos = response.json() # data returned is a list of ‘repository’ entities
+        for repo in repos:
+            print(repo[“full_name”])
     input_username = request.form.get("username")
     return render_template("returngitname.html", username=input_username)
