@@ -95,9 +95,10 @@ def query():
 
 
 @app.route("/githubuname")
-def about():
+def githubuname():
     return render_template("githubuname.html")
 
+
 @app.route("/returngitname")
-def about():
+def returngitname():
     return render_template("returngitname.html")
