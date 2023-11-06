@@ -11,11 +11,18 @@
         <table border="1">
             <tr>
                 <th>Repository Name</th>
+                <th>URL Link</th>
+                <th>Primary Language</th>
+                <th>Creation Date</th>
                 <th>Last Updated</th>
+
             </tr>
             {% for repo in repos %}
                 <tr>
                     <td>{{ repo.full_name }}</td>
+                    <td>{{ repo.html_url }}</td>
+                    <td>{{ repo.language }}</td>
+                    <td>{{ repo.created_at }}</td>
                     <td>{{ repo.updated_at }}</td>
                 </tr>
             {% endfor %}
