@@ -106,7 +106,8 @@ def returngithub():
     repos = None
 
     response = requests.get(f"https://api.github.com/users/{input_username}/repos")
+
     if response.status_code == 200:
         repos = response.json()
-    
+
     return render_template("returngitname.html", username=input_username, repos=repos)
