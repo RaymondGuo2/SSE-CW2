@@ -105,8 +105,7 @@ def returngithub():
     input_username = request.form.get("username")
     repos = []
 
-    response = requests.get(
-        f"https://api.github.com/users/{input_username}/repos")
+    response = requests.get(f"https://api.github.com/users/{input_username}/repos")
 
     if response.status_code == 200:
         repos = response.json()
@@ -124,11 +123,7 @@ def returngithub():
                     "created_at": repo["created_at"],
                     "updated_at": repo["updated_at"],
                     "latest_commit": {
-                        "hash": (
-                            latest_commit["sha"] 
-                            if latest_commit 
-                            else "N/A"
-                        ),
+                        "hash": (latest_commit["sha"] if latest_commit else "N/A"),
                         "author": (
                             latest_commit["commit"]["author"]["name"]
                             if latest_commit
@@ -148,5 +143,4 @@ def returngithub():
                 }
                 repos.append(repo_data)
 
-    return render_template("returngitname.html", 
-                           username=input_username, repos=reps)
+    return render_template("returngitname.html", username=input_username, repos=repos)
