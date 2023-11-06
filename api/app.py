@@ -103,13 +103,38 @@ def githubuname():
 @app.route("/returngitname", methods=["GET", "POST"])
 def returngithub():
     input_username = request.form.get("username")
-    repos = None
+    repos = []
 
     response = requests.get(
         f"https://api.github.com/users/{input_username}/repos")
 
     if response.status_code == 200:
         repos = response.json()
+        for repo in repos:
+            commits_url = repo['commits_url'].split('{')[0]
+            commits_response = requests.get(commits_url)
+            if commits_response.status_code == 200:
+                commits = commits_response.json()
+                latest_commit = commits[0] if commits else None
+
+                repo_data = {
+                    'full_name': repo['full_name'],
+                    'html_url': repo['html_url'],
+                    'language': repo['language'],
+                    'created_at': repo['created_at'],
+                    'updated_at': repo['updated_at'],
+                    'latest_commit': {
+                        'hash': (latest_commit['sha'] 
+                                 if latest_commit else 'N/A'),
+                        'author': (latest_commit['commit']['author']['name'] 
+                                   if latest_commit else 'N/A'),
+                        'date': (latest_commit['commit']['author']['date'] 
+                                 if latest_commit else 'N/A'),
+                        'message': (latest_commit['commit']['message'] 
+                                    if latest_commit else 'N/A')
+                    }   
+                }
+                repos.append(repo_data)
 
     return render_template(
         "returngitname.html", username=input_username, repos=repos)
