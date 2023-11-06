@@ -126,8 +126,8 @@ def returngithub():
                     "updated_at": repo["updated_at"],
                     "latest_commit": {
                         "hash": (
-                            latest_commit["sha"] 
-                            if latest_commit 
+                            latest_commit["sha"]
+                            if latest_commit
                             else "N/A"
                         ),
                         "author": (
