@@ -149,4 +149,4 @@ def returngithub():
                 repos.append(repo_data)
 
     return render_template("returngitname.html", 
-                           username=input_username, repos=repos)
+                           username=input_username, repos=reps)
