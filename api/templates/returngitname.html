@@ -15,7 +15,10 @@
                 <th>Primary Language</th>
                 <th>Creation Date</th>
                 <th>Last Updated</th>
-
+                <th>Latest Commit Hash</th>
+                <th>Latest Commit Author</th>
+                <th>Latest Commit Date</th>
+                <th>Latest Commit Message</th>
             </tr>
             {% for repo in repos %}
                 <tr>
@@ -24,6 +27,10 @@
                     <td>{{ repo.language }}</td>
                     <td>{{ repo.created_at }}</td>
                     <td>{{ repo.updated_at }}</td>
+                    <td>{{ repo.latest_commit.hash }}</td>
+                    <td>{{ repo.latest_commit.author }}</td>
+                    <td>{{ repo.latest_commit.date }}</td>
+                    <td>{{ repo.latest_commit.message }}</td>
                 </tr>
             {% endfor %}
         </table>
