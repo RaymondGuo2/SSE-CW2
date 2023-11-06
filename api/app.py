@@ -102,4 +102,4 @@ def githubuname():
 @app.route("/returngitname", methods=["GET", "POST"])
 def returngithub():
     input_username = request.form.get("username")
-    return render_template("returngitname.html", name=input_username)
+    return render_template("returngitname.html", username=input_username)
