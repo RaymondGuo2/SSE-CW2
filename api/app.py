@@ -92,3 +92,12 @@ def query():
     query = request.args.get("q")
     result = process_query(query)
     return result
+
+
+@app.route("/githubuname")
+def about():
+    return render_template("githubuname.html")
+
+@app.route("/returngitname")
+def about():
+    return render_template("returngitname.html")
