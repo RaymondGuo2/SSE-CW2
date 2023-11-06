@@ -96,7 +96,7 @@ def query():
 
 @app.route("/githubuname")
 def githubuname():
-    return render_template("guthubuname.html")
+    return render_template("githubuname.html")
 
 
 @app.route("/returngitname", methods=["POST"])
