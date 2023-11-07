@@ -100,7 +100,9 @@ def query():
 def githubuname():
     return render_template("githubuname.html")
 
+
 logging.basicConfig(level=logging.INFO)
+
 
 @app.route("/returngitname", methods=["GET", "POST"])
 def returngithub():
