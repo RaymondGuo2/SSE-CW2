@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import requests
+import logging
 
 app = Flask(__name__)
 
@@ -99,55 +100,70 @@ def query():
 def githubuname():
     return render_template("githubuname.html")
 
+logging.basicConfig(level=logging.INFO)
 
 @app.route("/returngitname", methods=["GET", "POST"])
 def returngithub():
     input_username = request.form.get("username")
     repos = []
+    error_message = None
 
-    response = requests.get(
-        f"https://api.github.com/users/{input_username}/repos"
-    )
+    try:
+        response = requests.get(
+            f"https://api.github.com/users/{input_username}/repos"
+        )
+        response.raise_for_status()
 
-    if response.status_code == 200:
-        repos = response.json()
-        for repo in repos:
+        repos_json = response.json()
+        for repo in repos_json:
             commits_url = repo["commits_url"].split("{")[0]
             commits_response = requests.get(commits_url)
-            if commits_response.status_code == 200:
-                commits = commits_response.json()
-                latest_commit = commits[0] if commits else None
+            commits_response.raise_for_status()
 
-                repo_data = {
-                    "full_name": repo["full_name"],
-                    "html_url": repo["html_url"],
-                    "language": repo["language"],
-                    "created_at": repo["created_at"],
-                    "updated_at": repo["updated_at"],
-                    "latest_commit": {
-                        "hash": (
-                            latest_commit["sha"]
-                            if latest_commit
-                            else "N/A"
-                        ),
-                        "author": (
-                            latest_commit["commit"]["author"]["name"]
-                            if latest_commit
-                            else "N/A"
-                        ),
-                        "date": (
-                            latest_commit["commit"]["author"]["date"]
-                            if latest_commit
-                            else "N/A"
-                        ),
-                        "message": (
-                            latest_commit["commit"]["message"]
-                            if latest_commit
-                            else "N/A"
-                        ),
-                    },
-                }
-                repos.append(repo_data)
+            commits = commits_response.json()
+            latest_commit = commits[0] if commits else None
+
+            repo_data = {
+                "full_name": repo["full_name"],
+                "html_url": repo["html_url"],
+                "language": repo["language"],
+                "created_at": repo["created_at"],
+                "updated_at": repo["updated_at"],
+                "latest_commit": {
+                    "hash": (
+                        latest_commit["sha"]
+                        if latest_commit
+                        else "N/A"
+                    ),
+                    "author": (
+                        latest_commit["commit"]["author"]["name"]
+                        if latest_commit
+                        else "N/A"
+                    ),
+                    "date": (
+                        latest_commit["commit"]["author"]["date"]
+                        if latest_commit
+                        else "N/A"
+                    ),
+                    "message": (
+                        latest_commit["commit"]["message"]
+                        if latest_commit
+                        else "N/A"
+                    ),
+                },
+            }
+            repos.append(repo_data)
+    except requests.RequestException as req_err:
+        logging.error(
+            f"HTTP request error for user {input_username}: {req_err}"
+        )
+        error_message = (
+            "Failed to fetch repositories. "
+            "Please try again later."
+        )
+
+    if error_message:
+        return render_template("error.html", error_message=error_message), 500
 
     return render_template(
         "returngitname.html", username=input_username, repos=repos
