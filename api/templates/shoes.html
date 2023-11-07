@@ -1,26 +1,79 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>Shoes</title>
-        <style> h1, h2, h3, h4, h5, h6 {text-align:center}</style>
-        <a href = "/index"><button>Home</button></a>
-        <a href = "/shoes"><button>Shoes</button></a>
-        <a href = "/jumper"><button>Jumpers</button></a>
-        <a href = "/hat"><button>Hats</button></a>
-        <a href = "/githubuname"><button>GitHub Entry</button></a>
-        <a href = "/contact"><button>Contact Us</button></a>
-      </head>
-    <body>
-        <h1 style="background-color: aquamarine">RZ Clothing</h1>
+<head>
+    <title>Shoes</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            padding: 0 10px;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .header {
+            background-color: aquamarine;
+            color: black;
+            padding: 10px 0;
+            text-align: left;
+            padding-left: 10px;
+        }
+        .subheader {
+            background-color: bisque;
+            color: black;
+            padding: 10px 0;
+            text-align: left;
+            padding-left: 10px;
+        }
+        .product {
+            text-align: center;
+        }
+        img {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/index">Home</a>
+        <a href="/shoes">Shoes</a>
+        <a href="/jumper">Jumpers</a>
+        <a href="/hat">Hats</a>
+        <a href="/githubuname">GitHub Entry</a>
+        <a href="/contact">Contact Us</a>
+    </div>
 
-        <h2 style = "background-color: bisque;"> Shop our shoes! </h2>
+    <h1 class="header">RZ Clothing</h1>
+    <h2 class="subheader">Shop our shoes!</h2>
+
+    <div class="product">
         <h3>Air Force 1s</h3>
-        <center><p>Purchase these Air Force 1s for £60.</p></center>
-        <center><img src="https://d2ob0iztsaxy5v.cloudfront.net/product/270104/2701041020_zm.jpg"
+        <p>Purchase these Air Force 1s for £60.</p>
+        <img src="https://d2ob0iztsaxy5v.cloudfront.net/product/270104/2701041020_zm.jpg"
         width="200" height="200">
-        <h3>Black Beanie</h3>
-        <center><p>Purchase these Vans for £50.</p></center>
-        <center><img src="https://i8.amplience.net/t/jpl/sz_product_list?plu=sz_284146_a&qlt=85&qlt=92&w=363&h=281&v=1&fmt=auto&fmt=auto"
+    </div>
+
+    <div class="product">
+        <p>Purchase these Vans for £50.</p>
+        <img src="https://i8.amplience.net/t/jpl/sz_product_list?plu=sz_284146_a&qlt=85&qlt=92&w=363&h=281&v=1&fmt=auto&fmt=auto"
         width="200" height="200">
-  
-    </body>
+    </div>
+
+</body>
 </html>
