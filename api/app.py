@@ -25,6 +25,16 @@ def hat_page():
     return render_template("hat.html")
 
 
+@app.route("/shoes")
+def shoes_page():
+    return render_template("shoes.html")
+
+
+@app.route("/jumper")
+def jumper_page():
+    return render_template("jumper.html")
+
+
 def process_query(query):
     if query == "dinosaurs":
         return "Dinosaurs ruled the Earth 200 million years ago"
