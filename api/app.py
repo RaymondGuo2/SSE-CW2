@@ -20,6 +20,11 @@ def submit():
     )
 
 
+@app.route("/hat")
+def hat_page():
+    return render_template("hat.html")
+
+
 def process_query(query):
     if query == "dinosaurs":
         return "Dinosaurs ruled the Earth 200 million years ago"
