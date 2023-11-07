@@ -20,6 +20,11 @@ def submit():
     )
 
 
+@app.route("/contact")
+def contact_page():
+    return render_template("contact.html")
+
+
 @app.route("/hat")
 def hat_page():
     return render_template("hat.html")
