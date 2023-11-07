@@ -1,25 +1,77 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>Jumpers</title>
-        <style> h1, h2, h3, h4, h5, h6 {text-align:center}</style>
-        <a href = "/index"><button>Home</button></a>
-        <a href = "/shoes"><button>Shoes</button></a>
-        <a href = "/jumper"><button>Jumpers</button></a>
-        <a href = "/hat"><button>Hats</button></a>
-        <a href = "/githubuname"><button>GitHub Entry</button></a>
-        <a href = "/contact"><button>Contact Us</button></a>
-      </head>
-    <body>
-        <h1 style="background-color: aquamarine">RZ Clothing</h1>
-        <h2 style="background-color: bisque;"> Shop our jumpers! </h2>
+<head>
+    <title>Jumpers</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            padding: 0 10px;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .header {
+            background-color: aquamarine;
+            color: black;
+            padding: 10px 0;
+            text-align: left;
+            padding-left: 10px;
+        }
+        .subheader {
+            background-color: bisque;
+            color: black;
+            padding: 10px 0;
+            text-align: left;
+            padding-left: 10px;
+        }
+        .product {
+            text-align: center;
+        }
+        img {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/index">Home</a>
+        <a href="/shoes">Shoes</a>
+        <a href="/jumper">Jumpers</a>
+        <a href="/hat">Hats</a>
+        <a href="/githubuname">GitHub Entry</a>
+        <a href="/contact">Contact Us</a>
+    </div>
+
+    <h1 class="header">RZ Clothing</h1>
+    <h2 class="subheader">Shop our jumpers!</h2>
+
+    <div class="product">
         <h3>Hugo Boss Jumper</h3>
-        <center><p>Purchase this Hugo Boss Jumper for £60.</p></center>
-        <center><img src="https://brandrunner.co.uk/wp-content/uploads/2021/01/Hugo-Boss-Jumper-Boys-1.jpg"
-        width="200" height="200">
-  
+        <p>Purchase this Hugo Boss Jumper for £60.</p>
+        <img src="https://brandrunner.co.uk/wp-content/uploads/2021/01/Hugo-Boss-Jumper-Boys-1.jpg" width="200" height="200">
+    </div>
+
+    <div class="product">
         <h3>Uniqlo Jumper</h3>
-        <center><p>Purchase this Uniqlo Jumper for £40.</p></center>
-        <center><img src="https://www.uniqlo.com/jp/ja/contents/feature/masterpiece/common_22fw/img/item_12_01.jpg"
-        width="200" height="200">
-    </body>
+        <p>Purchase this Uniqlo Jumper for £40.</p>
+        <img src="https://www.uniqlo.com/jp/ja/contents/feature/masterpiece/common_22fw/img/item_12_01.jpg" width="200" height="200">
+    </div>
+</body>
 </html>
