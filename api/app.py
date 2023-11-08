@@ -180,7 +180,9 @@ def returngithub():
             f"HTTP request error for user {input_username}: {req_err}"
         )
         error_message = (
-            "Failed to fetch repositories.\n\nPlease try again later."
+            "Failed to fetch repositories."
+            "\n""\n"
+            "Please try again later."
         )
 
     if error_message:
