@@ -131,7 +131,7 @@ def get_commit_data(owner, repo):
         ]
     commits = response.json()
     commit_dates = [datetime.strptime(commit['commit']['author']['date'], "\n"
-                                      '%Y-%m-%dT%H:%M:%SZ') for commit in commits]
+                                '%Y-%m-%dT%H:%M:%SZ') for commit in commits]
     commit_counts = list(range(1, len(commit_dates) + 1))
     return commit_dates, commit_counts
 
