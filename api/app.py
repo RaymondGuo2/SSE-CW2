@@ -127,7 +127,10 @@ logging.basicConfig(level=logging.INFO)
 def get_commit_data(owner, repo):
     response = requests.get(f"https://api.github.com/repos/{owner}/{repo}/commits")
     commits = response.json()
-    commit_dates = [datetime.strptime(commit['commit']['author']['date'], '%Y-%m-%dT%H:%M:%SZ') for commit in commits]
+    commit_dates = [
+        datetime.strptime(commit["commit"]["author"]["date"], "%Y-%m-%dT%H:%M:%SZ")
+        for commit in commits
+    ]
     commit_counts = list(range(1, len(commit_dates) + 1))
     return commit_dates, commit_counts
 
@@ -139,9 +142,7 @@ def returngithub():
     error_message = None
 
     try:
-        response = requests.get(
-            f"https://api.github.com/users/{input_username}/repos"
-        )
+        response = requests.get(f"https://api.github.com/users/{input_username}/repos")
         response.raise_for_status()
 
         repos_json = response.json()
@@ -160,11 +161,7 @@ def returngithub():
                 "created_at": repo["created_at"],
                 "updated_at": repo["updated_at"],
                 "latest_commit": {
-                    "hash": (
-                        latest_commit["sha"]
-                        if latest_commit
-                        else "N/A"
-                    ),
+                    "hash": (latest_commit["sha"] if latest_commit else "N/A"),
                     "author": (
                         latest_commit["commit"]["author"]["name"]
                         if latest_commit
@@ -176,25 +173,16 @@ def returngithub():
                         else "N/A"
                     ),
                     "message": (
-                        latest_commit["commit"]["message"]
-                        if latest_commit
-                        else "N/A"
+                        latest_commit["commit"]["message"] if latest_commit else "N/A"
                     ),
                 },
             }
             repos.append(repo_data)
     except requests.RequestException as req_err:
-        logging.error(
-            f"HTTP request error for user {input_username}: {req_err}"
-        )
-        error_message = (
-            "Failed to fetch repositories."
-            "Please try again later."
-        )
+        logging.error(f"HTTP request error for user {input_username}: {req_err}")
+        error_message = "Failed to fetch repositories." "Please try again later."
 
     if error_message:
         return render_template("error.html", error_message=error_message), 500
 
-    return render_template(
-        "returngitname.html", username=input_username, repos=repos
-    )
+    return render_template("returngitname.html", username=input_username, repos=repos)
