@@ -1,16 +1,66 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title>Thank You!</title>
-    <style> h1, h2, h3, h4, h5, h6 {text-align:center}</style>
-    <a href = "/"><button>Home</button></a>
-    <a href = "/shoes"><button>Shoes</button></a>
-    <a href = "/jumper"><button>Jumpers</button></a>
-    <a href = "/hat"><button>Hats</button></a>
-    <a href = "/githubuname"><button>GitHub Entry</button></a>
-    <a href = "/contact"><button>Contact Us</button></a>
-  </head>
-  <body>
-    <center><h1 style="background-color:aquamarine;">RZ Clothing</h></h1></center>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            padding: 0 10px;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .header {
+            background-color: aquamarine;
+            color: black;
+            padding: 10px 0;
+            text-align: left;
+            padding-left: 10px;
+        }
+        .subheader {
+            background-color: bisque;
+            color: black;
+            padding: 10px 0;
+            text-align: left;
+            padding-left: 10px;
+        }
+        .product {
+            text-align: center;
+        }
+        img {
+            margin-top: 10px;
+        }
+        h1, h2, h3, h4, h5, h6 {text-align:center}
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/shoes">Shoes</a>
+        <a href="/jumper">Jumpers</a>
+        <a href="/hat">Hats</a>
+        <a href="/githubuname">GitHub Entry</a>
+        <a href="/contact">Contact Us</a>
+    </div>
+
+    <h1 class="header">RZ Clothing</h1>
     <h2>Hello {{ name }}, thank you for submitting our contact form! Our team will aim to respond to your inquiry within 3-5 working days.</h1>
     <p>Name: {{ name }}</p>
     <p>Email: {{ email }}</p>
