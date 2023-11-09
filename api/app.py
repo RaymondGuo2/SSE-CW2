@@ -126,9 +126,9 @@ logging.basicConfig(level=logging.INFO)
 
 
 def get_commit_dates(owner, repo):
-    response = [
+    response = (
         requests.get(f"https://api.github.com/repos/{owner}/{repo}/commits")
-        ]
+        )
     commits = response.json()
     commit_dates = [
         datetime.strptime(commit['commit']['author']['date'],
@@ -138,9 +138,9 @@ def get_commit_dates(owner, repo):
 
 
 def get_commit_counts(owner, repo):
-    response = [
+    response = (
         requests.get(f"https://api.github.com/repos/{owner}/{repo}/commits")
-        ]
+        )
     commits = response.json()
     commit_dates = [
         datetime.strptime(commit['commit']['author']['date'],
