@@ -210,8 +210,8 @@ def returngithub():
                     commit_dates, commit_counts
                  )
             except Exception as e:
-                    logging.error(f"Error processing repo '{repo_name}': {e}")
-                    commit_activity_plot = None
+                logging.error(f"Error processing repo '{repo_name}': {e}")
+                commit_activity_plot = None
 
             repo_data = {
                 "full_name": repo["full_name"],
