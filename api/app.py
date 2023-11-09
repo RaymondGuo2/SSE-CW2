@@ -126,10 +126,11 @@ logging.basicConfig(level=logging.INFO)
 
 def get_commit_counts(owner, repo):
     response = (
-        requests.get(f"https://api.github.com/repos/{owner}/{repo}/commits")
+        requests.get(f"https://api.github.com/repos/{owner}/{repo}/contributors")
         )
-    commits = response.json()
-    return len(commits)
+    contributors = response.json()
+    total_commits = sum(contributor['contributions'] for contributor in contributors)
+    return total_commits
 
 
 @app.route("/returngitname", methods=["GET", "POST"])
