@@ -173,7 +173,7 @@ def generate_commit_activity_plot(commit_dates, commit_counts):
     plt.close()
 
     png_image.seek(0)
-    base64_string = base64.b64encode(png_image.getvalue()).decode('utf-8')
+    base64_string = base64.b64encode(png_image.read()).decode('utf-8')
 
     return base64_string
 
@@ -203,12 +203,15 @@ def returngithub():
             commits = commits_response.json()
             latest_commit = commits[0] if commits else None
 
-            commit_dates = get_commit_dates(input_username, repo_name)
-            commit_counts = get_commit_counts(commit_dates)
-
-            commit_activity_plot = generate_commit_activity_plot(
-                commit_dates, commit_counts
-            )
+            try:
+                commit_dates = get_commit_dates(input_username, repo_name)
+                commit_counts = get_commit_counts(commit_dates)
+                commit_activity_plot = generate_commit_activity_plot(
+                    commit_dates, commit_counts
+                 )
+            except Exception as e:
+                    logging.error(f"Error processing repo '{repo_name}': {e}")
+                    commit_activity_plot = None
 
             repo_data = {
                 "full_name": repo["full_name"],
@@ -243,7 +246,7 @@ def returngithub():
                     "counts": commit_counts
                 },
                 "commit_activity_plot": commit_activity_plot,
-                "total_commits": len(commit_dates)
+                "total_commits": len(commit_dates) if commit_dates else 0
             }
             repos.append(repo_data)
             # commit_counts.append(indv_commit_counts)
