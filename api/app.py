@@ -173,7 +173,7 @@ def generate_commit_activity_plot(commit_dates, commit_counts):
     plt.close()
 
     png_image.seek(0)
-    base64_string = base64.b64encode(png_image.read()).decode('utf-8')
+    base64_string = base64.b64encode(png_image.getvalue()).decode('utf-8')
 
     return base64_string
 
