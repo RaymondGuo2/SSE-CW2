@@ -170,7 +170,7 @@ def returngithub():
             commits_response = requests.get(commits_url)
             commits_response.raise_for_status()
 
-            repo_name = repo["name"]
+            # repo_name = repo["name"]
             # indv_commit_counts = get_commit_counts(input_username, repo_name)
             # indv_commit_dates = get_commit_dates(input_username, repo_name)
 
