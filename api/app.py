@@ -125,7 +125,19 @@ def githubuname():
 logging.basicConfig(level=logging.INFO)
 
 
-def get_commit_data(owner, repo):
+def get_commit_dates(owner, repo):
+    response = [
+        requests.get(f"https://api.github.com/repos/{owner}/{repo}/commits")
+        ]
+    commits = response.json()
+    commit_dates = [
+        datetime.strptime(commit['commit']['author']['date'],
+                          '%Y-%m-%dT%H:%M:%SZ')
+        for commit in commits]
+    return commit_dates
+
+
+def get_commit_counts(owner, repo):
     response = [
         requests.get(f"https://api.github.com/repos/{owner}/{repo}/commits")
         ]
@@ -135,7 +147,7 @@ def get_commit_data(owner, repo):
                           '%Y-%m-%dT%H:%M:%SZ')
         for commit in commits]
     commit_counts = list(range(1, len(commit_dates) + 1))
-    return commit_dates, commit_counts
+    return commit_counts
 
 
 @app.route("/returngitname", methods=["GET", "POST"])
@@ -165,6 +177,8 @@ def returngithub():
                 "language": repo["language"],
                 "created_at": repo["created_at"],
                 "updated_at": repo["updated_at"],
+                'commit_dates': get_commit_dates(input_username, repo),
+                'commit_counts': get_commit_counts(input_username, repo),
                 "latest_commit": {
                     "hash": (
                         latest_commit["sha"]
