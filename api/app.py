@@ -181,8 +181,8 @@ def returngithub():
                 "language": repo["language"],
                 "created_at": repo["created_at"],
                 "updated_at": repo["updated_at"],
-                "commit_counts": _commit_counts
-                "commit_dates": _commit_dates
+                "commit_counts": _commit_counts,
+                "commit_dates": _commit_dates,
                 "latest_commit": {
                     "hash": (
                         latest_commit["sha"]
