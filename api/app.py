@@ -2,6 +2,9 @@ from flask import Flask, render_template, request
 from datetime import datetime
 import requests
 import logging
+import base64
+from io import BytesIO
+import matplotlib.pyplot as plt
 
 app = Flask(__name__)
 
@@ -126,28 +129,53 @@ logging.basicConfig(level=logging.INFO)
 
 
 def get_commit_dates(owner, repo):
-    response = [
-        requests.get(f"https://api.github.com/repos/{owner}/{repo}/commits")
-        ]
-    commits = response.json()
-    commit_dates = [
-        datetime.strptime(commit['commit']['author']['date'],
-                          '%Y-%m-%dT%H:%M:%SZ')
-        for commit in commits]
+    commit_dates = []
+    page = 1
+    while True:
+        response = requests.get(
+            f"https://api.github.com/repos/{owner}/{repo}/commits", 
+            params={'page': page}
+        )
+        response.raise_for_status()
+        commits = response.json()
+        if not commits:
+            break
+        for commit in commits:
+            commit_date = datetime.strptime(
+                commit['commit']['author']['date'],
+                '%Y-%m-%dT%H:%M:%SZ'
+            )
+            commit_dates.append(commit_date)
+        page += 1
     return commit_dates
 
 
 def get_commit_counts(owner, repo):
-    response = [
-        requests.get(f"https://api.github.com/repos/{owner}/{repo}/commits")
-        ]
-    commits = response.json()
-    commit_dates = [
-        datetime.strptime(commit['commit']['author']['date'],
-                          '%Y-%m-%dT%H:%M:%SZ')
-        for commit in commits]
+    commit_dates = get_commit_dates(owner, repo)
     commit_counts = list(range(1, len(commit_dates) + 1))
     return commit_counts
+
+
+def generate_commit_activity_plot(commit_dates):
+    # Assume commit_dates is a list of datetime objects
+    if not commit_dates:
+        return None
+
+    plt.figure(figsize=(10,4))
+    plt.plot(commit_dates, commit_counts, marker='o')
+    plt.title('Commit Activity')
+    plt.xlabel('Date')
+    plt.ylabel('Number of Commits')
+    plt.tight_layout()
+
+    png_image = BytesIO()
+    plt.savefig(png_image, format='png')
+    plt.close()
+
+    png.image_seek(0)
+    base64_string = base64.b64encode(png_image.getValue()).decode('utf-8')
+
+    return base64_string
 
 
 @app.route("/returngitname", methods=["GET", "POST"])
@@ -166,16 +194,19 @@ def returngithub():
 
         repos_json = response.json()
         for repo in repos_json:
+
+            repo_name = repo["name"]
+
             commits_url = repo["commits_url"].split("{")[0]
             commits_response = requests.get(commits_url)
             commits_response.raise_for_status()
-
-            # repo_name = repo["name"]
-            # indv_commit_counts = get_commit_counts(input_username, repo_name)
-            # indv_commit_dates = get_commit_dates(input_username, repo_name)
-
             commits = commits_response.json()
             latest_commit = commits[0] if commits else None
+
+            commit_dates = get_commit_dates(input_username, repo_name)
+            commit_counts = get_commit_counts(commit_dates)
+
+            commit_activity_plot = generate_commit_activity_plot(commit_dates, commit_counts)
 
             repo_data = {
                 "full_name": repo["full_name"],
@@ -205,6 +236,12 @@ def returngithub():
                         else "N/A"
                     ),
                 },
+                "commit_activity": {
+                    "dates": commit_dates,
+                    "counts": commit_counts
+                },
+                "commit_activity_plot": commit_activity_plot,
+                "total_commits": len(commit_dates)
             }
             repos.append(repo_data)
             # commit_counts.append(indv_commit_counts)
@@ -228,3 +265,5 @@ def returngithub():
         # commit_counts=commit_counts,
         # commit_dates=commit_dates
     )
+
+
