@@ -126,15 +126,10 @@ logging.basicConfig(level=logging.INFO)
 
 def get_commit_counts(owner, repo):
     response = (
-        requests.get(
-            f"https://api.github.com/repos/{owner}/{repo}/contributors"
+        requests.get(f"https://api.github.com/repos/{owner}/{repo}/commits")
         )
-        )
-    contributors = response.json()
-    total_commits = sum(
-        contributor['contributions'] for contributor in contributors
-    )
-    return total_commits
+    commits = response.json()
+    return len(commits)
 
 
 @app.route("/returngitname", methods=["GET", "POST"])
@@ -142,7 +137,6 @@ def returngithub():
     input_username = request.form.get("username")
     repos = []
     repo_names = []
-    # commit_counts = []
     error_message = None
 
     try:
@@ -171,7 +165,6 @@ def returngithub():
                 "created_at": repo["created_at"],
                 "updated_at": repo["updated_at"],
                 "commit_counts": commit_counts,
-                "watchers": repo["watchers"],
                 "latest_commit": {
                     "hash": (
                         latest_commit["sha"]
@@ -197,8 +190,6 @@ def returngithub():
             }
             repos.append(repo_data)
             repo_names.append(repo_name)
-            # commit_counts.append(indv_commit_counts)
-            # commit_dates.append(indv_commit_dates)
     except requests.RequestException as req_err:
         logging.error(
             f"HTTP request error for user {input_username}: {req_err}"
@@ -216,6 +207,4 @@ def returngithub():
         username=input_username,
         repos=repos,
         repo_names=repo_names
-        # commit_counts=commit_counts,
-        # commit_dates=commit_dates
     )
