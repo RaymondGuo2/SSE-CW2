@@ -154,6 +154,8 @@ def get_commit_counts(owner, repo):
 def returngithub():
     input_username = request.form.get("username")
     repos = []
+    commit_counts = []
+    commit_dates = []
     error_message = None
 
     try:
@@ -169,8 +171,8 @@ def returngithub():
             commits_response.raise_for_status()
 
             repo_name = repo["name"]
-            commit_counts = get_commit_counts(input_username, repo_name)
-            commit_dates = get_commit_dates(input_username, repo_name)
+            indv_commit_counts = get_commit_counts(input_username, repo_name)
+            indv_commit_dates = get_commit_dates(input_username, repo_name)
 
             commits = commits_response.json()
             latest_commit = commits[0] if commits else None
@@ -205,6 +207,8 @@ def returngithub():
                 },
             }
             repos.append(repo_data)
+            commit_counts.append(indv_commit_counts)
+            commit_dates.append(indv_commit_dates)
     except requests.RequestException as req_err:
         logging.error(
             f"HTTP request error for user {input_username}: {req_err}"
@@ -221,6 +225,6 @@ def returngithub():
         "returngitname.html",
         username=input_username,
         repos=repos,
-        commit_counts,
-        commit_dates
+        commit_counts=commit_counts,
+        commit_dates=commit_dates
     )
