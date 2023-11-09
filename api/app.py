@@ -142,6 +142,25 @@ def get_commit_counts(owner, repo):
     return commit_count
 
 
+def get_commit_dates(owner, repo):
+    commit_count = []
+    page = 1
+    while True:
+        response = (
+            requests.get(
+                f"https://api.github.com/repos/{owner}/{repo}/commits",
+                params={'per_page': 100, 'page': page}
+            )
+            )
+        commits = response.json()
+        commit_dates = [datetime.strptime(commit['commit']['author']['date'], '%Y-%m-%dT%H:%M:%SZ') for commit in commits]
+        commit_dates_list.append(commit_dates)
+        if 'next' not in response.links:
+            break
+        page += 1
+    return commit_dates_list
+
+
 @app.route("/returngitname", methods=["GET", "POST"])
 def returngithub():
     input_username = request.form.get("username")
@@ -162,6 +181,7 @@ def returngithub():
 
             repo_name = repo["name"]
             commit_counts = get_commit_counts(input_username, repo_name)
+            commit_dates = get_commit_dates(input_username, repo_name)
 
             commits = commits_response.json()
             latest_commit = commits[0] if commits else None
@@ -173,6 +193,7 @@ def returngithub():
                 "created_at": repo["created_at"],
                 "updated_at": repo["updated_at"],
                 "commit_counts": commit_counts,
+                "commit_dates": commit_dates,
                 "latest_commit": {
                     "hash": (
                         latest_commit["sha"]
