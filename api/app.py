@@ -137,7 +137,6 @@ def get_commit_dates(owner, repo):
     return commit_dates
 
 
-@app.route("/returngitname", methods=["GET", "POST"])
 def get_commit_counts(owner, repo):
     response = [
         requests.get(f"https://api.github.com/repos/{owner}/{repo}/commits")
@@ -151,6 +150,7 @@ def get_commit_counts(owner, repo):
     return commit_counts
 
 
+@app.route("/returngitname", methods=["GET", "POST"])
 def returngithub():
     input_username = request.form.get("username")
     repos = []
