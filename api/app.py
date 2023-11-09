@@ -171,6 +171,7 @@ def returngithub():
                 "created_at": repo["created_at"],
                 "updated_at": repo["updated_at"],
                 "commit_counts": commit_counts,
+                "watchers": repo["watchers"],
                 "latest_commit": {
                     "hash": (
                         latest_commit["sha"]
