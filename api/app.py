@@ -178,7 +178,9 @@ def returngithub():
                 "created_at": repo["created_at"],
                 "updated_at": repo["updated_at"],
                 'commit_dates': get_commit_dates(input_username, repo["name"]),
-                'commit_counts': get_commit_counts(input_username, repo["name"]),
+                'commit_counts': get_commit_counts(
+                    input_username,
+                    repo["name"]),
                 "latest_commit": {
                     "hash": (
                         latest_commit["sha"]
