@@ -136,7 +136,6 @@ def get_commit_counts(owner, repo):
 def returngithub():
     input_username = request.form.get("username")
     repos = []
-    repo_names = []
     error_message = None
 
     try:
@@ -158,7 +157,6 @@ def returngithub():
             latest_commit = commits[0] if commits else None
 
             repo_data = {
-                "repo_name": repo["name"],
                 "full_name": repo["full_name"],
                 "html_url": repo["html_url"],
                 "language": repo["language"],
@@ -189,7 +187,6 @@ def returngithub():
                 },
             }
             repos.append(repo_data)
-            repo_names.append(repo_name)
     except requests.RequestException as req_err:
         logging.error(
             f"HTTP request error for user {input_username}: {req_err}"
@@ -205,6 +202,5 @@ def returngithub():
     return render_template(
         "returngitname.html",
         username=input_username,
-        repos=repos,
-        repo_names=repo_names
+        repos=repos
     )
