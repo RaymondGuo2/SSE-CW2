@@ -169,8 +169,8 @@ def returngithub():
             commits_response.raise_for_status()
 
             repo_name = repo["name"]
-            commit_counts = get_commit_counts(input_username, repo_name)
-            commit_dates = get_commit_dates(input_username, repo_name)
+            _commit_counts = get_commit_counts(input_username, repo_name)
+            _commit_dates = get_commit_dates(input_username, repo_name)
 
             commits = commits_response.json()
             latest_commit = commits[0] if commits else None
@@ -181,6 +181,8 @@ def returngithub():
                 "language": repo["language"],
                 "created_at": repo["created_at"],
                 "updated_at": repo["updated_at"],
+                "commit_counts": _commit_counts
+                "commit_dates": _commit_dates
                 "latest_commit": {
                     "hash": (
                         latest_commit["sha"]
