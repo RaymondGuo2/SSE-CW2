@@ -182,8 +182,6 @@ def generate_commit_activity_plot(commit_dates, commit_counts):
 def returngithub():
     input_username = request.form.get("username")
     repos = []
-    # commit_counts = []
-    # commit_dates = []
     error_message = None
 
     try:
@@ -249,8 +247,6 @@ def returngithub():
                 "total_commits": len(commit_dates) if commit_dates else 0
             }
             repos.append(repo_data)
-            # commit_counts.append(indv_commit_counts)
-            # commit_dates.append(indv_commit_dates)
     except requests.RequestException as req_err:
         logging.error(
             f"HTTP request error for user {input_username}: {req_err}"
@@ -266,7 +262,5 @@ def returngithub():
     return render_template(
         "returngitname.html",
         username=input_username,
-        repos=repos,
-        # commit_counts=commit_counts,
-        # commit_dates=commit_dates
+        repos=repos
     )
