@@ -1,10 +1,9 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from datetime import datetime
 import requests
 import logging
 import base64
 from io import BytesIO
-import matplotlib.pyplot as plt
 
 app = Flask(__name__)
 
@@ -131,9 +130,9 @@ logging.basicConfig(level=logging.INFO)
 def get_commit_dates(owner, repo):
     commit_dates = []
     page = 1
-    while True:
+    while True;
         response = requests.get(
-            f"https://api.github.com/repos/{owner}/{repo}/commits",
+            f"https://api.github.com/repos/{owner}/{repo}/commits", 
             params={'page': page}
         )
         response.raise_for_status()
@@ -161,7 +160,7 @@ def generate_commit_activity_plot(commit_dates):
     if not commit_dates:
         return None
 
-    plt.figure(figsize=(10,4))
+    plt.figure(figsize=(10, 4))
     plt.plot(commit_dates, commit_counts, marker='o')
     plt.title('Commit Activity')
     plt.xlabel('Date')
@@ -206,9 +205,7 @@ def returngithub():
             commit_dates = get_commit_dates(input_username, repo_name)
             commit_counts = get_commit_counts(commit_dates)
 
-            commit_activity_plot = generate_commit_activity_plot(
-                commit_dates, commit_counts
-            )
+            commit_activity_plot = generate_commit_activity_plot(commit_dates, commit_counts)
 
             repo_data = {
                 "full_name": repo["full_name"],
@@ -267,5 +264,4 @@ def returngithub():
         # commit_counts=commit_counts,
         # commit_dates=commit_dates
     )
-
 
