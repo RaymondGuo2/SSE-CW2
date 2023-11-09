@@ -222,7 +222,5 @@ def returngithub():
     return render_template(
         "returngitname.html",
         username=input_username,
-        repos=repos,
-        commit_counts=commit_counts,
-        commit_dates=commit_dates
+        repos=repos
     )
