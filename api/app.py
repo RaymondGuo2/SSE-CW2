@@ -125,38 +125,19 @@ def githubuname():
 logging.basicConfig(level=logging.INFO)
 
 
-def get_commit_dates(owner, repo):
-    response = (
-        requests.get(f"https://api.github.com/repos/{owner}/{repo}/commits")
-        )
-    commits = response.json()
-    commit_dates = [
-        datetime.strptime(commit['commit']['author']['date'],
-                          '%Y-%m-%dT%H:%M:%SZ')
-        for commit in commits]
-    return commit_dates
-
-
 def get_commit_counts(owner, repo):
     response = (
         requests.get(f"https://api.github.com/repos/{owner}/{repo}/commits")
         )
     commits = response.json()
-    commit_dates = [
-        datetime.strptime(commit['commit']['author']['date'],
-                          '%Y-%m-%dT%H:%M:%SZ')
-        for commit in commits]
-    commit_counts = list(range(1, len(commit_dates) + 1))
-    return commit_counts
+    return len(commits)
 
 
 @app.route("/returngitname", methods=["GET", "POST"])
 def returngithub():
     input_username = request.form.get("username")
     repos = []
-    repo_names = []
     # commit_counts = []
-    # commit_dates = []
     error_message = None
 
     try:
@@ -172,8 +153,7 @@ def returngithub():
             commits_response.raise_for_status()
 
             repo_name = repo["name"]
-            # indv_commit_counts = get_commit_counts(input_username, repo_name)
-            # indv_commit_dates = get_commit_dates(input_username, repo_name)
+            commit_counts = get_commit_counts(input_username, repo_name)
 
             commits = commits_response.json()
             latest_commit = commits[0] if commits else None
@@ -185,6 +165,7 @@ def returngithub():
                 "language": repo["language"],
                 "created_at": repo["created_at"],
                 "updated_at": repo["updated_at"],
+                "commit_counts": commit_counts,
                 "latest_commit": {
                     "hash": (
                         latest_commit["sha"]
@@ -209,7 +190,6 @@ def returngithub():
                 },
             }
             repos.append(repo_data)
-            repo_names.append(repo_name)
             # commit_counts.append(indv_commit_counts)
             # commit_dates.append(indv_commit_dates)
     except requests.RequestException as req_err:
@@ -227,8 +207,7 @@ def returngithub():
     return render_template(
         "returngitname.html",
         username=input_username,
-        repos=repos,
-        repo_names=repo_names
+        repos=repos
         # commit_counts=commit_counts,
         # commit_dates=commit_dates
     )
