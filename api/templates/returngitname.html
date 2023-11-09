@@ -4,13 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GitHub Repositories</title>
-    <style>
-        img.plot {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-    </style>
 </head>
 <body>
     <h1>GitHub Repositories for {{ username }}</h1>
@@ -26,8 +19,6 @@
                 <th>Latest Commit Author</th>
                 <th>Latest Commit Date</th>
                 <th>Latest Commit Message</th>
-                <th>Total Commits</th>
-                <th>Commit Activity Plot</th>
             </tr>
             {% for repo in repos %}
                 <tr>
@@ -40,14 +31,6 @@
                     <td>{{ repo.latest_commit.author }}</td>
                     <td>{{ repo.latest_commit.date }}</td>
                     <td>{{ repo.latest_commit.message }}</td>
-                    <td>{{ repo.total_commits }}</td>
-                    <td>
-                        {% if repo.commit_activity_plot %}
-                            <img src="data:image/png;base64, {{ repo.commit_activity_plot }}" alt="Commit Activity Plot" class="plot">
-                        {% else %}
-                            No plot available.
-                        {% endif %}
-                    </td>
                 </tr>
             {% endfor %}
         </table>
