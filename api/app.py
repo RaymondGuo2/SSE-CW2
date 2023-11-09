@@ -149,7 +149,8 @@ def get_commit_counts(owner, repo):
         for commit in commits]
     commit_counts = list(range(1, len(commit_dates) + 1))
     return commit_counts
-    
+
+
 def returngithub():
     input_username = request.form.get("username")
     repos = []
