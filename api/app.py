@@ -154,8 +154,6 @@ def get_commit_counts(owner, repo):
 def returngithub():
     input_username = request.form.get("username")
     repos = []
-    commit_counts = []
-    commit_dates = []
     error_message = None
 
     try:
@@ -222,5 +220,7 @@ def returngithub():
     return render_template(
         "returngitname.html",
         username=input_username,
-        repos=repos
+        repos=repos,
+        commit_counts,
+        commit_dates
     )
