@@ -133,7 +133,7 @@ def get_commit_dates(owner, repo):
     page = 1
     while True:
         response = requests.get(
-            f"https://api.github.com/repos/{owner}/{repo}/commits", 
+            f"https://api.github.com/repos/{owner}/{repo}/commits",
             params={'page': page}
         )
         response.raise_for_status()
@@ -206,7 +206,9 @@ def returngithub():
             commit_dates = get_commit_dates(input_username, repo_name)
             commit_counts = get_commit_counts(commit_dates)
 
-            commit_activity_plot = generate_commit_activity_plot(commit_dates, commit_counts)
+            commit_activity_plot = generate_commit_activity_plot(
+                commit_dates, commit_counts
+            )
 
             repo_data = {
                 "full_name": repo["full_name"],
