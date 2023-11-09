@@ -126,10 +126,14 @@ logging.basicConfig(level=logging.INFO)
 
 def get_commit_counts(owner, repo):
     response = (
-        requests.get(f"https://api.github.com/repos/{owner}/{repo}/contributors")
+        requests.get(
+            f"https://api.github.com/repos/{owner}/{repo}/contributors"
+        )
         )
     contributors = response.json()
-    total_commits = sum(contributor['contributions'] for contributor in contributors)
+    total_commits = sum(
+        contributor['contributions'] for contributor in contributors
+    )
     return total_commits
 
 
