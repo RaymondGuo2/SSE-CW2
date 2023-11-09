@@ -170,19 +170,20 @@ def returngithub():
 
             commits = commits_response.json()
             latest_commit = commits[0] if commits else None
+            repo_name = repo["name"]
 
             repo_data = {
-                "full_name": repo["name"],
+                "full_name": repo["full_name"],
                 "html_url": repo["html_url"],
                 "language": repo["language"],
                 "created_at": repo["created_at"],
                 "updated_at": repo["updated_at"],
                 "commit_dates": get_commit_dates(
                     input_username,
-                    repo["full_name"]),
+                    repo_name),
                 "commit_counts": get_commit_counts(
                     input_username,
-                    repo["full_name"]),
+                    repo_name),
                 "latest_commit": {
                     "hash": (
                         latest_commit["sha"]
@@ -212,7 +213,7 @@ def returngithub():
             f"HTTP request error for user {input_username}: {req_err}"
         )
         error_message = (
-            "Failed to fetch repositories."
+            "Failed to fetch repositories. "
             "Please try again later."
         )
 
