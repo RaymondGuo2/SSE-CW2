@@ -155,9 +155,9 @@ def get_commit_dates(owner, repo):
             )
         commits = response.json()
         commit_dates = [datetime.strptime(
-            commit['commit']['author']['date'], 
+            commit['commit']['author']['date'],
             '%Y-%m-%dT%H:%M:%SZ'
-        ) 
+        )
             for commit in commits]
         commit_dates_list.append(commit_dates)
         if 'next' not in response.links:
