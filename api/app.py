@@ -125,11 +125,21 @@ logging.basicConfig(level=logging.INFO)
 
 
 def get_commit_counts(owner, repo):
-    response = (
-        requests.get(f"https://api.github.com/repos/{owner}/{repo}/commits")
-        )
-    commits = response.json()
-    return len(commits)
+    commit_count = 0
+    page = 1
+    while True:
+        response = (
+            requests.get(
+                f"https://api.github.com/repos/{owner}/{repo}/commits",
+                params={'per_page': 100, 'page': page}
+            )
+            )
+        commits = response.json()
+        commit_count += len(commits)
+        if 'next' not in response.links:
+            break
+        page += 1
+    return commit_count
 
 
 @app.route("/returngitname", methods=["GET", "POST"])
