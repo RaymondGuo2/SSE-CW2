@@ -177,8 +177,8 @@ def returngithub():
                 "language": repo["language"],
                 "created_at": repo["created_at"],
                 "updated_at": repo["updated_at"],
-                #"commit_dates": get_commit_dates(input_username, repo[repo]),
-                #"commit_counts": get_commit_counts(
+                # "commit_dates": get_commit_dates(input_username, repo[repo]),
+                # "commit_counts": get_commit_counts(
                 #    input_username,
                 #    repo[repo]),
                 "latest_commit": {
