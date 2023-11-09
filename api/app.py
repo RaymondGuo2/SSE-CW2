@@ -172,15 +172,15 @@ def returngithub():
             latest_commit = commits[0] if commits else None
 
             repo_data = {
-                "full_name": repo["full_name"],
+                "full_name": repo["name"],
                 "html_url": repo["html_url"],
                 "language": repo["language"],
                 "created_at": repo["created_at"],
                 "updated_at": repo["updated_at"],
-                'commit_dates': get_commit_dates(input_username, repo["name"]),
-                'commit_counts': get_commit_counts(
-                    input_username,
-                    repo["name"]),
+                #"commit_dates": get_commit_dates(input_username, repo[repo]),
+                #"commit_counts": get_commit_counts(
+                #    input_username,
+                #    repo[repo]),
                 "latest_commit": {
                     "hash": (
                         latest_commit["sha"]
