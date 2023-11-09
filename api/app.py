@@ -130,7 +130,7 @@ logging.basicConfig(level=logging.INFO)
 def get_commit_dates(owner, repo):
     commit_dates = []
     page = 1
-    while True;
+    while True:
         response = requests.get(
             f"https://api.github.com/repos/{owner}/{repo}/commits", 
             params={'page': page}
