@@ -136,6 +136,7 @@ def get_commit_counts(owner, repo):
 def returngithub():
     input_username = request.form.get("username")
     repos = []
+    repo_names = []
     # commit_counts = []
     error_message = None
 
@@ -189,6 +190,7 @@ def returngithub():
                 },
             }
             repos.append(repo_data)
+            repo_names.append(repo_name)
             # commit_counts.append(indv_commit_counts)
             # commit_dates.append(indv_commit_dates)
     except requests.RequestException as req_err:
@@ -206,7 +208,8 @@ def returngithub():
     return render_template(
         "returngitname.html",
         username=input_username,
-        repos=repos
+        repos=repos,
+        repo_names=repo_names
         # commit_counts=commit_counts,
         # commit_dates=commit_dates
     )

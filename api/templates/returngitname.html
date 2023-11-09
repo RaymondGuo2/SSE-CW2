@@ -19,6 +19,7 @@
                 <th>Latest Commit Author</th>
                 <th>Latest Commit Date</th>
                 <th>Latest Commit Message</th>
+                <th>Number of Commits</th>
             </tr>
             {% for repo in repos %}
                 <tr>
@@ -31,6 +32,7 @@
                     <td>{{ repo.latest_commit.author }}</td>
                     <td>{{ repo.latest_commit.date }}</td>
                     <td>{{ repo.latest_commit.message }}</td>
+                    <td>{{ repo.commit_counts }}</td>
                 </tr>
             {% endfor %}
         </table>
