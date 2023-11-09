@@ -126,50 +126,18 @@ logging.basicConfig(level=logging.INFO)
 
 
 def get_commit_counts(owner, repo):
-    commit_count = 0
-    page = 1
-    while True:
-        response = (
-            requests.get(
-                f"https://api.github.com/repos/{owner}/{repo}/commits",
-                params={'per_page': 100, 'page': page}
-            )
-            )
-        commits = response.json()
-        commit_count += len(commits)
-        if 'next' not in response.links:
-            break
-        page += 1
-    return commit_count
-
-
-def get_commit_dates(owner, repo):
-    commit_dates_list = []
-    page = 1
-    while True:
-        response = (
-            requests.get(
-                f"https://api.github.com/repos/{owner}/{repo}/commits",
-                params={'per_page': 100, 'page': page}
-            )
-            )
-        commits = response.json()
-        commit_dates = [datetime.strptime(
-            commit['commit']['author']['date'],
-            '%Y-%m-%dT%H:%M:%SZ'
+    response = (
+        requests.get(f"https://api.github.com/repos/{owner}/{repo}/commits")
         )
-            for commit in commits]
-        commit_dates_list.append(commit_dates)
-        if 'next' not in response.links:
-            break
-        page += 1
-    return commit_dates_list
+    commits = response.json()
+    return len(commits)
 
 
 @app.route("/returngitname", methods=["GET", "POST"])
 def returngithub():
     input_username = request.form.get("username")
     repos = []
+    repo_names = []
     error_message = None
 
     try:
@@ -186,19 +154,18 @@ def returngithub():
 
             repo_name = repo["name"]
             commit_counts = get_commit_counts(input_username, repo_name)
-            commit_dates = get_commit_dates(input_username, repo_name)
 
             commits = commits_response.json()
             latest_commit = commits[0] if commits else None
 
             repo_data = {
+                "repo_name": repo["name"],
                 "full_name": repo["full_name"],
                 "html_url": repo["html_url"],
                 "language": repo["language"],
                 "created_at": repo["created_at"],
                 "updated_at": repo["updated_at"],
                 "commit_counts": commit_counts,
-                "commit_dates": commit_dates,
                 "latest_commit": {
                     "hash": (
                         latest_commit["sha"]
@@ -223,6 +190,7 @@ def returngithub():
                 },
             }
             repos.append(repo_data)
+            repo_names.append(repo_name)
     except requests.RequestException as req_err:
         logging.error(
             f"HTTP request error for user {input_username}: {req_err}"
@@ -238,5 +206,6 @@ def returngithub():
     return render_template(
         "returngitname.html",
         username=input_username,
-        repos=repos
+        repos=repos,
+        repo_names=repo_names
     )
