@@ -74,7 +74,6 @@ def database_page():
     key = config['supabase']['key']
     query = config['queries']['query']
     client = supabase.create_client(url, key)
-    client = create_client(url, key)
     response = client.sql(query)
     return render_template("database.html", response=response)
 
