@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-#from supabase import create_client, Client
+# from supabase import create_client, Client
 import requests
 import logging
 
