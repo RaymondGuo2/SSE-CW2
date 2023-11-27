@@ -26,6 +26,7 @@ jobs:
         pip install flask
         pip install pytest
         pip install matplotlib
+	pip install supabase
     - name: Run Tests
       run: pytest
 
