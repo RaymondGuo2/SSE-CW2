@@ -19,11 +19,12 @@
                 <th>Latest Commit Author</th>
                 <th>Latest Commit Date</th>
                 <th>Latest Commit Message</th>
+                <th>Number of Commits</th>
             </tr>
             {% for repo in repos %}
                 <tr>
                     <td>{{ repo.full_name }}</td>
-                    <td>{{ repo.html_url }}</td>
+                    <td><a href="{{ repo.html_url }}" target="_blank">{{ repo.html_url }}</a></td>
                     <td>{{ repo.language }}</td>
                     <td>{{ repo.created_at }}</td>
                     <td>{{ repo.updated_at }}</td>
@@ -31,6 +32,7 @@
                     <td>{{ repo.latest_commit.author }}</td>
                     <td>{{ repo.latest_commit.date }}</td>
                     <td>{{ repo.latest_commit.message }}</td>
+                    <td>{{ repo.commit_counts }}</td>
                 </tr>
             {% endfor %}
         </table>

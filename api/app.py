@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request
-from datetime import datetime
 import requests
 import logging
 
@@ -125,37 +124,29 @@ def githubuname():
 logging.basicConfig(level=logging.INFO)
 
 
-def get_commit_dates(owner, repo):
-    response = [
-        requests.get(f"https://api.github.com/repos/{owner}/{repo}/commits")
-        ]
-    commits = response.json()
-    commit_dates = [
-        datetime.strptime(commit['commit']['author']['date'],
-                          '%Y-%m-%dT%H:%M:%SZ')
-        for commit in commits]
-    return commit_dates
-
-
 def get_commit_counts(owner, repo):
-    response = [
-        requests.get(f"https://api.github.com/repos/{owner}/{repo}/commits")
-        ]
-    commits = response.json()
-    commit_dates = [
-        datetime.strptime(commit['commit']['author']['date'],
-                          '%Y-%m-%dT%H:%M:%SZ')
-        for commit in commits]
-    commit_counts = list(range(1, len(commit_dates) + 1))
-    return commit_counts
+    commit_count = 0
+    page = 1
+    while True:
+        response = (
+            requests.get(
+                f"https://api.github.com/repos/{owner}/{repo}/commits",
+                params={'per_page': 100, 'page': page}
+            )
+            )
+        commits = response.json()
+        commit_count += len(commits)
+        if 'next' not in response.links:
+            break
+        page += 1
+    return commit_count
 
 
 @app.route("/returngitname", methods=["GET", "POST"])
 def returngithub():
     input_username = request.form.get("username")
     repos = []
-    # commit_counts = []
-    # commit_dates = []
+    repo_names = []
     error_message = None
 
     try:
@@ -170,19 +161,20 @@ def returngithub():
             commits_response = requests.get(commits_url)
             commits_response.raise_for_status()
 
-            # repo_name = repo["name"]
-            # indv_commit_counts = get_commit_counts(input_username, repo_name)
-            # indv_commit_dates = get_commit_dates(input_username, repo_name)
+            repo_name = repo["name"]
+            commit_counts = get_commit_counts(input_username, repo_name)
 
             commits = commits_response.json()
             latest_commit = commits[0] if commits else None
 
             repo_data = {
+                "repo_name": repo["name"],
                 "full_name": repo["full_name"],
                 "html_url": repo["html_url"],
                 "language": repo["language"],
                 "created_at": repo["created_at"],
                 "updated_at": repo["updated_at"],
+                "commit_counts": commit_counts,
                 "latest_commit": {
                     "hash": (
                         latest_commit["sha"]
@@ -207,8 +199,7 @@ def returngithub():
                 },
             }
             repos.append(repo_data)
-            # commit_counts.append(indv_commit_counts)
-            # commit_dates.append(indv_commit_dates)
+            repo_names.append(repo_name)
     except requests.RequestException as req_err:
         logging.error(
             f"HTTP request error for user {input_username}: {req_err}"
@@ -225,6 +216,5 @@ def returngithub():
         "returngitname.html",
         username=input_username,
         repos=repos,
-        # commit_counts=commit_counts,
-        # commit_dates=commit_dates
+        repo_names=repo_names
     )
