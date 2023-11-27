@@ -66,6 +66,7 @@ def jumper_page():
     return render_template("jumper.html")
 
 
+"""
 @app.route("/database")
 def database_page():
     config = configparser.ConfigParser()
@@ -76,9 +77,9 @@ def database_page():
     client = supabase.create_client(url, key)
     response = client.sql(query)
     return render_template("database.html", response=response)
-
-
 """
+
+
 @app.route("/database")
 def database_page():
     config = configparser.ConfigParser()
@@ -101,7 +102,8 @@ def database_page():
         return render_template("database.html", response=data)
     else:
         return f"Failed to fetch data: {response.status_code}", 500
-"""
+
+
 """
 def process_query(query):
     return search_results
