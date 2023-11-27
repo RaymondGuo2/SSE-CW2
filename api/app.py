@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
-import requests
-from "psycopg[binary]" import psycopg as db
+import supabase
 import configparser
+import requests
 import logging
 
 app = Flask(__name__)
@@ -52,13 +52,10 @@ def jumper_page():
 def database_page():
     config = configparser.ConfigParser()
     config.read('dbtool.ini')
-    conn = db.connect(**config['connection'])
-    curs = conn.cursor()
-    curs.execute(config['query']['bigPopulation'],
-                 [config['default']['bigPopulation']])
-    header = ('There are %d countries' % curs.rowcount)
-    conn.close()
-    return render_template("database.html", header=header)
+    url = config['supabase']['url']
+    key = config['supabase']['key']
+    client = supabase.create_client(url, key)
+    return render_template("database.html")
 
 """
 def process_query(query):
