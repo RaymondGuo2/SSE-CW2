@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from supabase import create_client, Client
+#from supabase import create_client, Client
 import requests
 import logging
 
@@ -43,7 +43,7 @@ def jumper_page():
 
 @app.route("/database")
 def database_page():
-    return render_template("database.html", header=header)
+    return render_template("database.html")
 
 
 def process_query(query):
