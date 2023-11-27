@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-import supabase
+from supabase import create_client
 import configparser
 import requests
 import logging
@@ -72,9 +72,11 @@ def database_page():
     config.read('dbtool.ini')
     url = config['supabase']['url']
     key = config['supabase']['key']
-    query = config['queries']['query']
-    client = supabase.create_client(url, key)
-    response = client.sql(query)
+    """query = config['queries']['query']"""
+    """ client = supabase.create_client(url, key) """
+    client = create_client(url, key)
+    """response = client.sql(query)"""
+    response = client.table("items").select("*").execute()
     return render_template("database.html", response=response)
 
 
