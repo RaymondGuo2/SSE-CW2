@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import supabase
 import configparser
 import requests
@@ -29,6 +29,19 @@ def search():
     return render_template("search_results.html", results=search_results)
 """
 
+"""
+@app.route('/convert_currency')
+def convert_currency():
+    original_price = float(request.args.get('price'))
+    currency = request.args.get('currency')
+
+    response = requests.get(f'https://api.frankfurter.app/latest?from=USD&to={currency}')
+    data = response.json()
+    exchange_rate = data['rates'][currency]
+
+    converted_price = original_price * exchange_rate
+    return jsonify(convertedPrice=converted_price)
+"""
 
 @app.route("/contact")
 def contact_page():
@@ -56,7 +69,6 @@ def database_page():
     config.read('dbtool.ini')
     url = config['supabase']['url']
     key = config['supabase']['key']
-    query = config['queries']['query']
     client = supabase.create_client(url, key)
     response = client.sql(query)
     return render_template("database.html", response=response)
