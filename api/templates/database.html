@@ -65,8 +65,10 @@
 
     <div class="product">
         <h3>Database</h3>
-        <p>{{ response }}</p>
-    </div>
+        {% for row in response %}
+            <p>{{ row }}</p>
+        {% endfor %}
+    </div>    
     
 </body>
 </html>
