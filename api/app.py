@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 import requests
-import psycopg as db
+import psycopg-binary as db
 import configparser
 import logging
 
