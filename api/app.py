@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, pyscopg
 import requests
 import psycopg as db
 import configparser
