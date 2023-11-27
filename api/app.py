@@ -55,7 +55,8 @@ def database_page():
     url = config['supabase']['url']
     key = config['supabase']['key']
     client = supabase.create_client(url, key)
-    return render_template("database.html")
+    response = client.sql(query)
+    return render_template("database.html", response=response)
 
 """
 def process_query(query):
