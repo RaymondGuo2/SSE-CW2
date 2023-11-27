@@ -40,6 +40,11 @@ def jumper_page():
     return render_template("jumper.html")
 
 
+@app.route("/database")
+def contact_page():
+    return render_template("database.html")
+
+
 def process_query(query):
     if query == "dinosaurs":
         return "Dinosaurs ruled the Earth 200 million years ago"
