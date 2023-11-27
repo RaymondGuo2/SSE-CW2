@@ -65,7 +65,7 @@ def shoes_page():
 def jumper_page():
     return render_template("jumper.html")
 
-
+""""""
 @app.route("/database")
 def database_page():
     config = configparser.ConfigParser()
@@ -78,6 +78,30 @@ def database_page():
     return render_template("database.html", response=response)
 
 
+"""
+@app.route("/database")
+def database_page():
+    config = configparser.ConfigParser()
+    config.read('dbtool.ini')
+    url = config['supabase']['url']
+    key = config['supabase']['key']
+    table_name = "items"  # specify your table name here
+
+    api_url = f"{url}/rest/v1/{table_name}"
+    headers = {
+        "apikey": key,
+        "Authorization": f"Bearer {key}",
+        "Content-Type": "application/json"
+    }
+
+    response = requests.get(api_url, headers=headers)
+
+    if response.status_code == 200:
+        data = response.json()
+        return render_template("database.html", response=data)
+    else:
+        return f"Failed to fetch data: {response.status_code}", 500
+"""
 """
 def process_query(query):
     return search_results
