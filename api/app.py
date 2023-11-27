@@ -72,7 +72,7 @@ def database_page():
     config.read('dbtool.ini')
     url = config['supabase']['url']
     key = config['supabase']['key']
-    query =config['queries']['query']
+    query = config['queries']['query']
     client = supabase.create_client(url, key)
     response = client.sql(query)
     return render_template("database.html", response=response)
