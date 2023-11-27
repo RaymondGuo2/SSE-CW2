@@ -65,7 +65,7 @@ def shoes_page():
 def jumper_page():
     return render_template("jumper.html")
 
-""""""
+
 @app.route("/database")
 def database_page():
     config = configparser.ConfigParser()
