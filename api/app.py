@@ -21,6 +21,12 @@ def submit():
         "form.html", name=input_name, email=input_email, message=input_message
     )
 
+""" @app.route("/search")
+def search():
+    query = request.args.get("query")
+    search_results = process_query(query)
+    return render_template("search_results.html", results=search_results)
+"""
 
 @app.route("/contact")
 def contact_page():
@@ -54,6 +60,10 @@ def database_page():
     conn.close()
     return render_template("database.html", header=header)
 
+"""
+def process_query(query):
+    return search_results
+"""
 
 def process_query(query):
     if query == "dinosaurs":
