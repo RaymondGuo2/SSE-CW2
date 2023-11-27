@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-import supabase
+# import supabase
 import configparser
 import requests
 import logging
