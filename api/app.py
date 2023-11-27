@@ -50,9 +50,9 @@ def database_page():
     curs = conn.cursor()
     curs.execute(config['query']['bigPopulation'],
                  [config['default']['bigPopulation']])
-    header = ('There are %d countries' %curs.rowcount)
+    header = ('There are %d countries' % curs.rowcount)
     conn.close()
-    return render_template("database.html", header = header)
+    return render_template("database.html", header=header)
 
 
 def process_query(query):
