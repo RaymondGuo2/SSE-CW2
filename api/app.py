@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-# import supabase
+import supabase
 import configparser
 import requests
 import logging
@@ -106,6 +106,7 @@ def database_page():
 def process_query(query):
     return search_results
 """
+
 
 def process_query(query):
     if query == "dinosaurs":
