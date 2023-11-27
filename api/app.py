@@ -1,7 +1,5 @@
 from flask import Flask, render_template, request
 import requests
-import psycopg-binary as db
-import configparser
 import logging
 
 app = Flask(__name__)
@@ -44,14 +42,6 @@ def jumper_page():
 
 @app.route("/database")
 def database_page():
-    config = configparser.ConfigParser()
-    config.read('dbtool.ini')
-    conn = db.connect(**config['connection'])
-    curs = conn.cursor()
-    curs.execute(config['query']['bigPopulation'],
-                 [config['default']['bigPopulation']])
-    header = ('There are %d countries' % curs.rowcount)
-    conn.close()
     return render_template("database.html", header=header)
 
 
