@@ -41,7 +41,7 @@ def jumper_page():
 
 
 @app.route("/database")
-def contact_page():
+def database_page():
     return render_template("database.html")
 
 
