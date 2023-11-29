@@ -74,10 +74,12 @@ def database_page():
     curs = conn.cursor()
     curs.execute(config['query']['bigPopulation'],
                  [config['default']['bigPopulation']])
-    header = ('There are %d big countries' % curs.rowcount)
+    response = ('There are %d big countries' % curs.rowcount)
     rows = curs.fetchall()
+    print(response)
+    print(rows)
     conn.close()
-    return render_template("database.html", header=header, rows=rows)
+    return render_template("database.html", response=response, rows=rows)
 
 
 """
