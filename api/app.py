@@ -75,8 +75,9 @@ def database_page():
     curs.execute(config['query']['bigPopulation'],
                  [config['default']['bigPopulation']])
     header = ('There are %d big countries' % curs.rowcount)
+    rows = curs.fetchall()
     conn.close()
-    return render_template("database.html", header=header)
+    return render_template("database.html", header=header, rows=rows)
 
 
 """
