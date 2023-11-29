@@ -70,26 +70,13 @@ def jumper_page():
 def database_page():
     config = configparser.ConfigParser()
     config.read('dbtool.ini')
-    url = config['supabase']['url']
-    key = config['supabase']['key']
-    query = config['queries']['query']
-    client = supabase.create_client(url, key)
-    response = client.sql(query)
-    return render_template("database.html", response=response)
-
-
-
-@app.route("/database")
-def database_page():
-    config = configparser.ConfigParser()
-    config.read('dbtool.ini')
     conn = db.connect(**config['connection'])
     curs = conn.cursor()
     curs.execute(config['query']['bigPopulation'],
                  [config['default']['bigPopulation']])
     header = ('There are %d big countries' %curs.rowcount)
     conn.close()
-    return render_template("database.html", header = header)
+    return render_template("database.html", header=header)
 
 
 """
