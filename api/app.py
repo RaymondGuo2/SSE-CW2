@@ -77,7 +77,7 @@ def database_page():
     response = ('There are %d big countries' % curs.rowcount)
     rows = curs.fetchall()
     conn.close()
-    return render_template("database.html", _response=response, _rows=rows)
+    return render_template("database.html")
 
 
 """
