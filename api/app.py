@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-import supabase
+import psycopg as db
 import configparser
 import requests
 import logging
@@ -78,31 +78,21 @@ def database_page():
     return render_template("database.html", response=response)
 
 
-"""
+
 @app.route("/database")
 def database_page():
     config = configparser.ConfigParser()
     config.read('dbtool.ini')
-    url = config['supabase']['url']
-    key = config['supabase']['key']
-    table_name = "items"
-
-    api_url = f"{url}/rest/v1/{table_name}"
-    headers = {
-        "apikey": key,
-        "Authorization": f"Bearer {key}",
-        "Content-Type": "application/json"
-    }
-
-    response = requests.get(api_url, headers=headers)
-
-    if response.status_code == 200:
-        data = response.json()
-        return render_template("database.html", response=data)
-    else:
-        return f"Failed to fetch data: {response.status_code}", 500
+    conn = db.connect(**config['connection'])
+    curs = conn.cursor()
+    curs.execute(config['query']['bigPopulation'],
+                 [config['default']['bigPopulation']])
+    header = ('There are %d big countries' %curs.rowcount)
+    conn.close()
+    return render_template("database.html", header = header
 
 
+"""
 def process_query(query):
     return search_results
 """
