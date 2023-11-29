@@ -89,7 +89,7 @@ def database_page():
                  [config['default']['bigPopulation']])
     header = ('There are %d big countries' %curs.rowcount)
     conn.close()
-    return render_template("database.html", header = header
+    return render_template("database.html", header = header)
 
 
 """
