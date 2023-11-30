@@ -71,15 +71,21 @@ config = configparser.ConfigParser()
 config.read('dbtool.ini')
 
 
-@app.route("/database")
-def database_page():
+def testSQL():
     conn = db.connect(**config['connection'])
     curs = conn.cursor()
     curs.execute(config['query']['bigPopulation'],
                  [config['default']['bigPopulation']])
     response = ('There are %d big countries' % curs.rowcount)
     conn.close()
-    return render_template("database.html", response=response)
+    print (response)
+    return response
+
+
+@app.route("/database")
+def database_page():
+    responsesql = testSQL()
+    return render_template("database.html", response=responsesql)
 
 
 """
