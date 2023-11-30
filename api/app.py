@@ -76,7 +76,7 @@ response = ('There are %d big countries' % curs.rowcount)
 rows = curs.fetchall()
 conn.close()
 
-    
+
 @app.route("/database")
 def database_page():
     return render_template("database.html")
