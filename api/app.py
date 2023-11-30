@@ -67,23 +67,18 @@ def jumper_page():
     return render_template("jumper.html")
 
 
-def testSQL():
-    config = configparser.ConfigParser()
-    config.read('dbtool.ini')
-    server_params = dict(config['connection'])
-    server_params['row_factory'] = db.rows.dict_row
-    conn = db.connect(**server_params)
+config = configparser.ConfigParser()
+config.read('dbtool.ini')
+
+
+@app.route("/database")
+def database_page():
+    conn = db.connect(**config['connection'])
     curs = conn.cursor()
     curs.execute(config['query']['bigPopulation'],
                  [config['default']['bigPopulation']])
     response = ('There are %d big countries' % curs.rowcount)
     conn.close()
-    return response
-
-
-@app.route("/database")
-def database_page():
-    response = testSQL()
     return render_template("database.html", response=response)
 
 
