@@ -81,7 +81,8 @@ def testSQL():
 
 @app.route("/database")
 def database_page():
-    return render_template("database.html")
+    response = testSQL
+    return render_template("database.html", response=response)
 
 
 """
