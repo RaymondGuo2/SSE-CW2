@@ -78,11 +78,7 @@ def testSQL():
                  [config['default']['bigPopulation']])
     response = ('There are %d big countries' % curs.rowcount)
     conn.close()
-    print(response)
     return response
-
-
-testSQL()
 
 
 @app.route("/database")
