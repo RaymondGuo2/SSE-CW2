@@ -66,19 +66,19 @@ def jumper_page():
     return render_template("jumper.html")
 
 
+config = configparser.ConfigParser()
+config.read('dbtool.ini')
+conn = db.connect(**config['connection'])
+curs = conn.cursor()
+curs.execute(config['query']['bigPopulation'],
+             [config['default']['bigPopulation']])
+response = ('There are %d big countries' % curs.rowcount)
+rows = curs.fetchall()
+conn.close()
+
+    
 @app.route("/database")
 def database_page():
-    config = configparser.ConfigParser()
-    config.read('dbtool.ini')
-    conn = db.connect(**config['connection'])
-    curs = conn.cursor()
-    curs.execute(config['query']['bigPopulation'],
-                 [config['default']['bigPopulation']])
-    """
-    response = ('There are %d big countries' % curs.rowcount)
-    rows = curs.fetchall()
-"""
-    conn.close()
     return render_template("database.html")
 
 
