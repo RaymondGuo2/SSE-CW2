@@ -82,6 +82,9 @@ def testSQL():
     return response
 
 
+testSQL()
+
+
 @app.route("/database")
 def database_page():
     responsesql = testSQL()
@@ -272,6 +275,3 @@ def returngithub():
         repos=repos,
         repo_names=repo_names
     )
-
-
-app.run(debug=True)
