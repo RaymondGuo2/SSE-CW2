@@ -27,6 +27,7 @@ jobs:
         pip install pytest
         pip install matplotlib
         pip install "psycopg [binary]"
+	pip install configparser
     - name: Run Tests
       run: pytest
 
