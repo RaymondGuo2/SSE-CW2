@@ -70,7 +70,9 @@ def jumper_page():
 def testSQL():
     config = configparser.ConfigParser()
     config.read('dbtool.ini')
-    conn = db.connect(**config['connection'])
+    server_params = dict(config['connection'])
+    server_params['row_factory'] = db.rows.dict_row
+    conn = db.connect(**server_params)
     curs = conn.cursor()
     curs.execute(config['query']['bigPopulation'],
                  [config['default']['bigPopulation']])
