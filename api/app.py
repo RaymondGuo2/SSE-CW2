@@ -73,20 +73,35 @@ config.read('dbtool.ini')
 
 
 def testSQL():
-    server_params = {'dbname': os.getenv('DBNAME'),
-                     'host': os.getenv('HOST'),
-                     'port': os.getenv('PORT'),
-                     'user': os.getenv('USER'),
-                     'password': os.getenv('PASSWORD'),
-                     'client_encoding': os.getenv('CLIENT_ENCODING')}
+    DBNAME = os.environ.get('DBNAME')
+    HOST = os.environ.get('HOST')
+    PORT = os.environ.get('PORT')
+    USER = os.environ.get('USER')
+    PASSWORD = os.environ.get('PASSWORD')
+    CLIENT_ENCODING = os.getenv('CLIENT_ENCODING')
+    server_params = {'dbname': DBNAME,
+                     'host': HOST,
+                     'port': PORT,
+                     'user': USER,
+                     'password': PASSWORD,
+                     'client_encoding': CLIENT_ENCODING}
     conn = db.connect(**server_params)
     curs = conn.cursor()
     curs.execute(config['query']['bigPopulation'],
                  [config['default']['bigPopulation']])
     response = ('There are %d big countries' % curs.rowcount)
     conn.close()
+    print(DBNAME)
+    print(HOST)
+    print(PORT)
+    print(USER)
+    print(PASSWORD)
+    print(CLIENT_ENCODING)
     return response
 
+"""
+testSQL()
+"""
 
 @app.route("/database")
 def database_page():
