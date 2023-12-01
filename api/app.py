@@ -71,13 +71,13 @@ def testSQL():
     HOST = os.environ.get('HOST')
     PORT = os.environ.get('PORT')
     USER = os.environ.get('USER')
-    PASSWORD = os.environ.get('PASSWORD')
+    PGPASSWORD = os.environ.get('PGPASSWORD')
     CLIENT_ENCODING = os.environ.get('CLIENT_ENCODING')
     server_params = {'dbname': DBNAME,
                      'host': HOST,
                      'port': PORT,
                      'user': USER,
-                     'password': PASSWORD,
+                     'password': PGPASSWORD,
                      'client_encoding': CLIENT_ENCODING}
     conn = db.connect(**server_params)
     curs = conn.cursor()
