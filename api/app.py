@@ -3,7 +3,7 @@ import psycopg as db
 import configparser
 import requests
 import logging
-"""import os"""
+import os
 
 app = Flask(__name__, static_folder='static')
 
@@ -73,20 +73,12 @@ config.read('dbtool.ini')
 
 
 def testSQL():
-    """
     DBNAME = os.environ.get('DBNAME')
     HOST = os.environ.get('HOST')
     PORT = os.environ.get('PORT')
     USER = os.environ.get('USER')
     PASSWORD = os.environ.get('PASSWORD')
     CLIENT_ENCODING = os.environ.get('CLIENT_ENCODING')
-"""
-    DBNAME = "mondial"
-    HOST = "db.doc.ic.ac.uk"
-    PORT = "5432"
-    USER = "lab"
-    PASSWORD = "lab"
-    CLIENT_ENCODING = "utf-8"
     server_params = {'dbname': DBNAME,
                      'host': HOST,
                      'port': PORT,
@@ -107,6 +99,7 @@ def testSQL():
     print(CLIENT_ENCODING)
     return response
 
+testSQL()
 
 @app.route("/database")
 def database_page():
@@ -301,5 +294,5 @@ def returngithub():
 
 
 """
-app.run(debug=False)
+app.run(debug=True)
 """
