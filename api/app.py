@@ -3,7 +3,7 @@ import psycopg as db
 import requests
 import logging
 import os
-import json
+from sql_queries import SELECT_COUNTRY
 
 app = Flask(__name__, static_folder='static')
 
@@ -88,8 +88,6 @@ def testSQL():
                      'client_encoding': CLIENT_ENCODING}
     conn = db.connect(**server_params)
     curs = conn.cursor()
-    sql_queries = load_sql_queries('sql_queries.json')
-    SELECT_COUNTRY = sql_queries.get('SELECT_COUNTRY', '')
     curs.execute(SELECT_COUNTRY, ["GB"])
     response = curs.fetchone()
     conn.close()
