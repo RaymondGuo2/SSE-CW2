@@ -99,9 +99,9 @@ def testSQL():
     print(CLIENT_ENCODING)
     return response
 
-
+"""
 testSQL()
-
+"""
 
 @app.route("/database")
 def database_page():
