@@ -71,21 +71,17 @@ def testSQL():
     HOST = os.environ.get('HOST')
     PORT = os.environ.get('PORT')
     USER = os.environ.get('USER')
-    PGPASSWORD = os.environ.get('PGPASSWORD')
+    PASSWORD = os.environ.get('PASSWORD')
     CLIENT_ENCODING = os.environ.get('CLIENT_ENCODING')
     server_params = {'dbname': DBNAME,
                      'host': HOST,
                      'port': PORT,
                      'user': USER,
-                     'password': PGPASSWORD,
+                     'password': PASSWORD,
                      'client_encoding': CLIENT_ENCODING}
     conn = db.connect(**server_params)
     curs = conn.cursor()
-    curs.execute("""
-SELECT *
-FROM country
-WHERE code = %s
-""", ["GB"])
+    curs.execute("SELECT * FROM country WHERE code = %s", ["GB"])
     response = curs.fetchone()
     conn.close()
     print(response)
