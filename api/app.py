@@ -69,7 +69,7 @@ def jumper_page():
 
 
 config = configparser.ConfigParser()
-config.read('dbtool.ini')
+"""config.read('dbtool.ini')"""
 
 
 def testSQL():
@@ -87,16 +87,10 @@ def testSQL():
                      'client_encoding': CLIENT_ENCODING}
     conn = db.connect(**server_params)
     curs = conn.cursor()
-    curs.execute(config['query']['bigPopulation'],
-                 [config['default']['bigPopulation']])
-    response = ('There are %d big countries' % curs.rowcount)
+    curs.execute("SELECT * FROM country WHERE code = %s", ["GB"])
+    response = curs.fetchone()
     conn.close()
-    print(DBNAME)
-    print(HOST)
-    print(PORT)
-    print(USER)
-    print(PASSWORD)
-    print(CLIENT_ENCODING)
+    print(response)
     return response
 
 
