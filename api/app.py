@@ -73,12 +73,12 @@ config.read('dbtool.ini')
 
 
 def testSQL():
-    server_params = {'dbname' : os.getenv('DBNAME'),
-                     'host' : os.getenv('HOST'),
-                     'port' : os.getenv('PORT'),
-                     'user' : os.getenv('USER'),
-                     'password' : os.getenv('PASSWORD'),
-                     'client_encoding' : os.getenv('CLIENT_ENCODING'),}
+    server_params = {'dbname': os.getenv('DBNAME'),
+                     'host': os.getenv('HOST'),
+                     'port': os.getenv('PORT'),
+                     'user': os.getenv('USER'),
+                     'password': os.getenv('PASSWORD'),
+                     'client_encoding': os.getenv('CLIENT_ENCODING')}
     conn = db.connect(**server_params)
     curs = conn.cursor()
     curs.execute(config['query']['bigPopulation'],
