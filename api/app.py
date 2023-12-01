@@ -64,13 +64,7 @@ def shoes_page():
 
 @app.route("/jumper")
 def jumper_page():
-
     return render_template("jumper.html")
-
-
-def load_sql_queries(file_path):
-    with open(file_path) as json_file:
-        return json.load(json_file)
 
 
 def testSQL():
