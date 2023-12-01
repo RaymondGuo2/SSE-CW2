@@ -85,8 +85,7 @@ def testSQL():
 SELECT *
 FROM country
 WHERE code = %s
-""",
-["GB"])
+""", ["GB"])
     response = curs.fetchone()
     conn.close()
     print(response)
