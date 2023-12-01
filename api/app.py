@@ -3,7 +3,7 @@ import psycopg as db
 import configparser
 import requests
 import logging
-import os
+"""import os"""
 
 app = Flask(__name__, static_folder='static')
 
