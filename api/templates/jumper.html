@@ -3,7 +3,7 @@
 <head>
     <title>Jumpers</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
-    <link rel="stylesheet" type="text/css" href="dropdown.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='dropdown.css') }}">
 </head>
 <body>
     <div class="navbar">
@@ -13,7 +13,7 @@
           <button type="submit">Search</button>
         </form>
         <div class = "dropdown">
-            <button class="dropbn">Browse Our Products</button>
+            <button class="dropbtn">Browse Our Products</button>
             <div class="dropdown-content">
                 <a href="/shoes">Shoes</a>
                 <a href="/jumper">Jumpers</a>
