@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request
 import psycopg as db
-import configparser
 import requests
 import logging
 import os
+import json
 
 app = Flask(__name__, static_folder='static')
 
@@ -68,8 +68,9 @@ def jumper_page():
     return render_template("jumper.html")
 
 
-config = configparser.ConfigParser()
-"""config.read('dbtool.ini')"""
+def load_sql_queries(file_path):
+    with open(file_path) as json_file:
+        return json.load(json_file)
 
 
 def testSQL():
@@ -87,7 +88,9 @@ def testSQL():
                      'client_encoding': CLIENT_ENCODING}
     conn = db.connect(**server_params)
     curs = conn.cursor()
-    curs.execute("SELECT * FROM country WHERE code = %s", ["GB"])
+    sql_queries = load_sql_queries('sql_queries.json')
+    SELECT_COUNTRY = sql_queries.get('SELECT_COUNTRY', '')
+    curs.execute(SELECT_COUNTRY, ["GB"])
     response = curs.fetchone()
     conn.close()
     print(response)
