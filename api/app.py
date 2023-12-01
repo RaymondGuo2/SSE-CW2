@@ -3,7 +3,6 @@ import psycopg as db
 import requests
 import logging
 import os
-from sql_queries import SELECT_COUNTRY
 
 app = Flask(__name__, static_folder='static')
 
@@ -82,7 +81,12 @@ def testSQL():
                      'client_encoding': CLIENT_ENCODING}
     conn = db.connect(**server_params)
     curs = conn.cursor()
-    curs.execute(SELECT_COUNTRY, ["GB"])
+    curs.execute( """
+SELECT *
+FROM country
+WHERE code = %s
+""",
+                  ["GB"])
     response = curs.fetchone()
     conn.close()
     print(response)
