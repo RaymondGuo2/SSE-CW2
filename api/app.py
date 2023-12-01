@@ -81,7 +81,7 @@ def testSQL():
                      'client_encoding': CLIENT_ENCODING}
     conn = db.connect(**server_params)
     curs = conn.cursor()
-    curs.execute( """
+    curs.execute("""
 SELECT *
 FROM country
 WHERE code = %s
