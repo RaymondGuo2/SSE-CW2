@@ -3,6 +3,7 @@ import psycopg as db
 import configparser
 import requests
 import logging
+import os
 
 app = Flask(__name__, static_folder='static')
 
@@ -72,7 +73,13 @@ config.read('dbtool.ini')
 
 
 def testSQL():
-    conn = db.connect(**config['connection'])
+    server_params = {'dbname' : os.getenv('DBNAME'),
+                     'host' : os.getenv('HOST'),
+                     'port' : os.getenv('PORT'),
+                     'user' : os.getenv('USER'),
+                     'password' : os.getenv('PASSWORD'),
+                     'client_encoding' : os.getenv('CLIENT_ENCODING'),
+    conn = db.connect(**server_params)
     curs = conn.cursor()
     curs.execute(config['query']['bigPopulation'],
                  [config['default']['bigPopulation']])
