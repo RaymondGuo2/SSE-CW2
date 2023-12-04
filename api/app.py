@@ -66,7 +66,7 @@ def jumper_page():
     return render_template("jumper.html")
 
 
-def createTableItems():
+def createTableItem():
     DBNAME = os.environ.get('DBNAME')
     HOST = os.environ.get('HOST')
     PORT = os.environ.get('PORT')
@@ -81,9 +81,10 @@ def createTableItems():
                      'client_encoding': CLIENT_ENCODING}
     conn = db.connect(**server_params)
     curs = conn.cursor()
+    curs.execute("DROP TABLE items")
     try:
         curs.execute("""
-CREATE TABLE items (
+CREATE TABLE item (
 item_id SERIAL PRIMARY KEY,
 item_name VARCHAR(20) NOT NULL,
 price DECIMAL(10,2) NOT NULL,
@@ -98,6 +99,7 @@ size VARCHAR(2) NOT NULL
         conn.rollback()
     finally:
         conn.close()
+
 
 
 def insertItem(
@@ -121,15 +123,17 @@ def insertItem(
                      'client_encoding': CLIENT_ENCODING}
     conn = db.connect(**server_params)
     curs = conn.cursor()
+    curs.execute("DELETE FROM item")
     curs.execute("""
-INSERT INTO items (item_name, price, type, stock, color, size)
+INSERT INTO item (item_name, price, type, stock, color, size)
 VALUES (%s, %s, %s, %s, %s, %s)
 """, (name, price, itemType, stock, color, size))
+    conn.commit()
     conn.close()
 
 
 def setupDB():
-    createTableItems()
+    createTableItem()
     insertItem('Black Beanie', 12, 'Hat', 10, 'Black', 'M')
     insertItem('Green Beanie', 12, 'Hat', 10, 'Green', 'M')
     insertItem('Hugo Boss Jumper', 60, 'Jumper', 10, 'Grey', 'M')
@@ -142,16 +146,18 @@ def setupDB():
     USER = os.environ.get('USER')
     PASSWORD = os.environ.get('PASSWORD')
     CLIENT_ENCODING = os.environ.get('CLIENT_ENCODING')
-    server_params = {'dbname': DBNAME,
-                     'host': HOST,
-                     'port': PORT,
-                     'user': USER,
-                     'password': PASSWORD,
-                     'client_encoding': CLIENT_ENCODING}
+    server_params = {
+        'dbname': DBNAME,
+        'host': HOST,
+        'port': PORT,
+        'user': USER,
+        'password': PASSWORD,
+        'client_encoding': CLIENT_ENCODING
+    }
     conn = db.connect(**server_params)
     curs = conn.cursor()
-    curs.execute("SELECT * FROM items")
-    response = curs.fetchone()
+    curs.execute("SELECT* FROM item")
+    response = curs.fetchall()
     conn.close()
     return response
 
