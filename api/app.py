@@ -104,7 +104,7 @@ def connectDB():
 
 
 def dbQuery():
-    connectDB()
+    conn, curs = connectDB()
     curs.execute("SELECT* FROM item")
     response = curs.fetchall()
     conn.close()
