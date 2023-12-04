@@ -111,7 +111,7 @@ def database_page():
 
 @app.route('/airforce')
 def airforce():
-    return render_template('air_force.html')
+    return render_template('airforce.html')
 
 
 @app.route('/')
