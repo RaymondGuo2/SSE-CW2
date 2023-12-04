@@ -100,6 +100,7 @@ def connectDB():
     }
     conn = db.connect(**server_params)
     curs = conn.cursor()
+    return conn, curs
 
 
 def dbQuery():

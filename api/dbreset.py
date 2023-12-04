@@ -5,6 +5,7 @@ from dotenv import load_dotenv, find_dotenv
 dotenv_path = find_dotenv(filename='.env', raise_error_if_not_found=True)
 load_dotenv()
 
+
 def resetTableItem():
     DBNAME = os.environ.get('DBNAME')
     HOST = os.environ.get('HOST')
