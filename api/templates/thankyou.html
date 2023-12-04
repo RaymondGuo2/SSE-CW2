@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Thank You!</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+  {% include 'navbar.html' %} 
+
+    <h1 class="header">RZ Clothing</h1>
+    <h2>Hello {{ name }}, thank you for making a purchase on RZ Clothing!</h2>
+    <h3>Your order confirmation has been sent to {{ email }}. </h3>
+    <p> We aim to ship your order in the next 3-5 working days! </p>
+  </body>
+</html>
