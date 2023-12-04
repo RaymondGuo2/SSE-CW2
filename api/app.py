@@ -103,6 +103,7 @@ def airforce():
 def vans():
     return render_template('vans.html')
 
+
 """
 def process_query(query):
     return search_results
