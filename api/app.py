@@ -3,12 +3,8 @@ import psycopg as db
 import requests
 import logging
 import os
-from dotenv import load_dotenv
 
 app = Flask(__name__, static_folder='static')
-
-
-load_dotenv()
 
 
 @app.route("/")
