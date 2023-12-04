@@ -87,14 +87,18 @@ def testSQL():
     curs = conn.cursor()
     curs.execute("""
 CREATE TABLE items (
-item_no INTEGER NOT NULL, 
-item_name VARCHAR(20) NOT NULL, 
-price DECIMAL(10,2) NOT NULL
+item_id SERIAL PRIMARY KEY,
+item_name VARCHAR(20) NOT NULL,
+price DECIMAL(10,2) NOT NULL,
+type VARCHAR(20) NOT NULL,
+stock INTEGER NOT NULL,
+color VARCHAR(20) NOT NULL,
+size VARCHAR(2) NOT NULL
 )
 """)
     curs.execute("""
-INSERT INTO items
-VALUES (1, 'Black Beanie', 12)
+INSERT INTO items (item_name, price, type, stock, color, size)
+VALUES ('Black Beanie', 12, 'Hat', 10, 'Black', 'M')
 """)
     curs.execute("SELECT * FROM items")
     response = curs.fetchone()
