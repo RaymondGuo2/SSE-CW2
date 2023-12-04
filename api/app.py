@@ -114,6 +114,31 @@ def airforce():
     return render_template('airforce.html')
 
 
+@app.route('/vans')
+def vans():
+    return render_template('vans.html')
+
+
+@app.route('/blackbeanie')
+def blackbeanie():
+    return render_template('blackbeanie.html')
+
+
+@app.route('/greenbeanie')
+def greenbeanie():
+    return render_template('greenbeanie.html')
+
+
+@app.route('/hugojumper')
+def hugojumper():
+    return render_template('hugojumper.html')
+
+
+@app.route('/uniqlojumper')
+def uniqlojumper():
+    return render_template('uniqlojumper.html')
+
+
 @app.route('/')
 def vans():
     return render_template('vans.html')
