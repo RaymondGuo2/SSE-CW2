@@ -139,11 +139,6 @@ def uniqlojumper():
     return render_template('uniqlojumper.html')
 
 
-@app.route('/')
-def vans():
-    return render_template('vans.html')
-
-
 """
 def process_query(query):
     return search_results
