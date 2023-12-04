@@ -66,7 +66,41 @@ def jumper_page():
     return render_template("jumper.html")
 
 
-def testSQL():
+def createTableItems():
+    DBNAME = os.environ.get('DBNAME')
+    HOST = os.environ.get('HOST')
+    PORT = os.environ.get('PORT')
+    USER = os.environ.get('USER')
+    PASSWORD = os.environ.get('PASSWORD')
+    CLIENT_ENCODING = os.environ.get('CLIENT_ENCODING')
+    server_params = {'dbname': DBNAME,
+                     'host': HOST,
+                     'port': PORT,
+                     'user': USER,
+                     'password': PASSWORD,
+                     'client_encoding': CLIENT_ENCODING}
+    conn = db.connect(**server_params)
+    curs = conn.cursor()
+    try:
+        curs.execute("""
+CREATE TABLE items (
+item_id SERIAL PRIMARY KEY,
+item_name VARCHAR(20) NOT NULL,
+price DECIMAL(10,2) NOT NULL,
+type VARCHAR(20) NOT NULL,
+stock INTEGER NOT NULL,
+color VARCHAR(20) NOT NULL,
+size VARCHAR(2) NOT NULL
+)
+""")
+        conn.commit()
+    except db.ProgrammingError as e:
+        conn.rollback()
+    finally:
+        conn.close()
+        
+
+def insertItem(name:str, price:int, itemType:str, stock:int, color:str, size:str):
     DBNAME = os.environ.get('DBNAME')
     HOST = os.environ.get('HOST')
     PORT = os.environ.get('PORT')
@@ -82,30 +116,39 @@ def testSQL():
     conn = db.connect(**server_params)
     curs = conn.cursor()
     curs.execute("""
-CREATE TABLE items (
-item_id SERIAL PRIMARY KEY,
-item_name VARCHAR(20) NOT NULL,
-price DECIMAL(10,2) NOT NULL,
-type VARCHAR(20) NOT NULL,
-stock INTEGER NOT NULL,
-color VARCHAR(20) NOT NULL,
-size VARCHAR(2) NOT NULL
-)
-""")
-    curs.execute("""
 INSERT INTO items (item_name, price, type, stock, color, size)
-VALUES ('Black Beanie', 12, 'Hat', 10, 'Black', 'M')
-""")
+VALUES (%s, %s, %s, %s, %s, %s)
+""", (name, price, itemType, stock, color, size))
+    conn.commit()
+    conn.close()
+
+
+def setupDB():
+    createTableItems()
+    insertItem('Black Beanie', 12, 'Hat', 10, 'Black', 'M')
+    DBNAME = os.environ.get('DBNAME')
+    HOST = os.environ.get('HOST')
+    PORT = os.environ.get('PORT')
+    USER = os.environ.get('USER')
+    PASSWORD = os.environ.get('PASSWORD')
+    CLIENT_ENCODING = os.environ.get('CLIENT_ENCODING')
+    server_params = {'dbname': DBNAME,
+                     'host': HOST,
+                     'port': PORT,
+                     'user': USER,
+                     'password': PASSWORD,
+                     'client_encoding': CLIENT_ENCODING}
+    conn = db.connect(**server_params)
+    curs = conn.cursor()
     curs.execute("SELECT * FROM items")
     response = curs.fetchone()
     conn.close()
-    print(response)
     return response
 
 
 @app.route("/database")
 def database_page():
-    responsesql = testSQL()
+    responsesql = setupDB()
     return render_template("database.html", response=responsesql)
 
 
