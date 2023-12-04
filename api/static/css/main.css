@@ -2,7 +2,6 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: #f0f0f0;
-  max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -11,10 +10,10 @@ body {
   overflow: hidden;
   background-color: #fdfdfd;
   border-bottom: 1px solid #ccc;
-  border-radius: 0 0 10px 10px;
   padding: 5px 0;
   display: flex;
-  align-items: center;
+  justify-content: center; /* Center the items horizontally */
+  align-items: center; /* Center the items vertically */
 }
 
 .navbar strong {
@@ -23,13 +22,13 @@ body {
 }
 
 .navbar a {
-  float: left;
   display: block;
   color: #333;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
 }
+
 
 .navbar a:hover {
   background-color: #ddd;
