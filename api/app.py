@@ -3,8 +3,12 @@ import psycopg as db
 import requests
 import logging
 import os
+from dotenv import load_dotenv
 
 app = Flask(__name__, static_folder='static')
+
+
+load_dotenv()
 
 
 @app.route("/")
@@ -81,7 +85,18 @@ def testSQL():
                      'client_encoding': CLIENT_ENCODING}
     conn = db.connect(**server_params)
     curs = conn.cursor()
-    curs.execute("SELECT * FROM country WHERE code = %s", ["GB"])
+    curs.execute("""
+CREATE TABLE items (
+item_no INTEGER NOT NULL, 
+item_name VARCHAR(20) NOT NULL, 
+price DECIMAL(10,2) NOT NULL
+)
+""")
+    curs.execute("""
+INSERT INTO items
+VALUES (1, 'Black Beanie', 12)
+""")
+    curs.execute("SELECT * FROM items")
     response = curs.fetchone()
     conn.close()
     print(response)
