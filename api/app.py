@@ -81,7 +81,22 @@ def testSQL():
                      'client_encoding': CLIENT_ENCODING}
     conn = db.connect(**server_params)
     curs = conn.cursor()
-    curs.execute("SELECT * FROM country WHERE code = %s", ["GB"])
+    curs.execute("""
+CREATE TABLE items (
+item_id SERIAL PRIMARY KEY,
+item_name VARCHAR(20) NOT NULL,
+price DECIMAL(10,2) NOT NULL,
+type VARCHAR(20) NOT NULL,
+stock INTEGER NOT NULL,
+color VARCHAR(20) NOT NULL,
+size VARCHAR(2) NOT NULL
+)
+""")
+    curs.execute("""
+INSERT INTO items (item_name, price, type, stock, color, size)
+VALUES ('Black Beanie', 12, 'Hat', 10, 'Black', 'M')
+""")
+    curs.execute("SELECT * FROM items")
     response = curs.fetchone()
     conn.close()
     print(response)
@@ -92,6 +107,16 @@ def testSQL():
 def database_page():
     responsesql = testSQL()
     return render_template("database.html", response=responsesql)
+
+
+@app.route('/airforce')
+def airforce():
+    return render_template('air_force.html')
+
+
+@app.route('/')
+def vans():
+    return render_template('vans.html')
 
 
 """

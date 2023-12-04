@@ -4,22 +4,50 @@
     <title>Jumpers</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='dropdown.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
     {% include 'navbar.html' %} 
 
     <h2 class="subheader">Shop our jumpers!</h2>
 
-    <div class="product">
-        <h3>Hugo Boss Jumper</h3>
-        <p>Purchase this Hugo Boss Jumper for £60.</p>
-        <img src="https://brandrunner.co.uk/wp-content/uploads/2021/01/Hugo-Boss-Jumper-Boys-1.jpg" width="200" height="200">
+{% block body %}
+<div class="container" style="margin-top: 40px !important;">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2 class="subheader">Shop our jumpers!</h2>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="thumbnail">
+                                <a href="/product/black-beanie">
+                                    <img src="https://brandrunner.co.uk/wp-content/uploads/2021/01/Hugo-Boss-Jumper-Boys-1.jpg" alt="Hugo Boss Jumper">
+                                    <div class="caption text-center">
+                                        <h4>Hugo Boss Jumper</h4>
+                                        <p>Purchase this Hugo Boss Jumper for £60.</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="thumbnail">
+                                <a href="/product/green-beanie">
+                                    <img src="https://www.uniqlo.com/jp/ja/contents/feature/masterpiece/common_22fw/img/item_12_01.jpg" alt="Uniqlo Jumper">
+                                    <div class="caption text-center">
+                                        <h4>Uniqlo Jumper</h4>
+                                        <p>Purchase this Uniqlo Jumper for £40.</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
+{% endblock %}
 
-    <div class="product">
-        <h3>Uniqlo Jumper</h3>
-        <p>Purchase this Uniqlo Jumper for £40.</p>
-        <img src="https://www.uniqlo.com/jp/ja/contents/feature/masterpiece/common_22fw/img/item_12_01.jpg" width="200" height="200">
-    </div>
 </body>
 </html>

@@ -70,3 +70,8 @@ h1, h2, h3, p, a, span, strong, em, ul, ol, li, blockquote, pre, code, img, tabl
   text-align: center;
   margin: 0; /* Optional: Remove default margin for better centering */
 }
+
+.price {
+  font-size: 24px;
+  font-weight: bold;
+}
