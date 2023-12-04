@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request
 import psycopg as db
-import configparser
 import requests
 import logging
+import os
 
 app = Flask(__name__, static_folder='static')
 
@@ -63,21 +63,28 @@ def shoes_page():
 
 @app.route("/jumper")
 def jumper_page():
-
     return render_template("jumper.html")
 
 
-config = configparser.ConfigParser()
-config.read('dbtool.ini')
-
-
 def testSQL():
-    conn = db.connect(**config['connection'])
+    DBNAME = os.environ.get('DBNAME')
+    HOST = os.environ.get('HOST')
+    PORT = os.environ.get('PORT')
+    USER = os.environ.get('USER')
+    PASSWORD = os.environ.get('PASSWORD')
+    CLIENT_ENCODING = os.environ.get('CLIENT_ENCODING')
+    server_params = {'dbname': DBNAME,
+                     'host': HOST,
+                     'port': PORT,
+                     'user': USER,
+                     'password': PASSWORD,
+                     'client_encoding': CLIENT_ENCODING}
+    conn = db.connect(**server_params)
     curs = conn.cursor()
-    curs.execute(config['query']['bigPopulation'],
-                 [config['default']['bigPopulation']])
-    response = ('There are %d big countries' % curs.rowcount)
+    curs.execute("SELECT * FROM country WHERE code = %s", ["GB"])
+    response = curs.fetchone()
     conn.close()
+    print(response)
     return response
 
 
@@ -274,5 +281,5 @@ def returngithub():
 
 
 """
-app.run(debug=False)
+app.run(debug=True)
 """
