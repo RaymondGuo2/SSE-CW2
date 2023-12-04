@@ -22,6 +22,21 @@ def submit():
     )
 
 
+@app.route("/checkout")
+def checkout():
+    return render_template("checkout.html")
+
+
+@app.route("/place_order", methods=["POST"])
+def place_order():
+    input_name = request.form.get("name")
+    input_email = request.form.get("email")
+    input_message = request.form.get("message")
+    return render_template(
+        "thankyou.html", name=input_name, email=input_email, message=input_message
+    )
+
+
 """ @app.route("/search")
 def search():
     query = request.args.get("query")
@@ -29,7 +44,7 @@ def search():
     return render_template("search_results.html", results=search_results)
 """
 
-"""
+
 @app.route('/convert_currency')
 def convert_currency():
     original_price = float(request.args.get('price'))
@@ -43,7 +58,6 @@ def convert_currency():
 
     converted_price = original_price * exchange_rate
     return jsonify(convertedPrice=converted_price)
-"""
 
 
 @app.route("/contact")
