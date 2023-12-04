@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Basket</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
+</head>
+<body>
+    {% include 'navbar.html' %} 
+    <div class="container">
+        <h2>Your Shopping Basket</h2>
+        
+        <!-- Shopping Basket Table -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Size</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- This section will be dynamically filled with cart items -->
+                {% for item in basket_items %}
+                <tr>
+                    <td>{{ item.product_name }}</td>
+                    <td>{{ item.size }}</td>
+                    <td>
+                        <input type="number" value="{{ item.quantity }}" min="1">
+                    </td>
+                    <td>{{ item.price }}</td>
+                    <td>
+                        <button class="btn btn-danger">Remove</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Checkout Button -->
+        <div class="text-right">
+            <button class="btn btn-success">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/basket.js') }}"></script>
+</body>
+</html>

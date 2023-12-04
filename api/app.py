@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import psycopg as db
 import requests
 import logging
@@ -143,6 +143,13 @@ def uniqlojumper():
 def process_query(query):
     return search_results
 """
+
+
+@app.route('/add-to-cart', methods=['POST'])
+def add_to_cart():
+    data = request.get_json()
+    # Process the data, add it to the user's cart
+    return jsonify({"status": "success", "message": "Added to cart"})
 
 
 def process_query(query):
