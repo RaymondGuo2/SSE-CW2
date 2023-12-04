@@ -119,13 +119,17 @@ def insertItem(name:str, price:int, itemType:str, stock:int, color:str, size:str
 INSERT INTO items (item_name, price, type, stock, color, size)
 VALUES (%s, %s, %s, %s, %s, %s)
 """, (name, price, itemType, stock, color, size))
-    conn.commit()
     conn.close()
 
 
 def setupDB():
     createTableItems()
     insertItem('Black Beanie', 12, 'Hat', 10, 'Black', 'M')
+    insertItem('Green Beanie', 12, 'Hat', 10, 'Green', 'M')
+    insertItem('Hugo Boss Jumper', 60, 'Jumper', 10, 'Grey', 'M')
+    insertItem('Uniqlo Jumper', 40, 'Jumper', 10, 'Green', 'M')
+    insertItem('Air Force 1s', 60, 'Shoe', 10, 'White', '11')
+    insertItem('Vans', 50, 'Shoe', 10, 'Black', '11')
     DBNAME = os.environ.get('DBNAME')
     HOST = os.environ.get('HOST')
     PORT = os.environ.get('PORT')
