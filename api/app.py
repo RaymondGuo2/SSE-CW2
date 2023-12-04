@@ -100,7 +100,13 @@ size VARCHAR(2) NOT NULL
         conn.close()
         
 
-def insertItem(name:str, price:int, itemType:str, stock:int, color:str, size:str):
+def insertItem(
+        name: str,
+        price: int,
+        itemType: str,
+        stock: int,
+        color: str,
+        size: str):
     DBNAME = os.environ.get('DBNAME')
     HOST = os.environ.get('HOST')
     PORT = os.environ.get('PORT')
