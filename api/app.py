@@ -154,12 +154,32 @@ def database_page():
 
 @app.route('/airforce')
 def airforce():
-    return render_template('air_force.html')
+    return render_template('airforce.html')
 
 
-@app.route('/')
+@app.route('/vans')
 def vans():
     return render_template('vans.html')
+
+
+@app.route('/blackbeanie')
+def blackbeanie():
+    return render_template('blackbeanie.html')
+
+
+@app.route('/greenbeanie')
+def greenbeanie():
+    return render_template('greenbeanie.html')
+
+
+@app.route('/hugojumper')
+def hugojumper():
+    return render_template('hugojumper.html')
+
+
+@app.route('/uniqlojumper')
+def uniqlojumper():
+    return render_template('uniqlojumper.html')
 
 
 """
