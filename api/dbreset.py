@@ -25,12 +25,8 @@ def resetTableItem():
     curs.execute("DROP TABLE item")
     conn.commit()
     conn.close()
-    print(DBNAME)
-    print(HOST)
-    print(PORT)
-    print(USER)
-    print(PASSWORD)
-    print(CLIENT_ENCODING)
+    print("All Rows Deleted")
+    print("Item Table Deleted")
 
 
 resetTableItem()

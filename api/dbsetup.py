@@ -34,6 +34,7 @@ size VARCHAR(2) NOT NULL
 """)
     conn.commit()
     conn.close()
+    print("Item Table Setup Complete")
 
 
 def insertItem(
@@ -63,6 +64,7 @@ VALUES (%s, %s, %s, %s, %s, %s)
 """, (name, price, itemType, stock, color, size))
     conn.commit()
     conn.close()
+    print("Item Added to Item Table: ", (name))
 
 
 def setupDB():
@@ -73,6 +75,7 @@ def setupDB():
     insertItem('Uniqlo Jumper', 40, 'Jumper', 10, 'Green', 'M')
     insertItem('Air Force 1s', 60, 'Shoe', 10, 'White', '11')
     insertItem('Vans', 50, 'Shoe', 10, 'Black', '11')
+    print('Full Setup Complete')
 
 
 setupDB()
