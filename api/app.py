@@ -33,7 +33,10 @@ def place_order():
     input_email = request.form.get("email")
     input_message = request.form.get("message")
     return render_template(
-        "thankyou.html", name=input_name, email=input_email, message=input_message
+        "thankyou.html",
+        name=input_name,
+        email=input_email,
+        message=input_message
     )
 
 
@@ -113,7 +116,6 @@ size VARCHAR(2) NOT NULL
         conn.rollback()
     finally:
         conn.close()
-
 
 
 def insertItem(
@@ -220,7 +222,7 @@ def process_query(query):
 
 @app.route('/add-to-cart', methods=['POST'])
 def add_to_cart():
-    data = request.get_json()
+    # data = request.get_json()
     # Process the data, add it to the user's cart
     return jsonify({"status": "success", "message": "Added to cart"})
 
