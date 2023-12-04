@@ -94,11 +94,11 @@ size VARCHAR(2) NOT NULL
 )
 """)
         conn.commit()
-    except db.ProgrammingError as e:
+    except db.ProgrammingError:
         conn.rollback()
     finally:
         conn.close()
-        
+
 
 def insertItem(
         name: str,
