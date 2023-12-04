@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Air Force 1s</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <!-- Image Column -->
+            <div class="col-md-6">
+                <img src="link-to-your-airforce1s-image.jpg" alt="Air Force 1s" class="img-responsive">
+            </div>
+
+            <!-- Information Column -->
+            <div class="col-md-6">
+                <h2>Air Force 1s</h2>
+                <p class="price">£60</p>
+                <select id="currency-selector">
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="GBP">GBP</option>
+                </select>
+                
+                <div id="product-price">Price: $<span id="price">60.00</span></div>
+                <!-- Additional product details -->
+                <p>Description of Air Force 1s...</p>
+
+                <!-- Checkout Options -->
+                <div>
+                    <label for="size">Size:</label>
+                    <select id="size" name="size">
+                        <!-- Size options -->
+                    </select>
+                </div>
+                <div>
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" name="quantity" min="1">
+                </div>
+                <button type="button" class="btn btn-primary">Add to Cart</button>
+                <button type="button" class="btn btn-success">Buy Now</button>
+            </div>
+        </div>
+    </div>
+    <script src="path/to/your/script.js"></script>
+</body>
+</html>
+
+
+

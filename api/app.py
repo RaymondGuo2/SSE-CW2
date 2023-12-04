@@ -94,6 +94,15 @@ def database_page():
     return render_template("database.html", response=responsesql)
 
 
+@app.route('/airforce')
+def airforce():
+    return render_template('air_force.html')
+
+
+@app.route('/')
+def vans():
+    return render_template('vans.html')
+
 """
 def process_query(query):
     return search_results
