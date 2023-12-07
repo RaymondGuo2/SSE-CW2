@@ -25,7 +25,7 @@ def setupTableItem():
 CREATE TABLE item (
 item_id SERIAL PRIMARY KEY,
 item_name VARCHAR(20) NOT NULL,
-price DECIMAL(10,2) NOT NULL,
+price NUMERIC(10,2) NOT NULL,
 type VARCHAR(20) NOT NULL,
 stock INTEGER NOT NULL,
 color VARCHAR(20) NOT NULL,
@@ -39,7 +39,7 @@ size VARCHAR(2) NOT NULL
 
 def insertItem(
         name: str,
-        price: int,
+        price: float,
         itemType: str,
         stock: int,
         color: str,
