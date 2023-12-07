@@ -3,14 +3,14 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Open Sans", sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
 .footer{
     position: fixed;
     bottom: 0;
     width: 100%;
-    background: #10182F;
+    background: black;
     border-radius: 6px;
 }
 footer .content{
@@ -30,8 +30,13 @@ footer .content{
 
 .footer-row.footer-col h4{
     color: #fff;
-    font-size: 1.2rem;
-    font-weight: 400;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.footer-col {
+    font-size: 1.6rem;
+    color: #fff;
 }
 
 .footer-col .links{
@@ -45,16 +50,12 @@ footer .content{
 
 .footer-col .links li a {
     text-decoration: none;
-    color: #bfbfbf;
-}
-
-.footer-col .links li a:hover {
-    color: #fff;
+    color: inherit;
 }
 
 .footer-col p{
     margin: 20px 0;
-    color: #bfbfbf;
+    color: #fff;
     max-width: 300px;
 }
 
@@ -82,7 +83,7 @@ footer .content{
 .footer-col form button {
     cursor: pointer;
     border-radius: 6px;
-    background: #fff;
+    background: black;
     outline: none;
     border: none;
     font-weight: 500;
@@ -91,7 +92,7 @@ footer .content{
 }
 
 .footer-col form button:hover{
-    background: #cecccc;
+    background: #fff;
 }
 
 .footer-col .icons{
@@ -102,7 +103,7 @@ footer .content{
 }
 
 .footer-col .icons i {
-    color: #afb6c7;
+    color: #fff;
 }
 
 .footer-col .icons i:hover {
