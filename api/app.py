@@ -127,8 +127,30 @@ def dbQuery():
     return response
 
 
+def reduceStock(itemID:int, reduceBy:int):
+    conn, curs = connectDB()
+    curs.execute("
+SELECT stock
+FROM item
+WHERE item_id = %s
+", (itemID))
+    current_stock = curs.fetchone()
+    if current_stock:
+        current_stock = current_stock[0]
+        new_stock = max(0, current_stock - reduceBy)
+        curs.execute("
+UPDATE item SET stock = %s WHERE item_id = %s
+", (new_stock, itemID))
+        conn.commit()
+        conn.close()
+    else:
+        conn.close()
+    
+
+
 @app.route("/database")
 def database_page():
+    reduceStock(1, 5)
     responsesql = dbQuery()
     return render_template("database.html", response=responsesql)
 
