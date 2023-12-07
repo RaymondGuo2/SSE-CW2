@@ -129,11 +129,11 @@ def dbQuery():
 
 def reduceStock(itemID:int, reduceBy:int):
     conn, curs = connectDB()
-    curs.execute("
+    curs.execute("""
 SELECT stock
 FROM item
 WHERE item_id = %s
-", (itemID))
+""", (itemID))
     current_stock = curs.fetchone()
     if current_stock:
         current_stock = current_stock[0]
