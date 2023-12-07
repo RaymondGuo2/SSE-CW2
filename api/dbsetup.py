@@ -65,7 +65,14 @@ def insertItem(
     curs.execute("""
 INSERT INTO item (item_name, price, type, stock, color, size)
 VALUES ({name}, {price}, {itemType}, {stock}, {color}, {size})
-""".format(name=name, price=price, itemType=itemType, stock=stock, color=color, size=size))
+""".format(
+    name=name,
+    price=price,
+    itemType=itemType,
+    stock=stock,
+    color=color,
+    size=size)
+                 )
     conn.commit()
     conn.close()
     print("Item Added to Item Table: ", (name))
