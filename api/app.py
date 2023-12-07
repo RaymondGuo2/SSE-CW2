@@ -27,6 +27,11 @@ def checkout():
     return render_template("checkout.html")
 
 
+@app.route("/basket")
+def basket():
+    return render_template("basket.html")
+
+
 @app.route("/place_order", methods=["POST"])
 def place_order():
     input_name = request.form.get("name")
