@@ -70,7 +70,7 @@ def convert_currency():
 
 @app.route("/contact")
 def contact_page():
-    return render_template("contact.html")
+    return render_template("contact.html", api_key=os.environ.get('GOOGLE_MAPS_API_KEY'))
 
 
 @app.route("/hat")
