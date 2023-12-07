@@ -138,9 +138,30 @@ def reduceStock(itemID: int, reduceBy: int):
     conn.close
 
 
+def selectAttribute(itemID: int, attribute: str): # attribute = "item_name", "price", "type", "stock", "color", "size"
+    conn, curs = connectDB()
+    curs.execute("""
+        SELECT %s
+        FROM item
+        WHERE item_id = %s
+    """.format(attribute=attribute), (itemID,))
+    unformatted_response = curs.fetchone()
+    if unformatted_response:
+        unformatted_response = unformatted_response[0]
+        if attribute == "price":
+            response = f"(unformatted_response:.2f)"
+        else:
+            response = unformatted_response.strip("'")
+    else:
+        response = "Attribute Not Found"
+    conn.close()
+    return response
+
+
 @app.route("/database")
 def database_page():
-    responsesql = dbQuery()
+    # responsesql = dbQuery()
+    responsesql = selectAttribute(3, "item_name")
     return render_template("database.html", response=responsesql)
 
 
