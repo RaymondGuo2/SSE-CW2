@@ -140,7 +140,6 @@ def reduceStock(itemID: int, reduceBy: int):
 
 @app.route("/database")
 def database_page():
-    reduceStock(1, 5)
     responsesql = dbQuery()
     return render_template("database.html", response=responsesql)
 
