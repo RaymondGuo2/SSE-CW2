@@ -27,6 +27,11 @@ def checkout():
     return render_template("checkout.html")
 
 
+@app.route("/basket")
+def basket():
+    return render_template("basket.html")
+
+
 @app.route("/place_order", methods=["POST"])
 def place_order():
     input_name = request.form.get("name")
@@ -65,7 +70,8 @@ def convert_currency():
 
 @app.route("/contact")
 def contact_page():
-    return render_template("contact.html")
+    return render_template("contact.html", api_key=os.environ.get(
+        'GOOGLE_MAPS_API_KEY'))
 
 
 @app.route("/hat")

@@ -4,6 +4,8 @@
     <title>Air Force 1s</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     {% include 'navbar.html' %} 
@@ -40,12 +42,16 @@
                     <input type="number" id="quantity" name="quantity" min="1">
                 </div>
                 <button type="button" class="btn btn-primary">Add to Cart</button>
-                <button type="button" class="btn btn-success">Buy Now</button>
+                <button id = "buyNowButton" type="button" class="btn btn-success">Buy Now</button>
+                <script>
+                    document.getElementById('buyNowButton').addEventListener('click', function(){
+                        window.location.href = '/checkout';
+                    });
+                </script>
             </div>
         </div>
     </div>
-    <script src="{{ url_for(filename='/currencyconversion.js') }}"></script>
-    <script src="{{ url_for(filename='/addtobasket.js') }}"></script>
+    {% include 'footer.html' %}
 </body>
 </html>
 
