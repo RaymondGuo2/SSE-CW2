@@ -1,40 +1,60 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Database</title>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
-    </head>
-    <body>
-      {% include 'navbar.html' %} 
+<head>
+    <title>Database</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
+    <style>
+        .product {
+            margin: 0 auto; /* Center the table */
+            width: 80%; /* Optional: Set a maximum width for the container */
+        }
+
+        table {
+            width: 100%; /* Make the table fill the container width */
+            border-collapse: collapse; /* Remove spacing between table cells */
+        }
+
+        th, td {
+            border: 1px solid #ddd; /* Add a border to table cells */
+            padding: 8px; /* Add padding to table cells */
+            text-align: left; /* Align text to the left */
+        }
+
+        th {
+            background-color: #f2f2f2; /* Add background color to header cells */
+        }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
 
     <h1 class="header">RZ Clothing</h1>
     <h2 class="subheader">Check out our Database!</h2>
 
     <div class="product">
-      <h3>Database</h3>
-      <table>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Type</th>
-      <th>Stock</th>
-      <th>Color</th>
-      <th>Size</th>
-    </tr>
-    {% for item in response %}
-      <tr>
-        <td>{{ item[0] }}</td>
-        <td>{{ item[1] }}</td>
-        <td>{{ item[2] }}</td>
-        <td>{{ item[3] }}</td>
-        <td>{{ item[4] }}</td>
-        <td>{{ item[5] }}</td>
-        <td>{{ item[6] }}</td>
-      </tr>
-    {% endfor %}
-  </table>
-    </div>    
-    
+        <h3>Database</h3>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Type</th>
+                <th>Stock</th>
+                <th>Color</th>
+                <th>Size</th>
+            </tr>
+            {% for item in response %}
+                <tr>
+                    <td>{{ item[0] }}</td>
+                    <td>{{ item[1] }}</td>
+                    <td>{{ item[2] }}</td>
+                    <td>{{ item[3] }}</td>
+                    <td>{{ item[4] }}</td>
+                    <td>{{ item[5] }}</td>
+                    <td>{{ item[6] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 </body>
 </html>
