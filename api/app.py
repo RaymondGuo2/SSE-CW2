@@ -159,8 +159,6 @@ def selectAttribute(itemID: int, attribute: str):
         unformatted_response = unformatted_response[0]
         if attribute == "price":
             response = f"{unformatted_response:.2f}"
-        if attribute in ["stock", "item_id"]:
-            response = unformatted_response
         else:
             response = unformatted_response.strip("'")
     else:
