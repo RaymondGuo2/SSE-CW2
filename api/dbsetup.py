@@ -6,21 +6,28 @@ dotenv_path = find_dotenv(filename='.env', raise_error_if_not_found=True)
 load_dotenv()
 
 
-def setupTableItem():
+def connectDB():
     DBNAME = os.environ.get('DBNAME')
     HOST = os.environ.get('HOST')
     PORT = os.environ.get('PORT')
     USER = os.environ.get('USER')
     PASSWORD = os.environ.get('PASSWORD')
     CLIENT_ENCODING = os.environ.get('CLIENT_ENCODING')
-    server_params = {'dbname': DBNAME,
-                     'host': HOST,
-                     'port': PORT,
-                     'user': USER,
-                     'password': PASSWORD,
-                     'client_encoding': CLIENT_ENCODING}
+    server_params = {
+        'dbname': DBNAME,
+        'host': HOST,
+        'port': PORT,
+        'user': USER,
+        'password': PASSWORD,
+        'client_encoding': CLIENT_ENCODING
+    }
     conn = db.connect(**server_params)
     curs = conn.cursor()
+    return conn, curs
+
+
+def setupTableItem():
+    conn, curs = connectDB()
     curs.execute("DELETE FROM item")
     curs.execute("DROP TABLE item")
     conn.commit()
@@ -48,31 +55,11 @@ def insertItem(
         stock: int,
         color: str,
         size: str):
-    DBNAME = os.environ.get('DBNAME')
-    HOST = os.environ.get('HOST')
-    PORT = os.environ.get('PORT')
-    USER = os.environ.get('USER')
-    PASSWORD = os.environ.get('PASSWORD')
-    CLIENT_ENCODING = os.environ.get('CLIENT_ENCODING')
-    server_params = {'dbname': DBNAME,
-                     'host': HOST,
-                     'port': PORT,
-                     'user': USER,
-                     'password': PASSWORD,
-                     'client_encoding': CLIENT_ENCODING}
-    conn = db.connect(**server_params)
-    curs = conn.cursor()
+    conn, curs = connectDB()
     curs.execute("""
 INSERT INTO item (item_name, price, type, stock, color, size)
-VALUES ({name}, {price}, {itemType}, {stock}, {color}, {size})
-""".format(
-        name=name,
-        price=price,
-        itemType=itemType,
-        stock=stock,
-        color=color,
-        size=size)
-    )
+VALUES (%s, %s, %s, %s, %s, %s)
+""", (name, price, itemType, stock, color, size))
     conn.commit()
     conn.close()
     print("Item Added to Item Table: ", (name))
