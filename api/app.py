@@ -169,9 +169,13 @@ def selectAttribute(itemID: int, attribute: str):
 
 @app.route("/database")
 def database_page():
-    # responsesql = dbQuery()
-    responsesql = selectAttribute(3, "item_name")
-    return render_template("database.html", response=responsesql)
+    responsesql = dbQuery()
+    responseattribute = selectAttribute(3, "item_name")
+    return render_template(
+        "database.html",
+        response=responsesql,
+        response_attribute=responseattribute
+    )
 
 
 @app.route('/airforce')
