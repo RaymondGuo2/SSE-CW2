@@ -3,28 +3,12 @@
 <head>
     <title>Shoes</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='dropdown.css') }}">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    <div class="navbar">
-        <a href="/" style="text-decoration: none;"><strong>😴 NAP.G</strong></a>
-        <form action="/search" method="get">
-          <input type="text" name="query" placeholder="Search for rizz...">
-          <button type="submit">Search</button>
-        </form>
-        <div class = "dropdown">
-            <button class="dropbtn">Browse Our Products</button>
-            <div class="dropdown-content">
-                <a href="/shoes">Shoes</a>
-                <a href="/jumper">Jumpers</a>
-                <a href="/hat">Hats</a>
-            </div>
-        </div>
-        <a href="/githubuname">GitHub Entry</a>
-        <a href="/database">Database</a>
-        <a href="/contact">Contact Us</a>
-      </div>
+    {% include 'navbar.html' %} 
 
     <h2 class="subheader">Shop our shoes!</h2>
 
@@ -39,10 +23,10 @@
                         <div class="col-lg-3">
                             <div class="thumbnail">
                                 <a href="/airforce">
-                                    <img src="https://d2ob0iztsaxy5v.cloudfront.net/product/270104/2701041020_zm.jpg" alt="Hugo Boss Jumper">
+                                    <img src="https://d2ob0iztsaxy5v.cloudfront.net/product/270104/2701041020_zm.jpg" alt="Air Force 1s">
                                     <div class="caption text-center">
                                         <h4>Air Force 1s</h4>
-                                        <p>Purchase this Air Force 1s for £60.</p>
+                                        <p>Purchase this pair of Air Force 1s for £60.</p>
                                     </div>
                                 </a>
                             </div>
@@ -53,7 +37,7 @@
                                     <img src="https://i8.amplience.net/t/jpl/sz_product_list?plu=sz_284146_a&qlt=85&qlt=92&w=363&h=281&v=1&fmt=auto&fmt=auto" alt="Vans">
                                     <div class="caption text-center">
                                         <h4>Vans</h4>
-                                        <p>Purchase these Vans for £50.</p>
+                                        <p>Purchase this pair of Vans for £50.</p>
                                     </div>
                                 </a>
                             </div>
@@ -66,5 +50,6 @@
 </div>
 {% endblock %}
 
+{% include 'footer.html' %}
 </body>
 </html>
