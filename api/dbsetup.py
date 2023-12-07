@@ -21,6 +21,10 @@ def setupTableItem():
                      'client_encoding': CLIENT_ENCODING}
     conn = db.connect(**server_params)
     curs = conn.cursor()
+    curs.execute("DELETE FROM item")
+    curs.execute("DROP TABLE item")
+    conn.commit()
+    print("Item Table Reset")
     curs.execute("""
 CREATE TABLE item (
 item_id SERIAL PRIMARY KEY,
