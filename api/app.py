@@ -38,7 +38,10 @@ def place_order():
     input_email = request.form.get("email")
     input_message = request.form.get("message")
     return render_template(
-        "thankyou.html", name=input_name, email=input_email, message=input_message
+        "thankyou.html",
+        name=input_name,
+        email=input_email,
+        message=input_message
     )
 
 
@@ -85,99 +88,37 @@ def jumper_page():
     return render_template("jumper.html")
 
 
-def createTableItems():
+def connectDB():
     DBNAME = os.environ.get('DBNAME')
     HOST = os.environ.get('HOST')
     PORT = os.environ.get('PORT')
     USER = os.environ.get('USER')
     PASSWORD = os.environ.get('PASSWORD')
     CLIENT_ENCODING = os.environ.get('CLIENT_ENCODING')
-    server_params = {'dbname': DBNAME,
-                     'host': HOST,
-                     'port': PORT,
-                     'user': USER,
-                     'password': PASSWORD,
-                     'client_encoding': CLIENT_ENCODING}
+    server_params = {
+        'dbname': DBNAME,
+        'host': HOST,
+        'port': PORT,
+        'user': USER,
+        'password': PASSWORD,
+        'client_encoding': CLIENT_ENCODING
+    }
     conn = db.connect(**server_params)
     curs = conn.cursor()
-    try:
-        curs.execute("""
-CREATE TABLE items (
-item_id SERIAL PRIMARY KEY,
-item_name VARCHAR(20) NOT NULL,
-price DECIMAL(10,2) NOT NULL,
-type VARCHAR(20) NOT NULL,
-stock INTEGER NOT NULL,
-color VARCHAR(20) NOT NULL,
-size VARCHAR(2) NOT NULL
-)
-""")
-        conn.commit()
-    except db.ProgrammingError:
-        conn.rollback()
-    finally:
-        conn.close()
+    return conn, curs
 
 
-def insertItem(
-        name: str,
-        price: int,
-        itemType: str,
-        stock: int,
-        color: str,
-        size: str):
-    DBNAME = os.environ.get('DBNAME')
-    HOST = os.environ.get('HOST')
-    PORT = os.environ.get('PORT')
-    USER = os.environ.get('USER')
-    PASSWORD = os.environ.get('PASSWORD')
-    CLIENT_ENCODING = os.environ.get('CLIENT_ENCODING')
-    server_params = {'dbname': DBNAME,
-                     'host': HOST,
-                     'port': PORT,
-                     'user': USER,
-                     'password': PASSWORD,
-                     'client_encoding': CLIENT_ENCODING}
-    conn = db.connect(**server_params)
-    curs = conn.cursor()
-    curs.execute("""
-INSERT INTO items (item_name, price, type, stock, color, size)
-VALUES (%s, %s, %s, %s, %s, %s)
-""", (name, price, itemType, stock, color, size))
-    conn.close()
-
-
-def setupDB():
-    createTableItems()
-    insertItem('Black Beanie', 12, 'Hat', 10, 'Black', 'M')
-    insertItem('Green Beanie', 12, 'Hat', 10, 'Green', 'M')
-    insertItem('Hugo Boss Jumper', 60, 'Jumper', 10, 'Grey', 'M')
-    insertItem('Uniqlo Jumper', 40, 'Jumper', 10, 'Green', 'M')
-    insertItem('Air Force 1s', 60, 'Shoe', 10, 'White', '11')
-    insertItem('Vans', 50, 'Shoe', 10, 'Black', '11')
-    DBNAME = os.environ.get('DBNAME')
-    HOST = os.environ.get('HOST')
-    PORT = os.environ.get('PORT')
-    USER = os.environ.get('USER')
-    PASSWORD = os.environ.get('PASSWORD')
-    CLIENT_ENCODING = os.environ.get('CLIENT_ENCODING')
-    server_params = {'dbname': DBNAME,
-                     'host': HOST,
-                     'port': PORT,
-                     'user': USER,
-                     'password': PASSWORD,
-                     'client_encoding': CLIENT_ENCODING}
-    conn = db.connect(**server_params)
-    curs = conn.cursor()
-    curs.execute("SELECT * FROM items")
-    response = curs.fetchone()
+def dbQuery():
+    conn, curs = connectDB()
+    curs.execute("SELECT* FROM item")
+    response = curs.fetchall()
     conn.close()
     return response
 
 
 @app.route("/database")
 def database_page():
-    responsesql = setupDB()
+    responsesql = dbQuery()
     return render_template("database.html", response=responsesql)
 
 
@@ -219,7 +160,7 @@ def process_query(query):
 
 @app.route('/add-to-cart', methods=['POST'])
 def add_to_cart():
-    data = request.get_json()
+    # data = request.get_json()
     # Process the data, add it to the user's cart
     return jsonify({"status": "success", "message": "Added to cart"})
 
