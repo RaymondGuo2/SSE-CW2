@@ -169,12 +169,22 @@ def selectAttribute(itemID: int, attribute: str):
 
 @app.route("/database")
 def database_page():
-    responsesql = dbQuery()
-    responseattribute = selectAttribute(3, "item_name")
+    responseSql = dbQuery()
+    responseName = selectAttribute(3, "item_name")
+    responsePrice = selectAttribute(3, "price")
+    responseType = selectAttribute(3, "type")
+    responseStock = selectAttribute(3, "stock")
+    responseColor = selectAttribute(3, "color")
+    responseSize = selectAttribute(3, "size")
     return render_template(
         "database.html",
-        response=responsesql,
-        response_attribute=responseattribute
+        response=responseSql,
+        response_name=responseName,
+        response_price=responsePrice,
+        response_type=responseType,
+        response_stock=responseStock,
+        response_color=responseColor,
+        response_size=responseSize
     )
 
 
