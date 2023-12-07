@@ -149,12 +149,11 @@ def selectAttribute(itemID: int, attribute: str):
     columnNames = [row[0] for row in curs.fetchall()]
     if attribute not in columnNames:
         raise ValueError("Invalid Attribute")
-    query = """
+    curs.execute("""
         SELECT {attribute}
         FROM item
         WHERE item_id = %s
-    """.format(attribute=attribute)
-    curs.execute(query, (itemID,))
+    """.format(attribute=attribute), (itemID,))
     unformatted_response = curs.fetchone()
     if unformatted_response:
         unformatted_response = unformatted_response[0]
