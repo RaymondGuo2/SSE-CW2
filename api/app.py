@@ -172,7 +172,7 @@ def database_page():
     Sql = dbQuery()
     Name = selectAttribute(3, "item_name")
     # Price = selectAttribute(3, "price")
-    # Type = selectAttribute(3, "type")
+    Type = selectAttribute(3, "type")
     # Stock = selectAttribute(3, "stock")
     # Color = selectAttribute(3, "color")
     # Size = selectAttribute(3, "size")
@@ -181,7 +181,7 @@ def database_page():
         response=Sql,
         response_name=Name,
         # response_price=Price,
-        # response_type=Type,
+        response_type=Type,
         # response_stock=Stock,
         # response_color=Color,
         # response_size=Size
