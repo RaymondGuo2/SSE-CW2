@@ -138,10 +138,19 @@ def reduceStock(itemID: int, reduceBy: int):
     conn.close
 
 
-def selectAttribute(itemID: int, attribute: str): # attribute = "item_name", "price", "type", "stock", "color", "size"
+def selectAttribute(itemID: int, attribute: str):
+    # attribute = "item_name", "price", "type", "stock", "color", "size"
     conn, curs = connectDB()
     curs.execute("""
-        SELECT %s
+        SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name = 'item'
+        """)
+    columnNames = [row[0] for row in curs.fetchall()]
+    if attribute not in columnNames:
+        raise ValueError("Invalid Attribute")
+    curs.execute("""
+        SELECT {attribute}
         FROM item
         WHERE item_id = %s
     """.format(attribute=attribute), (itemID,))
@@ -149,7 +158,7 @@ def selectAttribute(itemID: int, attribute: str): # attribute = "item_name", "pr
     if unformatted_response:
         unformatted_response = unformatted_response[0]
         if attribute == "price":
-            response = f"(unformatted_response:.2f)"
+            response = f"{unformatted_response:.2f}"
         else:
             response = unformatted_response.strip("'")
     else:
