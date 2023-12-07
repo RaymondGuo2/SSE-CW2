@@ -138,9 +138,9 @@ WHERE item_id = %s
     if current_stock:
         current_stock = current_stock[0]
         new_stock = max(0, current_stock - reduceBy)
-        curs.execute("
+        curs.execute("""
 UPDATE item SET stock = %s WHERE item_id = %s
-", (new_stock, itemID))
+""", (new_stock, itemID))
         conn.commit()
         conn.close()
     else:
