@@ -4,6 +4,8 @@
   <title>Home Page</title>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" >
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
   {% include 'navbar.html' %} 
@@ -52,5 +54,34 @@
     </div>
   </div>
 
+  <footer class="footer">
+    <div class="footer-row">
+
+      <div class="footer-col">
+        <h4>Products</h4>
+        <ul class="links">
+          <li><a href="/shoes">Shoes</a></li>
+          <li><a href="/hat">Hats</a></li>
+          <li><a href="/jumper">Jumpers</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Newsletter</h4>
+        <p>
+          Subscribe to our newsletter for a weekly dose of news, updates, and exclusive offers.
+        </p>
+        <form action="#">
+          <input type="text" placeholder="Your email" required>
+          <button type="submit">SUBSCRIBE</button>
+        </form>
+        <div class="icons">
+          <i class="fa-brands fa-facebook-f"></i>
+          <i class="fa-brands fa-twitter-f"></i>
+          <i class="fa-brands fa-github-f"></i>
+        </div>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
