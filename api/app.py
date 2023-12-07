@@ -127,7 +127,7 @@ def dbQuery():
     return response
 
 
-def reduceStock(itemID:int, reduceBy:int):
+def reduceStock(itemID: int, reduceBy: int):
     conn, curs = connectDB()
     curs.execute("""
 SELECT stock
@@ -145,7 +145,6 @@ UPDATE item SET stock = %s WHERE item_id = %s
         conn.close()
     else:
         conn.close()
-    
 
 
 @app.route("/database")
