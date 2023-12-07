@@ -112,7 +112,17 @@ def connectDB():
 def dbQuery():
     conn, curs = connectDB()
     curs.execute("SELECT* FROM item")
-    response = curs.fetchall()
+    unformatted_response = curs.fetchall()
+    response = [
+        (item[0],
+         item[1].strip("'"),
+         float(item[2]),
+         item[3].strip("'"),
+         item[4],
+         item[5].strip("'"),
+         item[6].strip("'"))
+        for item in unformatted_response
+    ]
     conn.close()
     return response
 
