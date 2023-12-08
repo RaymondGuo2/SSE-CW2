@@ -42,6 +42,7 @@
                 <th>Stock</th>
                 <th>Color</th>
                 <th>Size</th>
+		<th>Url</th>
             </tr>
             {% for item in response %}
                 <tr>
@@ -52,12 +53,13 @@
                     <td>{{ item[4] }}</td>
                     <td>{{ item[5] }}</td>
                     <td>{{ item[6] }}</td>
+		    <td>{{ item[7] }}</td
                 </tr>
             {% endfor %}
         </table>
 	<p>Attributes for Item ID = 3: {{ response_name }} {{
 	response_price }} {{ response_type }} {{ response_stock }} {{
-	response_color }} {{ response_size }}</p> 
+	response_color }} {{ response_size }} {{ response_url }}</p> 
     </div>
 </body>
 </html>
