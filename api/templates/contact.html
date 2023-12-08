@@ -6,49 +6,44 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-        #map {
-            height: 500px;
-            width: 100%;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/contact.css') }}" />
 </head>
 <body>
     {% include 'navbar.html' %} 
-
-    <h1 class="header">RZ Clothing</h1>
     <h2 class="subheader">Contact Us</h2>
+    <div class = "current-container">
+        <div class = "left-content">
+            <div class="contact-info">
+                <center><h3><b>If you have any enquiries about our products or services, please feel free to contact us by phone or email:</b></h3></center>
 
-    <div class="contact-info">
-        <p>If you have any queries about our products or services, please feel free to contact us using any of the methods below:</p>
-        <h4>Telephone Number</h4>
-        <p>08321</p>
-        <h4>Email</h4>
-        <p>rzclothing@olook.com</p>
+                <center><h4><b>Telephone Number: 08321</b></h4></center>
+                <center><h4><b>Email: napg@olook.com</b></h4></center>
+
+                <center><h4>Alternatively, you may wish to send a message using our contact form below or visit our flagship store shown on the right</h4></center>
+            </div>
+        
+            <div class="contact-form">
+                <center><b><h4>Contact Form</h4></b></center>
+                <form action="/submit" method="post">
+                    <label for="namefield">Name:</label>
+                    <input type="text" id="namefield" name="name">
+                    <label for="emailfield">Email Address:</label>
+                    <input type="email" id="emailfield" name="email">
+                    <label for="messagefield">Message:</label>
+                    <textarea id="messagefield" name="message"></textarea>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+        <div id="map"></div>
     </div>
 
-    <div class="contact-form">
-        <h4>Contact Form</h4>
-        <form action="/submit" method="post">
-            <label for="namefield">Name:</label>
-            <input type="text" id="namefield" name="name">
-            <label for="emailfield">Email Address:</label>
-            <input type="email" id="emailfield" name="email">
-            <label for="messagefield">Message:</label>
-            <textarea id="messagefield" name="message"></textarea>
-            <input type="submit" value="Submit">
-        </form>
-    </div>
-    <div id="map"></div>
+    
     <script>
         function initMap() {
-            var location = {lat: -25.363, lng: 131.044};
+            var location = {lat: 51.49916, lng: -0.17892};
             var map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 10,
+                zoom: 18,
                 center: location
             });
             var marker = new google.maps.Marker({

@@ -23,11 +23,13 @@
                         <!-- Black Beanie Product -->
                         <div class="col-lg-3">
                             <div class="thumbnail">
-                                <a href="/black-beanie">
-                                    <img src="https://www.footasylum.com/images/products/medium/127357.jpg" alt="Black Beanie">
+                                <a href="/blackbeanie">
+                                    <img src="{{ bb_attributes[7] }}">
                                     <div class="caption text-center">
-                                        <h4>Black Beanie</h4>
-                                        <p>Purchase this Northface Black Beanie for £12.</p>
+                                        <h4>{{ bb_attributes[1] }}</h4>
+                                        <p>Purchase this {{
+                                        bb_attributes[1] }} for £{{
+                                        bb_attributes[2] }}.</p>
                                     </div>
                                 </a>
                             </div>
@@ -35,11 +37,14 @@
                         <!-- Green Beanie Product -->
                         <div class="col-lg-3">
                             <div class="thumbnail">
-                                <a href="/green-beanie">
-                                    <img src="https://i.pinimg.com/736x/45/98/86/4598863f4b9d99b8c26cdc1684a36466.jpg" alt="Green Beanie">
+                                <a href="/greenbeanie">
+                                    <img src="{{ gb_attributes[7] }}"
+					 alt="{{ gb_attributes[1] }}">
                                     <div class="caption text-center">
-                                        <h4>Green Beanie</h4>
-                                        <p>Purchase this Northface Green Beanie for £12.</p>
+                                        <h4>{{ gb_attributes[1] }}</h4>
+                                        <p>Purchase this {{
+                                        gb_attributes[1] }} for £{{
+                                        gb_attributes[2] }}.</p>
                                     </div>
                                 </a>
                             </div>
