@@ -220,7 +220,11 @@ def hugojumper():
 def uniqlojumper():
     Stock = selectAttribute(3, "stock")
     maxStock = Stock + 1
-    return render_template('uniqlojumper.html', stock=Stock, max_stock=maxStock)
+    return render_template(
+        'uniqlojumper.html',
+        stock=Stock,
+        max_stock=maxStock
+    )
 
 
 """
