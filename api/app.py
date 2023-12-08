@@ -1,16 +1,17 @@
-from flask import Flask, render_template, request, jsonify, redirect, session
+from flask import Flask, render_template, request, jsonify, session
 import psycopg as db
 import requests
-import logging
 import os
 from dotenv import load_dotenv, find_dotenv
 
 app = Flask(__name__, static_folder='static')
 
-dotenv_path = find_dotenv(filename='.env', raise_error_if_not_found=True)
+dotenv_path = find_dotenv(filename='.env')
 load_dotenv()
 
-app.secret_key = os.environ.get('FLASK_SECRET_KEY')
+secret_key = os.urandom(24)
+app.secret_key = secret_key
+
 
 @app.route("/")
 def hello_world():
@@ -400,10 +401,9 @@ def uniqlojumper():
     )
 
 
-"""
 def process_query(query):
-    return search_results
-"""
+    if query == "dinosaurs":
+        return "Dinosaurs ruled the Earth 200 million years ago"
 
 
 @app.route('/add-to-cart', methods=['POST'])
@@ -412,10 +412,10 @@ def add_to_cart():
 
     if 'cart' not in session:
         session['cart'] = []
-    
     session['cart'].append(data)
     session.modified = True
     return jsonify(success=True)
+
 
 """
 app.run(debug=True)
