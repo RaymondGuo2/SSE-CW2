@@ -38,6 +38,7 @@ def basket():
     cart_items = session.get('cart', [])
     return render_template("basket.html", basket_items=cart_items)
 
+
 @app.route("/thankyou", methods=["POST"])
 def place_order():
     input_name = request.form.get("name")
@@ -60,10 +61,15 @@ def place_order():
         address=input_address
     )
 
+
 def send_simple_message(to_email, name, address):
     mail_api_key = os.environ.get('mailAPIKEY')
     email_subject = f"Thank You for Your Order, {name}!"
-    email_body = f"Dear {name},\n\nThank you for your order! It will be shipped to: {address}.\n\nBest regards,\nYour Team"
+    email_body = (
+        f"Dear {name},\n\n"
+        "Thank you for your order! It will be shipped to: "
+        f"{address}.\n\nBest regards,\nYour Team"
+    )
 
     return requests.post(
         "https://api.eu.mailgun.net/v3/noteqa.com/messages",
@@ -74,6 +80,7 @@ def send_simple_message(to_email, name, address):
             "subject": email_subject,
             "text": email_body
         })
+
 
 """ @app.route("/search")
 def search():
