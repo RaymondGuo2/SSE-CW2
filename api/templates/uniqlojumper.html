@@ -13,20 +13,21 @@
         <div class="row">
             <!-- Image Column -->
             <div class="col-md-6">
-                <img src="https://www.uniqlo.com/jp/ja/contents/feature/masterpiece/common_22fw/img/item_12_01.jpg" alt="Uniqlo Jumper" class="img-responsive">
+                <img src="{{ url }}" alt="Uniqlo Jumper" class="img-responsive">
             </div>
 
             <!-- Information Column -->
             <div class="col-md-6">
-                <h2>Uniqlo Jumper</h2>
-                <p class="price">£40</p>
+                <h2>{{ item_name }}</h2>
+                <p class="price">£{{ price }}</p>
                 <select id="currency-selector">
                     <option value="USD">USD</option>
                     <option value="EUR">EUR</option>
                     <option value="GBP">GBP</option>
                 </select>
                 
-                <div id="product-price">Price: $<span id="price">40.00</span></div>
+                <div id="product-price">Price: $<span id="price">{{
+                price }}</span></div>
                 <!-- Additional product details -->
                 <p>Description of Uniqlo Jumper...</p>
 
