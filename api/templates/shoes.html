@@ -23,10 +23,12 @@
                         <div class="col-lg-3">
                             <div class="thumbnail">
                                 <a href="/airforce">
-                                    <img src="https://d2ob0iztsaxy5v.cloudfront.net/product/270104/2701041020_zm.jpg" alt="Air Force 1s">
+                                    <img src="{{ af_attributes[7] }}">
                                     <div class="caption text-center">
-                                        <h4>Air Force 1s</h4>
-                                        <p>Purchase this pair of Air Force 1s for £60.</p>
+                                        <h4>{{ af_attributes[1] }}</h4>
+                                        <p>Purchase this pair of {{
+                                        af_attributes[1] }} for £{{
+                                        af_attributes[2] }}.</p>
                                     </div>
                                 </a>
                             </div>
@@ -34,10 +36,13 @@
                         <div class="col-lg-3">
                             <div class="thumbnail">
                                 <a href="/vans">
-                                    <img src="https://i8.amplience.net/t/jpl/sz_product_list?plu=sz_284146_a&qlt=85&qlt=92&w=363&h=281&v=1&fmt=auto&fmt=auto" alt="Vans">
+                                    <img src="{{ v_attributes[7] }}"
+                                        alt="{{ v_attributes[1] }}">
                                     <div class="caption text-center">
-                                        <h4>Vans</h4>
-                                        <p>Purchase this pair of Vans for £50.</p>
+                                        <h4>{{ v_attributes[1] }}</h4>
+                                        <p>Purchase this pair of {{
+                                        v_attributes[1] }} for £{{
+                                        v_attributes[2] }}.</p>
                                     </div>
                                 </a>
                             </div>

@@ -24,10 +24,13 @@
                         <div class="col-lg-3">
                             <div class="thumbnail">
                                 <a href="/hugojumper">
-                                    <img src="https://brandrunner.co.uk/wp-content/uploads/2021/01/Hugo-Boss-Jumper-Boys-1.jpg" alt="Hugo Boss Jumper">
+                                    <img src="{{ hbj_attributes[7] }}"
+					 alt="{{ hbj_attributes[1] }}">
                                     <div class="caption text-center">
-                                        <h4>Hugo Boss Jumper</h4>
-                                        <p>Purchase this Hugo Boss Jumper for £60.</p>
+                                        <h4>{{ hbj_attributes[1] }}</h4>
+                                        <p>Purchase this {{
+                                        hbj_attributes[1] }} for £{{
+                                        hbj_attributes[2] }}.</p>
                                     </div>
                                 </a>
                             </div>
@@ -35,10 +38,13 @@
                         <div class="col-lg-3">
                             <div class="thumbnail">
                                 <a href="/uniqlojumper">
-                                    <img src="https://www.uniqlo.com/jp/ja/contents/feature/masterpiece/common_22fw/img/item_12_01.jpg" alt="Uniqlo Jumper">
+                                    <img src="{{ uj_attributes[7] }}"
+                                        alt="{{ uj_attributes[1] }}">
                                     <div class="caption text-center">
-                                        <h4>Uniqlo Jumper</h4>
-                                        <p>Purchase this Uniqlo Jumper for £40.</p>
+                                        <h4>{{ uj_attributes[1] }}</h4>
+                                        <p>Purchase this {{
+                                        uj_attributes[1] }} for £{{
+                                        uj_attributes[2] }}.</p>
                                     </div>
                                 </a>
                             </div>

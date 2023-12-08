@@ -82,17 +82,35 @@ def contact_page():
 
 @app.route("/hat")
 def hat_page():
-    return render_template("hat.html")
+    bbAttributes = selectAttribute(1)
+    gbAttributes = selectAttribute(2)
+    return render_template(
+        "hat.html",
+        bb_attributes=bbAttributes,
+        gb_attributes=gbAttributes
+    )
 
 
 @app.route("/shoes")
 def shoes_page():
-    return render_template("shoes.html")
+    afAttributes = selectAttribute(5)
+    vAttributes = selectAttribute(6)
+    return render_template(
+        "shoes.html",
+        af_attributes=afAttributes,
+        v_attributes=vAttributes
+    )
 
 
 @app.route("/jumper")
 def jumper_page():
-    return render_template("jumper.html")
+    hbjAttributes = selectAttribute(3)
+    ujAttributes = selectAttribute(4)
+    return render_template(
+        "jumper.html",
+        hbj_attributes=hbjAttributes,
+        uj_attributes=ujAttributes
+    )
 
 
 def connectDB():
@@ -252,24 +270,38 @@ def vans():
 @app.route('/blackbeanie')
 def blackbeanie():
     Attributes = selectAttribute(1)
-    Id = Attributes[0]
+    IdM = Attributes[0]
     Item_Name = Attributes[1]
     Price = Attributes[2]
     _Type = Attributes[3]
-    Stock = Attributes[4]
+    StockM = Attributes[4]
     Color = Attributes[5]
-    Size = Attributes[6]
+    SizeM = Attributes[6]
     Url = Attributes[7]
+    AttributesL = selectAttribute(8)
+    IdL = AttributesL[0]
+    StockL = AttributesL[4]
+    SizeL = AttributesL[6]
+    AttributesS = selectAttribute(7)
+    IdS = AttributesS[0]
+    StockS = AttributesS[4]
+    SizeS = AttributesS[6]
     return render_template(
         'blackbeanie.html',
-        ID=Id,
+        IDM=IdM,  # M
         item_name=Item_Name,
         price=Price,
         Type=_Type,
-        stock=Stock,
+        stockM=StockM,
         color=Color,
-        size=Size,
-        url=Url
+        sizeM=SizeM,
+        url=Url,
+        IDL=IdL,  # L
+        stockL=StockL,
+        sizeL=SizeL,
+        IDS=IdS,  # S
+        stockS=StockS,
+        sizeS=SizeS
     )
 
 
