@@ -1,9 +1,17 @@
+html, body{
+  height: 100%; /* Ensures the full height of the viewport is used */
+  margin: 0;
+  display: flex;
+  flex-direction: column; /* Layout content top to bottom */
+}
+
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: #f0f0f0;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .navbar {
@@ -36,7 +44,10 @@ body {
 }
 
 .content {
-  padding: 16px;
+  flex: 1;
+  padding: 20px;
+  font-size: 20px;
+  margin-bottom: 20px;
 }
 
 .product-container {
@@ -64,6 +75,10 @@ body {
 .product-info {
   padding: 5px;
   text-align: center;
+}
+
+h1{
+  font-size: 32px;
 }
 
 h1, h2, h3, p, a, span, strong, em, ul, ol, li, blockquote, pre, code, img, table, th, td {
