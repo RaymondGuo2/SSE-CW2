@@ -211,7 +211,7 @@ def airforce():
         ID=Id,
         item_name=Item_Name,
         price=Price,
-        Type = _Type,
+        Type=_Type,
         stock=Stock,
         color=Color,
         size=Size,
@@ -235,7 +235,7 @@ def vans():
         ID=Id,
         item_name=Item_Name,
         price=Price,
-        Type = _Type,
+        Type=_Type,
         stock=Stock,
         color=Color,
         size=Size,
@@ -264,7 +264,7 @@ def greenbeanie():
         ID=Id,
         item_name=Item_Name,
         price=Price,
-        Type = _Type,
+        Type=_Type,
         stock=Stock,
         color=Color,
         size=Size,
@@ -288,7 +288,7 @@ def hugojumper():
         ID=Id,
         item_name=Item_Name,
         price=Price,
-        Type = _Type,
+        Type=_Type,
         stock=Stock,
         color=Color,
         size=Size,
@@ -312,7 +312,7 @@ def uniqlojumper():
         ID=Id,
         item_name=Item_Name,
         price=Price,
-        Type = _Type,
+        Type=_Type,
         stock=Stock,
         color=Color,
         size=Size,
@@ -327,7 +327,7 @@ def process_query(query):
 
 
 @app.route('/add-to-cart')
-def add_to_cart():  
+def add_to_cart():
     unique_id = request.args.get('id')
     return jsonify({"status": "success", "id": unique_id})
 
