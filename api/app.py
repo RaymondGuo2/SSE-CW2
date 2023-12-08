@@ -3,6 +3,8 @@ import psycopg as db
 import requests
 import logging
 import os
+import mailchimp_transactional as MailchimpTransactional
+from mailchimp_transactional.api_client import ApiClientError
 
 app = Flask(__name__, static_folder='static')
 
@@ -328,7 +330,7 @@ def get_commit_counts(owner, repo):
     while True:
         response = (
             requests.get(
-                f"https://api.github.com/repos/{owner}/{repo}/commits",
+                "https://api.github.com/repos/{owner}/{repo}/commits",
                 params={'per_page': 100, 'page': page}
             )
             )
@@ -416,6 +418,61 @@ def returngithub():
         repos=repos,
         repo_names=repo_names
     )
+
+
+def run():
+  try:
+    mailchimp = MailchimpTransactional.Client('md-ldYd44eY5Cja0U_YNfMj2w')
+    response = mailchimp.users.ping()
+    print('API called successfully: {}'.format(response))
+  except ApiClientError as error:
+    print('An exception occurred: {}'.format(error.text))
+
+run()
+
+
+mailchimp = MailchimpTransactional.Client('md-ldYd44eY5Cja0U_YNfMj2w')
+message = {
+    "from_email": "support@noteqa.com",
+    "subject": "Hello world",
+    "text": "Welcome to Mailchimp Transactional! This is the plain text content of the email.",
+    "html": "<p>Welcome to Mailchimp Transactional! This is the HTML content of the email.</p>",
+    "to": [
+        {
+            "email": "za.zeeshan33@gmail.com",
+            "type": "to"
+        }
+    ]
+}
+
+def run():
+  try:
+    response = mailchimp.messages.send({"message":message})
+    print('API called successfully: {}'.format(response))
+  except ApiClientError as error:
+    print('An exception occurred: {}'.format(error.text))
+
+run()
+
+
+def send_simple_message():
+    return requests.post(
+        "https://api.eu.mailgun.net/v3/noteqa.com/messages",
+        auth=("api", "a376a0a3d10a66e8b0f67979fd8fe1b8-0a688b4a-f1907890"),
+        data={"from": "Excited User <mailgun@noteqa.com>",
+              "to": ["za.zeeshan33@gmail.com"],
+              "subject": "Hello",
+              "text": "Testing some Mailgun awesomness!"})
+
+
+# Call the function to send an email
+response = send_simple_message()
+
+# Check the response to see if the email was sent successfully
+if response.status_code == 200:
+    print("Email sent successfully!")
+else:
+    print("Email sending failed. Status code:", response.status_code)
 
 
 """
