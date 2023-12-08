@@ -45,10 +45,8 @@ body {
 }
 
 .content {
-  flex: 1;
   padding: 20px;
   font-size: 20px;
-  margin-bottom: 20px;
 }
 
 .product-container {
@@ -125,7 +123,7 @@ h1, h2, h3, p, a, span, strong, em, ul, ol, li, blockquote, pre, code, img, tabl
   outline: none;
   box-shadow: none;
   background-color: transparent;
-
+}
 
 .dropdown .dropbtn:hover {
   background-color: #ddd;
