@@ -6,7 +6,7 @@ from dotenv import load_dotenv, find_dotenv
 
 app = Flask(__name__, static_folder='static')
 
-dotenv_path = find_dotenv(filename='.env', raise_error_if_not_found=True)
+dotenv_path = find_dotenv(filename='.env')
 load_dotenv()
 
 secret_key = os.urandom(24)
