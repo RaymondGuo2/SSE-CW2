@@ -77,17 +77,35 @@ def contact_page():
 
 @app.route("/hat")
 def hat_page():
-    return render_template("hat.html")
+    bbAttributes = selectAttribute(1)
+    gbAttributes = selectAttribute(2)
+    return render_template(
+        "hat.html",
+        bb_attributes=bbAttributes,
+        gb_attributes=gbAttributes
+    )
 
 
 @app.route("/shoes")
 def shoes_page():
-    return render_template("shoes.html")
+    afAttributes = selectAttribute(5)
+    vAttributes = selectAttribute(6)
+    return render_template(
+        "shoes.html",
+        af_attributes=afAttributes,
+        v_attributes=vAttributes
+    )
 
 
 @app.route("/jumper")
 def jumper_page():
-    return render_template("jumper.html")
+    hbjAttributes = selectAttribute(3)
+    ujAttributes = selectAttribute(4)
+    return render_template(
+        "jumper.html",
+        hbj_attributes=hbjAttributes,
+        uj_attributes=ujAttributes
+    )
 
 
 def connectDB():

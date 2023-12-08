@@ -31,7 +31,7 @@ def setupTableItem():
     curs.execute("""
 CREATE TABLE item (
 item_id SERIAL PRIMARY KEY,
-item_name VARCHAR(20) NOT NULL,
+item_name VARCHAR(50) NOT NULL,
 price NUMERIC(10,2) NOT NULL,
 type VARCHAR(20) NOT NULL,
 stock INTEGER NOT NULL,
@@ -65,14 +65,14 @@ VALUES (%s, %s, %s, %s, %s, %s, %s)
 
 def setupDB():
     setupTableItem()
-    insertItem('Black Beanie',
+    insertItem('Northface Black Beanie',
                12,
                'Hat',
                10,
                'Black',
                'M',
                'https://www.footasylum.com/images/products/medium/127357.jpg')
-    insertItem('Green Beanie',
+    insertItem('Northface Green Beanie',
                12,
                'Hat',
                10,
@@ -113,14 +113,14 @@ def setupDB():
                ('https://i8.amplience.net/t/jpl/sz_product_list?plu=sz_'
                 '284146_a&qlt=85&qlt=92&w=363&h=281&v=1&fmt'
                 '=auto&fmt=auto'))
-    insertItem('Black Beanie',
+    insertItem('Northface Black Beanie',
                12,
                'Hat',
                10,
                'Black',
                'S',
                'https://www.footasylum.com/images/products/medium/127357.jpg')
-    insertItem('Black Beanie',
+    insertItem('Northface Black Beanie',
                12,
                'Hat',
                10,
