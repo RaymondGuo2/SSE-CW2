@@ -390,7 +390,7 @@ def add_to_cart():
 
     if 'cart' not in session:
         session['cart'] = []
-    
+   
     session['cart'].append(data)
     session.modified = True
     return jsonify(success=True)
