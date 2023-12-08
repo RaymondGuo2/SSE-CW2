@@ -265,7 +265,7 @@ def blackbeanie():
     SizeS = AttributesL[6]
     return render_template(
         'blackbeanie.html',
-        IDM=IdM, #M
+        IDM=IdM,  # M
         item_name=Item_Name,
         price=Price,
         Type=_Type,
@@ -273,10 +273,10 @@ def blackbeanie():
         color=Color,
         sizeM=SizeM,
         url=Url,
-        IDL=IdL, #L
+        IDL=IdL,  # L
         stockL=StockL,
         sizeL=SizeL,
-        IDS=IdS, #S
+        IDS=IdS,  # S
         stockS=StockS,
         sizeS=SizeS
     )
