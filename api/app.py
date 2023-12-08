@@ -272,12 +272,12 @@ def blackbeanie():
         stockM=StockM,
         color=Color,
         sizeM=SizeM,
-        url=Url
-        IDL=IdL #L
-        stockL=StockL
-        sizeL=SizeL
-        IDS=IdS #S
-        stockS=StockS
+        url=Url,
+        IDL=IdL, #L
+        stockL=StockL,
+        sizeL=SizeL,
+        IDS=IdS, #S
+        stockS=StockS,
         sizeS=SizeS
     )
 
