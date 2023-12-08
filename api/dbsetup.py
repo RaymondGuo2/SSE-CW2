@@ -95,7 +95,7 @@ def setupDB():
                'Green',
                'M',
                ('https://www.uniqlo.com/jp/ja/contents/feature/masterpiece/'
-               'common_22fw/img/item_12_01.jpg'))
+                'common_22fw/img/item_12_01.jpg'))
     insertItem('Air Force 1s',
                60,
                'Shoe',
@@ -110,8 +110,9 @@ def setupDB():
                10,
                'Black',
                '11',
-               ('https://i8.amplience.net/t/jpl/sz_product_list?plu=sz_284146_a&qlt='
-                '85&qlt=92&w=363&h=281&v=1&fmt=auto&fmt=auto'))
+               ('https://i8.amplience.net/t/jpl/sz_product_list?plu=sz_'
+                '284146_a&qlt=85&qlt=92&w=363&h=281&v=1&fmt'
+                '=auto&fmt=auto'))
     print('Full Setup Complete')
 
 
