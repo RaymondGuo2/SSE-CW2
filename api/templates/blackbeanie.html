@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Black North Face Beanie</title>
+    <title>{{ item_name }}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" >
@@ -13,22 +13,23 @@
         <div class="row">
             <!-- Image Column -->
             <div class="col-md-6">
-                <img src="https://www.footasylum.com/images/products/medium/127357.jpg" alt="Black Beanie" class="img-responsive">
+                <img src="{{ url }}" alt="{{ item_name }}" class="img-responsive">
             </div>
 
             <!-- Information Column -->
             <div class="col-md-6">
-                <h2>Black North Face Beanie</h2>
-                <p class="price">value</p>
+
+                <h2>{{ item_name }}</h2>
+                <p class="price">£{{ price }}</p>
                 <select id="currency-selector">
                     <option value="USD">USD</option>
                     <option value="EUR">EUR</option>
                     <option value="GBP">GBP</option>
                 </select>
                 
-                <div id="product-price">Price: <span id="currency-symbol">£</span><span id="price">12.00</span></div>
-                <!-- Additional product details -->
-                <p>Description of Black North Face Beanie...</p>
+                <div id="product-price">Price: $<span id="price">{{
+                price }}</span></div>
+               
 
                 <!-- Checkout Options -->
                 <div>
@@ -41,7 +42,7 @@
                 </div>
                 <div>
                     <label for="quantity">Quantity:</label>
-                    <input type="number" id="quantity" name="quantity" min="1">
+                    <input type="number" id="quantity" name="quantity" min="1" max="{{ stock }}">
                 </div>
                 <button type="button" class="btn btn-primary">Add to Cart</button>
                 <button type="button" class="btn btn-success">Buy Now</button>
@@ -49,45 +50,5 @@
         </div>
     </div>
     {% include 'footer.html' %}
-    <script>
-        function updatePriceDisplay(price, currencySymbol) {
-            document.getElementById('price').innerText = price.toFixed(2);
-            document.getElementById('currency-symbol').innerText = currencySymbol;
-        }
-
-        document.querySelector('.btn-primary').addEventListener('click', function(){
-            var sizeSelect = document.getElementById('size');
-            var selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
-            var uniqueId = selectedOption.getAttribute('data-id');
-            var quantity = document.getElementById('quantity').value;
-            addToCart(uniqueId, quantity);
-            window.location.href = '/basket';
-        });
-
-        function addToCart(uniqueId, quantity){
-            fetch('/add_to_cart?id=' + uniqueId + '&quantity=' + quantity)
-                .then(response => response.json())
-                .then(data => console.log(data))
-                .catch(error => console.error('Error:', error));
-        }
-
-        document.getElementById('currency-selector').addEventListener('change', function() {
-            var selectedCurrency = this.value;
-            var originalPrice = 12.00;
-
-            fetch('/convert_currency?price=' + originalPrice + '&currency=' + selectedCurrency)
-                .then(response => response.json())
-                .then(data => {
-                    var currencySymbols = { 'USD': '$', 'EUR': 'x', 'GBP': '£' };
-                    var symbol = currencySymbols[selectedCurrency] || '£';
-                    updatePriceDisplay(data.convertedPrice, symbol);
-                })
-                .catch(error => console.error('Error:', error));
-            });
-
-            window.onload = function() {
-                document.getElementById('currency-selector').dispatchEvent(new Event('change'));
-            };
-    </script>
 </body>
 </html>
