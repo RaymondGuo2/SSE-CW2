@@ -1,0 +1,69 @@
+/* Container that holds the form and the map */
+.current-container {
+  display: flex;
+  width: 80%;
+  height: 500px;
+  margin: 0 auto;
+}
+
+/* Style for the left content (contact form) */
+.left-content {
+  flex: 0 0 50%;
+  border-right: 2px solid #ccc; /* Vertical line between the form and the map */
+  padding: 15px;
+  box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+}
+
+/* Style for the map */
+#map {
+  flex: 0 0 50%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .current-container {
+      flex-direction: column;
+      height: auto; /* Height should be auto for smaller screens */
+  }
+
+  .left-content {
+      border-right: none;
+      border-bottom: 2px solid #ccc; /* Horizontal line for smaller screens */
+  }
+
+  #map {
+      width: 100%; /* Full width on small screens */
+  }
+}
+
+/* Style for the labels */
+.contact-form label {
+  display: block; /* Makes each label appear on a new line */
+  margin-top: 10px; /* Adds some space above each label */
+}
+
+/* Style for the input fields */
+.contact-form input[type="text"],
+.contact-form input[type="email"] {
+  width: 100%; /* Makes input fields take the full width of their container */
+  padding: 8px; /* Adds some padding inside the input fields */
+  margin-top: 5px; /* Adds some space above each input field */
+  box-sizing: border-box; /* Includes padding in the element's total width */
+}
+
+/* Style for the textarea */
+.contact-form textarea {
+  width: 100%; /* Makes textarea take the full width of its container */
+  padding: 8px; /* Adds some padding inside the textarea */
+  margin-top: 5px; /* Adds some space above the textarea */
+  height: 100px; /* Sets a specific height for the textarea */
+  box-sizing: border-box;
+}
+
+/* Style for the submit button */
+.contact-form input[type="submit"] {
+  margin-top: 10px; /* Adds some space above the submit button */
+  padding: 8px 15px; /* Adds some padding inside the button */
+}
