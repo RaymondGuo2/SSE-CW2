@@ -178,6 +178,7 @@ def database_page():
     Stock = selectAttribute(3, "stock")
     Color = selectAttribute(3, "color")
     Size = selectAttribute(3, "size")
+    reduceStock(3, 1)
     return render_template(
         "database.html",
         response=Sql,
