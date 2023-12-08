@@ -175,7 +175,7 @@ def database_page():
     Name = selectAttribute(3, "item_name")
     Price = selectAttribute(3, "price")
     Type = selectAttribute(3, "type")
-    # Stock = selectAttribute(3, "stock")
+    Stock = selectAttribute(3, "stock")
     Color = selectAttribute(3, "color")
     Size = selectAttribute(3, "size")
     return render_template(
@@ -184,7 +184,7 @@ def database_page():
         response_name=Name,
         response_price=Price,
         response_type=Type,
-        # response_stock=Stock,
+        response_stock=Stock,
         response_color=Color,
         response_size=Size
     )
