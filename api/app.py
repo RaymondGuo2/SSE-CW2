@@ -118,7 +118,7 @@ def dbQuery():
          item[1].strip("'"),
          f"{item[2]:.2f}",
          item[3].strip("'"),
-         item[4],
+         str(item[4]),
          item[5].strip("'"),
          item[6].strip("'"))
         for item in unformatted_response
@@ -159,6 +159,8 @@ def selectAttribute(itemID: int, attribute: str):
         unformatted_response = unformatted_response[0]
         if attribute == "price":
             response = f"{unformatted_response:.2f}"
+        elif attribute in ["stock", "item_id"]:
+            response = str(unformatted_response)
         else:
             response = unformatted_response.strip("'")
     else:
