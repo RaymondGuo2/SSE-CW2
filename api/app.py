@@ -378,10 +378,8 @@ def uniqlojumper():
     )
 
 
-"""
-def process_query(query):
-    return search_results
-"""
+def sum(a, b):
+    return a+b
 
 
 @app.route('/add-to-cart', methods=['POST'])
