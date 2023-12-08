@@ -47,34 +47,26 @@ body {
 .content {
   padding: 20px;
   font-size: 20px;
+  margin-bottom: 20px;
 }
+
 
 .product-container {
   display: flex;
   justify-content: center; /* Center the items horizontally */
-  gap: 5px; /* Adjust the spacing between the product boxes */
+  gap: 10px; /* Adjust the spacing between the images */
 }
 
 .product-box {
-  background-color: #f9f9f9;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  overflow: hidden;
-  width: 30%;
-  max-width: 100px;
-  margin: 5px;
+  /* Set a specific width for the product boxes, or use a percentage for responsiveness */
+  width: 210px; /* You can adjust this value to change the size of the images */
 }
 
 .product-box img {
-  width: 100%;
-  height: auto;
-  border-bottom: 1px solid #ccc;
+  width: 100%; /* Ensure the image takes the full width of the container */
+  height: auto; /* Maintain aspect ratio */
 }
 
-.product-info {
-  padding: 5px;
-  text-align: center;
-}
 
 h1{
   font-size: 32px;
