@@ -326,11 +326,10 @@ def process_query(query):
 """
 
 
-@app.route('/add-to-cart', methods=['POST'])
-def add_to_cart():
-    # data = request.get_json()
-    # Process the data, add it to the user's cart
-    return jsonify({"status": "success", "message": "Added to cart"})
+@app.route('/add-to-cart')
+def add_to_cart():  
+    unique_id = request.args.get('id')
+    return jsonify({"status": "success", "id": unique_id})
 
 
 def process_query(query):
