@@ -35,9 +35,9 @@
                 <div>
                     <label for="size">Size:</label>
                     <select id="size" name="size">
-                        <option value="S" data-id="x">Small</option>
-                        <option value="M" data-id="1">Medium</option>
-                        <option value="L" data-id="x">Large</option>
+                        <option value="S" >Small</option>
+                        <option value="M" >Medium</option>
+                        <option value="L" >Large</option>
                     </select>
                 </div>
                 <div>
@@ -50,5 +50,62 @@
         </div>
     </div>
     {% include 'footer.html' %}
+    <script>
+        function updatePriceDisplay(price, currencySymbol) {
+            document.getElementById('price').innerText = price.toFixed(2);
+            document.getElementById('currency-symbol').innerText = currencySymbol;
+        }
+        
+        document.querySelector('.btn-primary').addEventListener('click', function(){
+            var itemName = '{{ item_name }}'
+            var price = '{{ price }}'
+            var sizeSelect = document.getElementById('size');
+            var size = sizeSelect.options[sizeSelect.selectedIndex].value;
+            var quantity = document.getElementById('quantity').value;
+            addToCart(itemName, price, size, quantity);
+        });
+
+        function addToCart(itemName, price, size, quantity){
+            var data = { itemName: itemName, price: price, size: size, quantity: quantity };
+            
+            fetch('/add-to-cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.success){
+                    window.location.href = '/basket';
+                }
+                else {
+                    console.error('Error adding item to cart');
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+        
+        document.getElementById('currency-selector').addEventListener('change', function() {
+            var selectedCurrency = this.value;
+            var originalPrice = 12.00;
+        
+            fetch('/convert_currency?price=' + originalPrice + '&currency=' + selectedCurrency)
+                .then(response => response.json())
+                .then(data => {
+                    var currencySymbols = { 'USD': '$', 'EUR': 'x', 'GBP': '£' };
+                    var symbol = currencySymbols[selectedCurrency] || '£';
+                    updatePriceDisplay(data.convertedPrice, symbol);
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        
+            window.onload = function() {
+                document.getElementById('currency-selector').dispatchEvent(new Event('change'));
+            };
+        </script>
 </body>
 </html>
