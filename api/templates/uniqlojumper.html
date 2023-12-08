@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Uniqlo Jumper</title>
+    <title>{{ item_name }}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" >
@@ -13,7 +13,7 @@
         <div class="row">
             <!-- Image Column -->
             <div class="col-md-6">
-                <img src="{{ url }}" alt="Uniqlo Jumper" class="img-responsive">
+                <img src="{{ url }}" alt="{{ item_name }}" class="img-responsive">
             </div>
 
             <!-- Information Column -->
@@ -29,7 +29,7 @@
                 <div id="product-price">Price: $<span id="price">{{
                 price }}</span></div>
                 <!-- Additional product details -->
-                <p>Description of Uniqlo Jumper...</p>
+                <p>Description of {{ item_name }}...</p>
 
                 <!-- Checkout Options -->
                 <div>

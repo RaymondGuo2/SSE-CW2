@@ -195,12 +195,32 @@ def database_page():
 
 @app.route('/airforce')
 def airforce():
-    return render_template('airforce.html')
+    Stock = selectAttribute(5, "stock")
+    Price = selectAttribute(5, "price")
+    Item_Name = selectAttribute(5, "item_name")
+    Url = selectAttribute(5, "url")
+    return render_template(
+        'airforce.html',
+        stock=Stock,
+        price=Price,
+        item_name=Item_Name,
+        url=Url
+    )
 
 
 @app.route('/vans')
 def vans():
-    return render_template('vans.html')
+    Stock = selectAttribute(6, "stock")
+    Price = selectAttribute(6, "price")
+    Item_Name = selectAttribute(6, "item_name")
+    Url = selectAttribute(6, "url")
+    return render_template(
+        'vans.html',
+        stock=Stock,
+        price=Price,
+        item_name=Item_Name,
+        url=Url
+    )
 
 
 @app.route('/blackbeanie')
@@ -210,12 +230,32 @@ def blackbeanie():
 
 @app.route('/greenbeanie')
 def greenbeanie():
-    return render_template('greenbeanie.html')
+    Stock = selectAttribute(2, "stock")
+    Price = selectAttribute(2, "price")
+    Item_Name = selectAttribute(2, "item_name")
+    Url = selectAttribute(2, "url")
+    return render_template(
+        'greenbeanie.html',
+        stock=Stock,
+        price=Price,
+        item_name=Item_Name,
+        url=Url
+    )
 
 
 @app.route('/hugojumper')
 def hugojumper():
-    return render_template('hugojumper.html')
+    Stock = selectAttribute(3, "stock")
+    Price = selectAttribute(3, "price")
+    Item_Name = selectAttribute(3, "item_name")
+    Url = selectAttribute(3, "url")
+    return render_template(
+        'hugojumper.html',
+        stock=Stock,
+        price=Price,
+        item_name=Item_Name,
+        url=Url
+    )
 
 
 @app.route('/uniqlojumper')

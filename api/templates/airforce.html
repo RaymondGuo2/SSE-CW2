@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Air Force 1s</title>
+    <title>{{ item_name }}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" >
@@ -13,22 +13,23 @@
         <div class="row">
             <!-- Image Column -->
             <div class="col-md-6">
-                <img src="https://d2ob0iztsaxy5v.cloudfront.net/product/270104/2701041020_zm.jpg" alt="Air Force 1s" class="img-responsive">
+                <img src="{{ url }}" alt="{{ item_name }}" class="img-responsive">
             </div>
 
             <!-- Information Column -->
             <div class="col-md-6">
-                <h2>Air Force 1s</h2>
-                <p class="price">£60</p>
+                <h2>{{ item_name }}</h2>
+                <p class="price">£{{ price }}</p>
                 <select id="currency-selector">
                     <option value="USD">USD</option>
                     <option value="EUR">EUR</option>
                     <option value="GBP">GBP</option>
                 </select>
                 
-                <div id="product-price">Price: $<span id="price">60.00</span></div>
+                <div id="product-price">Price: $<span id="price">{{
+                price }}</span></div>
                 <!-- Additional product details -->
-                <p>Description of Air Force 1s...</p>
+                <p>Description of {{ item_name }}...</p>
 
                 <!-- Checkout Options -->
                 <div>
@@ -39,21 +40,13 @@
                 </div>
                 <div>
                     <label for="quantity">Quantity:</label>
-                    <input type="number" id="quantity" name="quantity" min="1">
+                    <input type="number" id="quantity" name="quantity" min="1" max="{{ stock }}">
                 </div>
                 <button type="button" class="btn btn-primary">Add to Cart</button>
-                <button id = "buyNowButton" type="button" class="btn btn-success">Buy Now</button>
-                <script>
-                    document.getElementById('buyNowButton').addEventListener('click', function(){
-                        window.location.href = '/checkout';
-                    });
-                </script>
+                <button type="button" class="btn btn-success">Buy Now</button>
             </div>
         </div>
     </div>
     {% include 'footer.html' %}
 </body>
 </html>
-
-
-
