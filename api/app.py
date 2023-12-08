@@ -260,9 +260,9 @@ def blackbeanie():
     StockL = AttributesL[4]
     SizeL = AttributesL[6]
     AttributesS = selectAttribute(7)
-    IdS = AttributesL[0]
-    StockS = AttributesL[4]
-    SizeS = AttributesL[6]
+    IdS = AttributesS[0]
+    StockS = AttributesS[4]
+    SizeS = AttributesS[6]
     return render_template(
         'blackbeanie.html',
         IDM=IdM,  # M
