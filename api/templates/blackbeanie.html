@@ -35,7 +35,7 @@
                     <label for="size">Size:</label>
                     <select id="size" name="size">
                         <option value="S" data-id="x">Small</option>
-                        <option value="M" data-id="x">Medium</option>
+                        <option value="M" data-id="1">Medium</option>
                         <option value="L" data-id="x">Large</option>
                     </select>
                 </div>
@@ -61,7 +61,7 @@
             var uniqueId = selectedOption.getAttribute('data-id');
             var quantity = document.getElementById('quantity').value;
             addToCart(uniqueId, quantity);
-            window.location.href = '/checkout';
+            window.location.href = '/basket';
         });
 
         function addToCart(uniqueId, quantity){

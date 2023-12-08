@@ -29,7 +29,8 @@ def checkout():
 
 @app.route("/basket")
 def basket():
-    return render_template("basket.html")
+    basket_items = session.get('cart', [])
+    return render_template("basket.html", basket_items=basket_items)
 
 
 @app.route("/place_order", methods=["POST"])
@@ -282,6 +283,14 @@ def process_query(query):
 @app.route('/add-to-cart')
 def add_to_cart():  
     unique_id = request.args.get('id')
+    quantity = int(request.args.get('quantity'))
+    size = request.args.get('size')
+
+    product_name, price = get_product_details(unique_id) 
+
+    if 'cart' not in session:
+        session['cart'] = []
+    session['cart'].append({'product_id':unique_id, 'product_name':product_name, 'size': size, 'quantity':quantity, 'price':price})
     return jsonify({"status": "success", "id": unique_id})
 
 
