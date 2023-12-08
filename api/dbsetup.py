@@ -113,6 +113,20 @@ def setupDB():
                ('https://i8.amplience.net/t/jpl/sz_product_list?plu=sz_'
                 '284146_a&qlt=85&qlt=92&w=363&h=281&v=1&fmt'
                 '=auto&fmt=auto'))
+    insertItem('Black Beanie',
+               12,
+               'Hat',
+               10,
+               'Black',
+               'S',
+               'https://www.footasylum.com/images/products/medium/127357.jpg')
+    insertItem('Black Beanie',
+               12,
+               'Hat',
+               10,
+               'Black',
+               'L',
+               'https://www.footasylum.com/images/products/medium/127357.jpg')
     print('Full Setup Complete')
 
 

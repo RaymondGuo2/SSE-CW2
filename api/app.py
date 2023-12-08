@@ -245,7 +245,26 @@ def vans():
 
 @app.route('/blackbeanie')
 def blackbeanie():
-    return render_template('blackbeanie.html')
+    Attributes = selectAttribute(1)
+    Id = Attributes[0]
+    Item_Name = Attributes[1]
+    Price = Attributes[2]
+    _Type = Attributes[3]
+    Stock = Attributes[4]
+    Color = Attributes[5]
+    Size = Attributes[6]
+    Url = Attributes[7]
+    return render_template(
+        'blackbeanie.html',
+        ID=Id,
+        item_name=Item_Name,
+        price=Price,
+        Type=_Type,
+        stock=Stock,
+        color=Color,
+        size=Size,
+        url=Url
+    )
 
 
 @app.route('/greenbeanie')
