@@ -120,7 +120,8 @@ def dbQuery():
          item[3].strip("'"),
          str(item[4]),
          item[5].strip("'"),
-         item[6].strip("'"))
+         item[6].strip("'"),
+         item[7])
         for item in unformatted_response
     ]
     conn.close()
@@ -139,7 +140,7 @@ def reduceStock(itemID: int, reduceBy: int):
 
 
 def selectAttribute(itemID: int, attribute: str):
-    # attribute = "item_name", "price", "type", "stock", "color", "size"
+    # attribute = "item_name" "price" "type" "stock" "color" "size" "url"
     conn, curs = connectDB()
     curs.execute("""
         SELECT column_name
@@ -178,7 +179,7 @@ def database_page():
     Stock = selectAttribute(3, "stock")
     Color = selectAttribute(3, "color")
     Size = selectAttribute(3, "size")
-    reduceStock(3, 1)
+    Url = selectAttribute(3, "url")
     return render_template(
         "database.html",
         response=Sql,
@@ -187,7 +188,8 @@ def database_page():
         response_type=Type,
         response_stock=Stock,
         response_color=Color,
-        response_size=Size
+        response_size=Size,
+        response_url=Url
     )
 
 
