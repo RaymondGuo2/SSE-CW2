@@ -218,7 +218,8 @@ def hugojumper():
 
 @app.route('/uniqlojumper')
 def uniqlojumper():
-    return render_template('uniqlojumper.html')
+    Stock = selectAttribute(3, "stock")
+    return render_template('uniqlojumper.html', stock=Stock)
 
 
 """
