@@ -70,7 +70,8 @@ def convert_currency():
 
 @app.route("/contact")
 def contact_page():
-    return render_template("contact.html")
+    return render_template("contact.html", api_key=os.environ.get(
+        'GOOGLE_MAPS_API_KEY'))
 
 
 @app.route("/hat")
@@ -110,16 +111,84 @@ def connectDB():
 
 def dbQuery():
     conn, curs = connectDB()
-    curs.execute("SELECT* FROM item")
-    response = curs.fetchall()
+    curs.execute("SELECT* FROM item ORDER BY item_id")
+    unformatted_response = curs.fetchall()
+    response = [
+        (item[0],
+         item[1].strip("'"),
+         f"{item[2]:.2f}",
+         item[3].strip("'"),
+         str(item[4]),
+         item[5].strip("'"),
+         item[6].strip("'"))
+        for item in unformatted_response
+    ]
+    conn.close()
+    return response
+
+
+def reduceStock(itemID: int, reduceBy: int):
+    conn, curs = connectDB()
+    curs.execute("""
+        UPDATE item
+        SET stock = GREATEST(stock - %s, 0)
+        WHERE item_id = %s
+    """, (reduceBy, itemID))
+    conn.commit()
+    conn.close
+
+
+def selectAttribute(itemID: int, attribute: str):
+    # attribute = "item_name", "price", "type", "stock", "color", "size"
+    conn, curs = connectDB()
+    curs.execute("""
+        SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name = 'item'
+        """)
+    columnNames = [row[0] for row in curs.fetchall()]
+    if attribute not in columnNames:
+        raise ValueError("Invalid Attribute")
+    curs.execute("""
+        SELECT {attribute}
+        FROM item
+        WHERE item_id = %s
+    """.format(attribute=attribute), (itemID,))
+    unformatted_response = curs.fetchone()
+    if unformatted_response:
+        unformatted_response = unformatted_response[0]
+        if attribute == "price":
+            response = f"{unformatted_response:.2f}"
+        elif attribute in ["stock", "item_id"]:
+            response = int(unformatted_response)
+        else:
+            response = unformatted_response.strip("'")
+    else:
+        response = "Attribute Not Found"
     conn.close()
     return response
 
 
 @app.route("/database")
 def database_page():
-    responsesql = dbQuery()
-    return render_template("database.html", response=responsesql)
+    Sql = dbQuery()
+    Name = selectAttribute(3, "item_name")
+    Price = selectAttribute(3, "price")
+    Type = selectAttribute(3, "type")
+    Stock = selectAttribute(3, "stock")
+    Color = selectAttribute(3, "color")
+    Size = selectAttribute(3, "size")
+    reduceStock(3, 1)
+    return render_template(
+        "database.html",
+        response=Sql,
+        response_name=Name,
+        response_price=Price,
+        response_type=Type,
+        response_stock=Stock,
+        response_color=Color,
+        response_size=Size
+    )
 
 
 @app.route('/airforce')
@@ -149,7 +218,11 @@ def hugojumper():
 
 @app.route('/uniqlojumper')
 def uniqlojumper():
-    return render_template('uniqlojumper.html')
+    Stock = selectAttribute(3, "stock")
+    return render_template(
+        'uniqlojumper.html',
+        stock=Stock
+    )
 
 
 """

@@ -6,26 +6,37 @@ dotenv_path = find_dotenv(filename='.env', raise_error_if_not_found=True)
 load_dotenv()
 
 
-def setupTableItem():
+def connectDB():
     DBNAME = os.environ.get('DBNAME')
     HOST = os.environ.get('HOST')
     PORT = os.environ.get('PORT')
     USER = os.environ.get('USER')
     PASSWORD = os.environ.get('PASSWORD')
     CLIENT_ENCODING = os.environ.get('CLIENT_ENCODING')
-    server_params = {'dbname': DBNAME,
-                     'host': HOST,
-                     'port': PORT,
-                     'user': USER,
-                     'password': PASSWORD,
-                     'client_encoding': CLIENT_ENCODING}
+    server_params = {
+        'dbname': DBNAME,
+        'host': HOST,
+        'port': PORT,
+        'user': USER,
+        'password': PASSWORD,
+        'client_encoding': CLIENT_ENCODING
+    }
     conn = db.connect(**server_params)
     curs = conn.cursor()
+    return conn, curs
+
+
+def setupTableItem():
+    conn, curs = connectDB()
+    curs.execute("DELETE FROM item")
+    curs.execute("DROP TABLE item")
+    conn.commit()
+    print("Item Table Reset")
     curs.execute("""
 CREATE TABLE item (
 item_id SERIAL PRIMARY KEY,
 item_name VARCHAR(20) NOT NULL,
-price DECIMAL(10,2) NOT NULL,
+price NUMERIC(10,2) NOT NULL,
 type VARCHAR(20) NOT NULL,
 stock INTEGER NOT NULL,
 color VARCHAR(20) NOT NULL,
@@ -39,25 +50,12 @@ size VARCHAR(2) NOT NULL
 
 def insertItem(
         name: str,
-        price: int,
+        price: float,
         itemType: str,
         stock: int,
         color: str,
         size: str):
-    DBNAME = os.environ.get('DBNAME')
-    HOST = os.environ.get('HOST')
-    PORT = os.environ.get('PORT')
-    USER = os.environ.get('USER')
-    PASSWORD = os.environ.get('PASSWORD')
-    CLIENT_ENCODING = os.environ.get('CLIENT_ENCODING')
-    server_params = {'dbname': DBNAME,
-                     'host': HOST,
-                     'port': PORT,
-                     'user': USER,
-                     'password': PASSWORD,
-                     'client_encoding': CLIENT_ENCODING}
-    conn = db.connect(**server_params)
-    curs = conn.cursor()
+    conn, curs = connectDB()
     curs.execute("""
 INSERT INTO item (item_name, price, type, stock, color, size)
 VALUES (%s, %s, %s, %s, %s, %s)
