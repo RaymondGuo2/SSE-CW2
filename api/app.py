@@ -120,7 +120,8 @@ def dbQuery():
          item[3].strip("'"),
          str(item[4]),
          item[5].strip("'"),
-         item[6].strip("'"))
+         item[6].strip("'"),
+         item[7])
         for item in unformatted_response
     ]
     conn.close()
@@ -139,7 +140,7 @@ def reduceStock(itemID: int, reduceBy: int):
 
 
 def selectAttribute(itemID: int, attribute: str):
-    # attribute = "item_name", "price", "type", "stock", "color", "size"
+    # attribute = "item_name" "price" "type" "stock" "color" "size" "url"
     conn, curs = connectDB()
     curs.execute("""
         SELECT column_name
@@ -178,7 +179,7 @@ def database_page():
     Stock = selectAttribute(3, "stock")
     Color = selectAttribute(3, "color")
     Size = selectAttribute(3, "size")
-    reduceStock(3, 1)
+    Url = selectAttribute(3, "url")
     return render_template(
         "database.html",
         response=Sql,
@@ -187,18 +188,39 @@ def database_page():
         response_type=Type,
         response_stock=Stock,
         response_color=Color,
-        response_size=Size
+        response_size=Size,
+        response_url=Url
     )
 
 
 @app.route('/airforce')
 def airforce():
-    return render_template('airforce.html')
+    Stock = selectAttribute(5, "stock")
+    Price = selectAttribute(5, "price")
+    Item_Name = selectAttribute(5, "item_name")
+    Url = selectAttribute(5, "url")
+    return render_template(
+        'airforce.html',
+        stock=Stock,
+        price=Price,
+        item_name=Item_Name,
+        url=Url
+    )
 
 
 @app.route('/vans')
 def vans():
-    return render_template('vans.html')
+    Stock = selectAttribute(6, "stock")
+    Price = selectAttribute(6, "price")
+    Item_Name = selectAttribute(6, "item_name")
+    Url = selectAttribute(6, "url")
+    return render_template(
+        'vans.html',
+        stock=Stock,
+        price=Price,
+        item_name=Item_Name,
+        url=Url
+    )
 
 
 @app.route('/blackbeanie')
@@ -208,20 +230,46 @@ def blackbeanie():
 
 @app.route('/greenbeanie')
 def greenbeanie():
-    return render_template('greenbeanie.html')
+    Stock = selectAttribute(2, "stock")
+    Price = selectAttribute(2, "price")
+    Item_Name = selectAttribute(2, "item_name")
+    Url = selectAttribute(2, "url")
+    return render_template(
+        'greenbeanie.html',
+        stock=Stock,
+        price=Price,
+        item_name=Item_Name,
+        url=Url
+    )
 
 
 @app.route('/hugojumper')
 def hugojumper():
-    return render_template('hugojumper.html')
+    Stock = selectAttribute(3, "stock")
+    Price = selectAttribute(3, "price")
+    Item_Name = selectAttribute(3, "item_name")
+    Url = selectAttribute(3, "url")
+    return render_template(
+        'hugojumper.html',
+        stock=Stock,
+        price=Price,
+        item_name=Item_Name,
+        url=Url
+    )
 
 
 @app.route('/uniqlojumper')
 def uniqlojumper():
-    Stock = selectAttribute(3, "stock")
+    Stock = selectAttribute(4, "stock")
+    Price = selectAttribute(4, "price")
+    Item_Name = selectAttribute(4, "item_name")
+    Url = selectAttribute(4, "url")
     return render_template(
         'uniqlojumper.html',
-        stock=Stock
+        stock=Stock,
+        price=Price,
+        item_name=Item_Name,
+        url=Url
     )
 
 

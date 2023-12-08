@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Vans</title>
+    <title>{{ item_name }}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" >
@@ -13,22 +13,23 @@
         <div class="row">
             <!-- Image Column -->
             <div class="col-md-6">
-                <img src="https://i8.amplience.net/t/jpl/sz_product_list?plu=sz_284146_a&qlt=85&qlt=92&w=363&h=281&v=1&fmt=auto&fmt=auto" alt="Vans" class="img-responsive">
+                <img src="{{ url }}" alt="{{ item_name }}" class="img-responsive">
             </div>
 
             <!-- Information Column -->
             <div class="col-md-6">
-                <h2>Vans</h2>
-                <p class="price">£50</p>
+                <h2>{{ item_name }}</h2>
+                <p class="price">£{{ price }}</p>
                 <select id="currency-selector">
                     <option value="USD">USD</option>
                     <option value="EUR">EUR</option>
                     <option value="GBP">GBP</option>
                 </select>
                 
-                <div id="product-price">Price: $<span id="price">50.00</span></div>
+                <div id="product-price">Price: $<span id="price">{{
+                price }}</span></div>
                 <!-- Additional product details -->
-                <p>Description of Vans...</p>
+                <p>Description of {{ item_name }}...</p>
 
                 <!-- Checkout Options -->
                 <div>
@@ -39,7 +40,7 @@
                 </div>
                 <div>
                     <label for="quantity">Quantity:</label>
-                    <input type="number" id="quantity" name="quantity" min="1">
+                    <input type="number" id="quantity" name="quantity" min="1" max="{{ stock }}">
                 </div>
                 <button type="button" class="btn btn-primary">Add to Cart</button>
                 <button type="button" class="btn btn-success">Buy Now</button>
@@ -49,4 +50,3 @@
     {% include 'footer.html' %}
 </body>
 </html>
-
