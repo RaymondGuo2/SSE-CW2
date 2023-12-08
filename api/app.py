@@ -1,7 +1,6 @@
-from flask import Flask, render_template, request, jsonify, redirect, session
+from flask import Flask, render_template, request, jsonify, session
 import psycopg as db
 import requests
-import logging
 import os
 from dotenv import load_dotenv, find_dotenv
 
@@ -10,7 +9,9 @@ app = Flask(__name__, static_folder='static')
 dotenv_path = find_dotenv(filename='.env', raise_error_if_not_found=True)
 load_dotenv()
 
-app.secret_key = os.environ.get('FLASK_SECRET_KEY')
+secret_key = os.urandom(24)
+app.secret_key = secret_key
+
 
 @app.route("/")
 def hello_world():
@@ -393,6 +394,7 @@ def add_to_cart():
     session['cart'].append(data)
     session.modified = True
     return jsonify(success=True)
+
 
 """
 app.run(debug=True)
