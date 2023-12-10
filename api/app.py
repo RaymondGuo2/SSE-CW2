@@ -87,8 +87,8 @@ def search():
     query = request.args.get("query")
     search_results = search_db(query)
     return render_template(
-        "searchresults.html", 
-        response=search_results, 
+        "searchresults.html",
+        response=search_results,
         query=query
     )
 
