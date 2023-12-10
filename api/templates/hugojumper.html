@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ item_name }}</title>
+    <title>{{ _S_attributes[1] }}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" >
@@ -13,96 +13,146 @@
         <div class="row">
             <!-- Image Column -->
             <div class="col-md-6">
-                <img src="{{ url }}" alt="{{ item_name }}" class="img-responsive">
+                <img src="{{ _S_attributes[7] }}" alt="{{ _S_attributes[1] }}" class="img-responsive">
             </div>
 
             <!-- Information Column -->
             <div class="col-md-6">
-                <h2>{{ item_name }}</h2>
+
+                <h2>{{ _S_attributes[1] }}</h2>
                 <h3 id="product-price"><span id="currency-symbol">£</span><span id = "price">{{ _S_attributes[2] }}</span></h3>
                 <select id="currency-selector">
                     <option value="GBP">GBP</option>
                     <option value="USD">USD</option>
                     <option value="EUR">EUR</option>
                 </select>
-                <!-- Additional product details -->
-                <p>Description of {{ item_name }}...</p>
 
-                <!-- Checkout Options -->
+		<p>Description of {{ _S_attributes[1] }}...</p>
+
                 <div>
                     <label for="size">Size:</label>
-                    <select id="size" name="size">
-                        <option value="S" >Small</option>
-                        <option value="M" >Medium</option>
-                        <option value="L" >Large</option>
+                    <select id="size" name="size" onchange="updateMaxQuantity()">
+                        <option value="{{ _S_attributes[6] }}" data-id="{{ _S_attributes[0] }}">Small</option>
+                        <option value="{{ _M_attributes[6] }}" data-id="{{ _M_attributes[0] }}">Medium</option>
+                        <option value="{{ _L_attributes[6] }}" data-id="{{ _L_attributes[0] }}">Large</option>
                     </select>
                 </div>
                 <div>
                     <label for="quantity">Quantity:</label>
-                    <input type="number" id="quantity" name="quantity" min="1" max="{{ stock }}">
+                    <input type="number" id="quantity" name="quantity"
+			   min="0" max="{{ _S_attributes[4] }}">
                 </div>
-                <button type="button" class="btn btn-primary">Add to Cart</button>
-                <button type="button" class="btn btn-success">Buy Now</button>
-            </div>
+		<div id="outOfStockMessage" style="color: red;"></div>
+                <button id="addToCart" type="button" class="btn btn-primary">Add to Cart</button>
+                <button id="buyNow" type="button" class="btn btn-success">Buy Now</button>
+	    </div>
         </div>
     </div>
     {% include 'footer.html' %}
     <script>
-        function updatePriceDisplay(price, currencySymbol) {
-            document.getElementById('price').innerText = price.toFixed(2);
-            document.getElementById('currency-symbol').innerText = currencySymbol;
-        }
-        
-        document.querySelector('.btn-primary').addEventListener('click', function(){
-            var itemName = '{{ item_name }}'
-            var price = '{{ price }}'
-            var sizeSelect = document.getElementById('size');
-            var size = sizeSelect.options[sizeSelect.selectedIndex].value;
-            var quantity = document.getElementById('quantity').value;
-            addToCart(itemName, price, size, quantity);
-        });
+      function updateMaxQuantity() {
+	  var sizeSelect = document.getElementById('size');
+	  var quantityInput = document.getElementById('quantity');
+	  var outOfStockMessage = document.getElementById('outOfStockMessage');
+	  var addToCart = document.getElementById('addToCart');
+	  var buyNow = document.getElementById('buyNow');
+	  switch (sizeSelect.value) {
+	  case "{{ _S_attributes[6] }}":
+	      quantityInput.max = "{{ _S_attributes[4] }}";
+	      break;
+	  case "{{ _M_attributes[6] }}":
+	      quantityInput.max = "{{ _M_attributes[4] }}";
+	      break;
+	  case "{{ _L_attributes[6] }}":
+	      quantityInput.max = "{{ _L_attributes[4] }}";
+	      break;
+	  default:
+	      quantityInput.max = "{{ _S_attributes[4] }}";
+	      break;
+	  }
+	  quantityInput.value = 1;
+	  if (parseInt(quantityInput.max) === 0) {
+	      quantityInput.style.display = 'none';
+	      addToCart.style.display = 'none';
+	      buyNow.style.display = 'none';
+	      outOfStockMessage.style.color = 'red';
+	      outOfStockMessage.innerText = 'Out of Stock';
+	  } else {
+	      quantityInput.style.display = 'inline-block';
+	      addToCart.style.display = 'inline-block';
+	      buyNow.style.display = 'inline-block';
+	      outOfStockMessage.style.color = 'black';
+	      outOfStockMessage.innerText = '';
+	  }
+      }
 
-        function addToCart(itemName, price, size, quantity){
-            var data = { itemName: itemName, price: price, size: size, quantity: quantity };
-            
-            fetch('/add-to-cart', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            })
-            .then(response => response.json())
-            .then(data => {
-                if(data.success){
-                    window.location.href = '/basket';
-                }
-                else {
-                    console.error('Error adding item to cart');
-                }
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-        }
-        
-        document.getElementById('currency-selector').addEventListener('change', function() {
-            var selectedCurrency = this.value;
-            var originalPrice = 12.00;
-        
-            fetch('/convert_currency?price=' + originalPrice + '&currency=' + selectedCurrency)
-                .then(response => response.json())
-                .then(data => {
-                    var currencySymbols = { 'USD': '$', 'EUR': 'x', 'GBP': '£' };
-                    var symbol = currencySymbols[selectedCurrency] || '£';
-                    updatePriceDisplay(data.convertedPrice, symbol);
-                })
-                .catch(error => console.error('Error:', error));
-            });
-        
-            window.onload = function() {
-                document.getElementById('currency-selector').dispatchEvent(new Event('change'));
-            };
+      var originalPriceGBP = parseFloat('{{ _S_attributes[2] }}');
+
+      function updatePriceDisplay(price, currencySymbol) {
+	  document.getElementById('price').innerText = price.toFixed(2);
+          document.getElementById('currency-symbol').innerText = currencySymbol;
+      }
+    
+      function convertAndDisplayPrice(selectedCurrency) {
+          if (selectedCurrency === 'GBP') {
+              updatePriceDisplay(originalPriceGBP, '£');
+          } else {
+              fetch('/convert_currency?price=' + originalPriceGBP + '&currency=' + selectedCurrency)
+                  .then(response => response.json())
+                  .then(data => {
+                      var currencySymbols = { 'USD': '$', 'EUR': '€', 'GBP': '£' };
+                      var symbol = currencySymbols[selectedCurrency];
+                      updatePriceDisplay(data.convertedPrice, symbol);
+                  })
+                  .catch(error => console.error('Error:', error));
+          }
+      }
+
+      document.getElementById('currency-selector').addEventListener('change', function() {
+	  convertAndDisplayPrice(this.value);
+      });
+    
+        // Function to add items to the cart
+      function addToCart(itemPicture, itemName, price, size, quantity, itemId) {
+          var data = { itemPicture: itemPicture, itemName: itemName, price: price, size: size, quantity: quantity, itemId: itemId };
+    
+          fetch('/add-to-cart', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(data),
+          })
+          .then(response => response.json())
+          .then(data => {
+              if(data.success) {
+                  window.location.href = '/basket';
+              } else {
+                  console.error('Error adding item to cart');
+              }
+          })
+          .catch((error) => {
+              console.error('Error:', error);
+          });
+      }
+    
+        // Event listener for the Add to Cart button
+      document.querySelector('.btn-primary').addEventListener('click', function() {
+          var itemPicture = '{{ _S_attributes[7] }}';
+          var itemName = '{{ _S_attributes[1] }}';
+          var price = originalPriceGBP; // Get the current displayed price
+          var sizeSelect = document.getElementById('size');
+	  var selectedOption =  sizeSelect.options[sizeSelect.selectedIndex];
+          var size = selectedOption.value;
+          var quantity = document.getElementById('quantity').value;
+	  var itemId = selectedOption.getAttribute('data-id');
+          addToCart(itemPicture, itemName, price, size, quantity, itemId);
+      });
+    
+        // Trigger the currency conversion on page load
+      window.onload = function() {
+          document.getElementById('currency-selector').dispatchEvent(new Event('change'));
+      };
     </script>
 </body>
 </html>

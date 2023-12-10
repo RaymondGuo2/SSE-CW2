@@ -213,6 +213,60 @@ def setupDB():
                 '284146_a&qlt=85&qlt=92&w=363&h=281&v=1&fmt'
                 '=auto&fmt=auto'),
                'vans')
+    insertItem('Northface Green Beanie',
+               12,
+               'Hat',
+               10,
+               'Green',
+               'S',
+               ('https://i.pinimg.com/736x/45/'
+                '98/86/4598863f4b9d99b8c26cdc1684a36466.jpg'),
+               'greenbeanie')
+    insertItem('Northface Green Beanie',
+               12,
+               'Hat',
+               10,
+               'Green',
+               'L',
+               ('https://i.pinimg.com/736x/45/'
+                '98/86/4598863f4b9d99b8c26cdc1684a36466.jpg'),
+               'greenbeanie')
+    insertItem('Hugo Boss Jumper',
+               60,
+               'Jumper',
+               10,
+               'Grey',
+               'S',
+               ('https://brandrunner.co.uk/wp-content/uploads/2021/01/'
+                'Hugo-Boss-Jumper-Boys-1.jpg'),
+               'hugojumper')
+    insertItem('Hugo Boss Jumper',
+               60,
+               'Jumper',
+               10,
+               'Grey',
+               'L',
+               ('https://brandrunner.co.uk/wp-content/uploads/2021/01/'
+                'Hugo-Boss-Jumper-Boys-1.jpg'),
+               'hugojumper')
+    insertItem('Uniqlo Jumper',
+               40,
+               'Jumper',
+               10,
+               'Green',
+               'S',
+               ('https://www.uniqlo.com/jp/ja/contents/feature/masterpiece/'
+                'common_22fw/img/item_12_01.jpg'),
+               'uniqlojumper')
+    insertItem('Uniqlo Jumper',
+               40,
+               'Jumper',
+               10,
+               'Green',
+               'L',
+               ('https://www.uniqlo.com/jp/ja/contents/feature/masterpiece/'
+                'common_22fw/img/item_12_01.jpg'),
+               'uniqlojumper')
     print('Full Setup Complete')
 
 

@@ -27,6 +27,7 @@
                         <label for="address">Shipping Address:</label>
                         <input type="text" id="address" name="address" class="form-control">
                     </div>
+		    <input type="hidden" id="basketItems" name="basketItems" value="">
                     <button type="submit" class="btn btn-primary">Place Order</button>
                 </form>
             </div>
@@ -51,8 +52,12 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const basketItems = JSON.parse(localStorage.getItem('basketItems')) || [];
-            const productsDetails = document.getElementById('products-details');
-
+	    const productsDetails = document.getElementById('products-details');
+	    
+	    const basketItemsInput = document.getElementById('basketItems');
+            basketItemsInput.value = JSON.stringify(basketItems);
+            
+	    
             basketItems.forEach(item => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
