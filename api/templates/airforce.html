@@ -11,28 +11,22 @@
     {% include 'navbar.html' %} 
     <div class="container">
         <div class="row">
-            <!-- Image Column -->
             <div class="col-md-6">
                 <img src="{{ _7_attributes[7] }}" alt="{{ _7_attributes[1] }}" class="img-responsive">
             </div>
 
-            <!-- Information Column -->
             <div class="col-md-6">
 
                 <h2>{{ _7_attributes[1] }}</h2>
-                <p class="price">£{{ _7_attributes[2] }}</p>
+                <h3 id="product-price"><span id="currency-symbol">£</span><span id = "price">{{ _7_attributes[2] }}</span></h3>
                 <select id="currency-selector">
+                    <option value="GBP">GBP</option>
                     <option value="USD">USD</option>
                     <option value="EUR">EUR</option>
-                    <option value="GBP">GBP</option>
                 </select>
                 
-                <div id="product-price">Price: $<span id="price">{{
-                _7_attributes[2] }}</span></div>
-                <!-- Additional product details -->
                 <p>Description of {{ _7_attributes[1] }}...</p>
 
-                <!-- Checkout Options -->
                 <div>
                     <label for="size">Size:</label>
                     <select id="size" name="size">
@@ -54,24 +48,36 @@
     </div>
     {% include 'footer.html' %}
     <script>
+        var originalPriceGBP = parseFloat('{{ _7_attributes[2] }}');
+    
         function updatePriceDisplay(price, currencySymbol) {
             document.getElementById('price').innerText = price.toFixed(2);
             document.getElementById('currency-symbol').innerText = currencySymbol;
         }
-        
-        document.querySelector('.btn-primary').addEventListener('click', function(){
-            var itemPicture = '{{ _7_attributes[7] }}'
-            var itemName = '{{ _7_attributes[1] }}'
-            var price = '{{ _7_attributes[2] }}'
-            var sizeSelect = document.getElementById('size');
-            var size = sizeSelect.options[sizeSelect.selectedIndex].value;
-            var quantity = document.getElementById('quantity').value;
-            addToCart(itemPicture, itemName, price, size, quantity);
+    
+        function convertAndDisplayPrice(selectedCurrency) {
+            if (selectedCurrency === 'GBP') {
+                updatePriceDisplay(originalPriceGBP, '£');
+            } else {
+                fetch('/convert_currency?price=' + originalPriceGBP + '&currency=' + selectedCurrency)
+                    .then(response => response.json())
+                    .then(data => {
+                        var currencySymbols = { 'USD': '$', 'EUR': '€', 'GBP': '£' };
+                        var symbol = currencySymbols[selectedCurrency];
+                        updatePriceDisplay(data.convertedPrice, symbol);
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        }
+    
+        document.getElementById('currency-selector').addEventListener('change', function() {
+            convertAndDisplayPrice(this.value);
         });
-
-        function addToCart(itemPicture, itemName, price, size, quantity){
+    
+        // Function to add items to the cart
+        function addToCart(itemPicture, itemName, price, size, quantity) {
             var data = { itemPicture: itemPicture, itemName: itemName, price: price, size: size, quantity: quantity };
-            
+    
             fetch('/add-to-cart', {
                 method: 'POST',
                 headers: {
@@ -81,10 +87,9 @@
             })
             .then(response => response.json())
             .then(data => {
-                if(data.success){
+                if(data.success) {
                     window.location.href = '/basket';
-                }
-                else {
+                } else {
                     console.error('Error adding item to cart');
                 }
             })
@@ -92,24 +97,23 @@
                 console.error('Error:', error);
             });
         }
-        
-        document.getElementById('currency-selector').addEventListener('change', function() {
-            var selectedCurrency = this.value;
-            var originalPrice = 12.00;
-        
-            fetch('/convert_currency?price=' + originalPrice + '&currency=' + selectedCurrency)
-                .then(response => response.json())
-                .then(data => {
-                    var currencySymbols = { 'USD': '$', 'EUR': 'x', 'GBP': '£' };
-                    var symbol = currencySymbols[selectedCurrency] || '£';
-                    updatePriceDisplay(data.convertedPrice, symbol);
-                })
-                .catch(error => console.error('Error:', error));
-            });
-        
-            window.onload = function() {
-                document.getElementById('currency-selector').dispatchEvent(new Event('change'));
-            };
-        </script>
+    
+        // Event listener for the Add to Cart button
+        document.querySelector('.btn-primary').addEventListener('click', function() {
+            var itemPicture = '{{ _7_attributes[7] }}';
+            var itemName = '{{ _7_attributes[1] }}';
+            var price = originalPriceGBP; // Get the current displayed price
+            var sizeSelect = document.getElementById('size');
+            var size = sizeSelect.options[sizeSelect.selectedIndex].value;
+            var quantity = document.getElementById('quantity').value;
+            addToCart(itemPicture, itemName, price, size, quantity);
+        });
+    
+        // Trigger the currency conversion on page load
+        window.onload = function() {
+            document.getElementById('currency-selector').dispatchEvent(new Event('change'));
+        };
+    </script>
+    
 </body>
 </html>

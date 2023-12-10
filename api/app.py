@@ -122,13 +122,16 @@ def convert_currency():
     currency = request.args.get('currency')
 
     response = requests.get(
-        f'https://api.frankfurter.app/latest?from=USD&to={currency}'
+        f'https://api.frankfurter.app/latest?from=GBP&to={currency}'
     )
     data = response.json()
-    exchange_rate = data['rates'][currency]
 
-    converted_price = original_price * exchange_rate
-    return jsonify(convertedPrice=converted_price)
+    if currency in data['rates']:
+        exchange_rate = data['rates'][currency]
+        converted_price = original_price * exchange_rate
+        return jsonify(convertedPrice=converted_price)
+    else:
+        return jsonify(error="Currency not found"), 404
 
 
 @app.route("/contact")
