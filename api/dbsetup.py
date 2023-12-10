@@ -60,7 +60,7 @@ VALUES (%s, %s, %s, %s, %s, %s, %s)
 """, (name, price, itemType, stock, color, size, url))
     conn.commit()
     conn.close()
-    print("Item Added to Item Table: ", (name))
+    print("Item Added to Item Table: ", (name), " Size: ", (size))
 
 
 def setupDB():
@@ -127,6 +127,74 @@ def setupDB():
                'Black',
                'L',
                'https://www.footasylum.com/images/products/medium/127357.jpg')
+    insertItem('Air Force 1s',
+               60,
+               'Shoe',
+               4,
+               'White',
+               '3',
+               ('https://d2ob0iztsaxy5v.cloudfront.net/product/270104/'
+                '2701041020_zm.jpg'))
+    insertItem('Air Force 1s',
+               60,
+               'Shoe',
+               6,
+               'White',
+               '5',
+               ('https://d2ob0iztsaxy5v.cloudfront.net/product/270104/'
+                '2701041020_zm.jpg'))
+    insertItem('Air Force 1s',
+               60,
+               'Shoe',
+               7,
+               'White',
+               '7',
+               ('https://d2ob0iztsaxy5v.cloudfront.net/product/270104/'
+                '2701041020_zm.jpg'))
+    insertItem('Air Force 1s',
+               60,
+               'Shoe',
+               8,
+               'White',
+               '9',
+               ('https://d2ob0iztsaxy5v.cloudfront.net/product/270104/'
+                '2701041020_zm.jpg'))
+    insertItem('Vans',
+               50,
+               'Shoe',
+               10,
+               'Black',
+               '3',
+               ('https://i8.amplience.net/t/jpl/sz_product_list?plu=sz_'
+                '284146_a&qlt=85&qlt=92&w=363&h=281&v=1&fmt'
+                '=auto&fmt=auto'))
+    insertItem('Vans',
+               50,
+               'Shoe',
+               10,
+               'Black',
+               '5',
+               ('https://i8.amplience.net/t/jpl/sz_product_list?plu=sz_'
+                '284146_a&qlt=85&qlt=92&w=363&h=281&v=1&fmt'
+                '=auto&fmt=auto'))
+    insertItem('Vans',
+               50,
+               'Shoe',
+               10,
+               'Black',
+               '7',
+               ('https://i8.amplience.net/t/jpl/sz_product_list?plu=sz_'
+                '284146_a&qlt=85&qlt=92&w=363&h=281&v=1&fmt'
+                '=auto&fmt=auto'))
+    insertItem('Vans',
+               50,
+               'Shoe',
+               10,
+               'Black',
+               '9',
+               ('https://i8.amplience.net/t/jpl/sz_product_list?plu=sz_'
+                '284146_a&qlt=85&qlt=92&w=363&h=281&v=1&fmt'
+                '=auto&fmt=auto'))
     print('Full Setup Complete')
 
 

@@ -278,49 +278,35 @@ def database_page():
 
 @app.route('/airforce')
 def airforce():
-    Attributes = selectAttribute(5)
-    Id = Attributes[0]
-    Item_Name = Attributes[1]
-    Price = Attributes[2]
-    _Type = Attributes[3]
-    Stock = Attributes[4]
-    Color = Attributes[5]
-    Size = Attributes[6]
-    Url = Attributes[7]
+    _3_Attributes = selectAttribute(9)
+    _5_Attributes = selectAttribute(10)
+    _7_Attributes = selectAttribute(11)
+    _9_Attributes = selectAttribute(12)
+    _11_Attributes = selectAttribute(5)
     return render_template(
         'airforce.html',
-        ID=Id,
-        item_name=Item_Name,
-        price=Price,
-        Type=_Type,
-        stock=Stock,
-        color=Color,
-        size=Size,
-        url=Url
+        _3_attributes=_3_Attributes,
+        _5_attributes=_5_Attributes,
+        _7_attributes=_7_Attributes,
+        _9_attributes=_9_Attributes,
+        _11_attributes=_11_Attributes
     )
 
 
 @app.route('/vans')
 def vans():
-    Attributes = selectAttribute(6)
-    Id = Attributes[0]
-    Item_Name = Attributes[1]
-    Price = Attributes[2]
-    _Type = Attributes[3]
-    Stock = Attributes[4]
-    Color = Attributes[5]
-    Size = Attributes[6]
-    Url = Attributes[7]
+    _3_Attributes = selectAttribute(13)
+    _5_Attributes = selectAttribute(14)
+    _7_Attributes = selectAttribute(15)
+    _9_Attributes = selectAttribute(16)
+    _11_Attributes = selectAttribute(6)
     return render_template(
         'vans.html',
-        ID=Id,
-        item_name=Item_Name,
-        price=Price,
-        Type=_Type,
-        stock=Stock,
-        color=Color,
-        size=Size,
-        url=Url
+        _3_attributes=_3_Attributes,
+        _5_attributes=_5_Attributes,
+        _7_attributes=_7_Attributes,
+        _9_attributes=_9_Attributes,
+        _11_attributes=_11_Attributes
     )
 
 

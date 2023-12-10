@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ item_name }}</title>
+    <title>{{ _7_attributes[1] }}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" >
@@ -13,13 +13,14 @@
         <div class="row">
             <!-- Image Column -->
             <div class="col-md-6">
-                <img src="{{ url }}" alt="{{ item_name }}" class="img-responsive">
+                <img src="{{ _7_attributes[7] }}" alt="{{ _7_attributes[1] }}" class="img-responsive">
             </div>
 
             <!-- Information Column -->
             <div class="col-md-6">
-                <h2>{{ item_name }}</h2>
-                <p class="price">£{{ price }}</p>
+
+                <h2>{{ _7_attributes[1] }}</h2>
+                <p class="price">£{{ _7_attributes[2] }}</p>
                 <select id="currency-selector">
                     <option value="USD">USD</option>
                     <option value="EUR">EUR</option>
@@ -27,20 +28,24 @@
                 </select>
                 
                 <div id="product-price">Price: $<span id="price">{{
-                price }}</span></div>
+                _7_attributes[2] }}</span></div>
                 <!-- Additional product details -->
-                <p>Description of {{ item_name }}...</p>
+                <p>Description of {{ _7_attributes[1] }}...</p>
 
                 <!-- Checkout Options -->
                 <div>
                     <label for="size">Size:</label>
                     <select id="size" name="size">
-                        <option value="11">11</option>
+                        <option value="{{ _3_attributes[6] }}">3</option>
+			<option value="{{ _5_attributes[6] }}">5</option>
+			<option value="{{ _7_attributes[6] }}">7</option>
+			<option value="{{ _9_attributes[6] }}">9</option>
+			<option value="{{ _11_attributes[6] }}">11</option>
                     </select>
                 </div>
                 <div>
                     <label for="quantity">Quantity:</label>
-                    <input type="number" id="quantity" name="quantity" min="1" max="{{ stock }}">
+                    <input type="number" id="quantity" name="quantity" min="1" max="{{ _7_attributes[4] }}">
                 </div>
                 <button type="button" class="btn btn-primary">Add to Cart</button>
                 <button type="button" class="btn btn-success">Buy Now</button>
@@ -55,8 +60,8 @@
         }
         
         document.querySelector('.btn-primary').addEventListener('click', function(){
-            var itemName = '{{ item_name }}'
-            var price = '{{ price }}'
+            var itemName = '{{ _7_attributes[1] }}'
+            var price = '{{ _7_attributes[2] }}'
             var sizeSelect = document.getElementById('size');
             var size = sizeSelect.options[sizeSelect.selectedIndex].value;
             var quantity = document.getElementById('quantity').value;
