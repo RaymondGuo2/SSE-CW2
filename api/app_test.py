@@ -1,10 +1,10 @@
 import pytest
-from unittest.mock import patch, MagicMock
 from app import app as flask_app, dbQuery, reduceStock, selectAttribute
 
 
 def app():
-    yield flask_app
+    flask_app.config['TESTING'] = True
+    return flask_app
 
 
 def client(app):
@@ -114,15 +114,14 @@ def currency_convert_test(client):
                            f"{original_price}&currency={currency}"))
     assert response.status_code == 200
     assert "Price converted" in response.json
-<<<<<<< HEAD
 
 
 def mock_db_connection(mocker):
-    with patch('app.connectDB') as mock_connect:
-        mock_conn = MagicMock()
-        mock_curs = MagicMock()
-        mock_connect.return_value = (mock_conn, mock_curs)
-        yield mock_conn, mock_curs
+    mock_connect = mocker.patch('app.connectDB')
+    mock_conn = mocker.MagicMock()
+    mock_curs = mocker.MagicMock()
+    mock_connect.return_value = (mock_conn, mock_curs)
+    return mock_conn, mock_curs
 
 
 def test_db_query(mock_db_connection):
@@ -156,5 +155,3 @@ def test_select_attribute(mock_db_connection):
     item_id = 1
     result = selectAttribute(item_id)
     assert result == [1, "Product1", "20.00", "Hat", "5", "Red", "M", 'URL1']
-=======
->>>>>>> origin/main
