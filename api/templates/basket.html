@@ -44,8 +44,10 @@
             </tbody>
         </table>
 
-        <!-- Checkout Button -->
         <div class="text-right">
+            <div class="total-price">
+                <h3>Total: £<span id="total-price"></span></h3>
+            </div>
             <button id="checkoutButton" class = "btn btn-primary">Proceed to Checkout</button>
         </div>
     </div>
@@ -58,6 +60,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             var basketDataElement = document.getElementById('basketData');
             var basketItems = JSON.parse(basketDataElement.textContent);
+            displayTotal(basketItems);
 
             var checkoutButton = document.getElementById('checkoutButton');
             checkoutButton.addEventListener('click', saveToCheckout);
@@ -65,6 +68,14 @@
             function saveToCheckout() {
                 localStorage.setItem('basketItems', JSON.stringify(basketItems));
                 window.location.href = '/checkout';
+            }
+
+            function displayTotal(basketItems){
+                var total = 0;
+                basketItems.forEach(item => {
+                    total += parseFloat(item.price) * parseInt(item.quantity);
+                });
+                document.getElementById('total-price').innerText = total.toFixed(2);
             }
         });    
     </script>

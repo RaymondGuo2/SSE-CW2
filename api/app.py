@@ -86,7 +86,11 @@ def send_simple_message(to_email, name, address):
 def search():
     query = request.args.get("query")
     search_results = search_db(query)
-    return render_template("searchresults.html", results=search_results)
+    return render_template(
+        "searchresults.html", 
+        response=search_results, 
+        query=query
+    )
 
 
 def search_db(search_query):
@@ -95,23 +99,13 @@ def search_db(search_query):
 
     conn, curs = connectDB()
     curs.execute("""
-    SELECT *
+    SELECT DISTINCT ON (item_name) *
     FROM item
     WHERE item_name ILIKE %s
     """, ('%' + search_query + '%',)
     )
-    unformatted_response = curs.fetchall()
-    response = [
-        (item[0],
-         item[1].strip("'"),
-         f"{item[2]:.2f}",
-         item[3].strip("'"),
-         str(item[4]),
-         item[5].strip("'"),
-         item[6].strip("'"),
-         item[7])
-        for item in unformatted_response
-    ]
+
+    response = curs.fetchall()
     conn.close()
     return response
 
