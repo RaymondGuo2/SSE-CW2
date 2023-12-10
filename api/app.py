@@ -162,11 +162,10 @@ def connectDB():
 
 def dbQuery():
     conn, curs = connectDB()
-    curs.execute("SELECT* FROM item ORDER BY  item_id")
+    curs.execute("SELECT* FROM item ORDER BY  item_name, size DESC")
     unformatted_response = curs.fetchall()
     response = [
-        (item[0],
-         item[1].strip("'"),
+        (item[1].strip("'"),
          f"{item[2]:.2f}",
          item[3].strip("'"),
          str(item[4]),
