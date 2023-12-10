@@ -15,12 +15,11 @@
             {% for item in response %}
                 <div class="col-lg-3">
                     <div class="thumbnail">
-                        <!-- Link to item-specific page or more details -->
-                        <a href="/item/{{ item[0] }}"> <!-- Assuming item[0] is a unique identifier -->
-                            <img src="{{ item[7] }}" alt="{{ item[1] }}"> <!-- item[7] for image, item[1] for name -->
+                        <a href="/item/{{ item[0] }}"> <!-- change this to allow for having the name of each page assigned to the database in html form-->
+                            <img src="{{ item[7] }}" alt="{{ item[1] }}">
                             <div class="caption text-center">
-                                <h4>{{ item[1] }}</h4> <!-- item[1] for name -->
-                                <p>Purchase this item for £{{ item[2] }}.</p> <!-- item[2] for price -->
+                                <h4>{{ item[1] }}</h4>
+                                <p>Purchase this item for £{{ item[2] }}.</p>
                             </div>
                         </a>
                     </div>
