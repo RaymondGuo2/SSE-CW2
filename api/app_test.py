@@ -43,7 +43,7 @@ def search_test(client):
 def currency_convert_test(client):
     # original_price = "10"
     # currency = "GBP"
-    response = client.get((f"/convert_currency?price="
-                            "{original_price}&currency={currency}"))
+    response = client.get(("/convert_currency?price="
+                           f"{original_price}&currency={currency}"))
     assert response.status_code == 200
     assert "Price converted" in response.json
