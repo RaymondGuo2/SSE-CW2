@@ -1,4 +1,6 @@
-from app import app as flask_app
+import pytest
+from unittest.mock import patch, MagicMock
+from app import app as flask_app, dbQuery, reduceStock, selectAttribute
 
 
 def app():
@@ -13,6 +15,71 @@ def home_page_test(client):
     response = client.get("/")
     assert response.status_code == 200
     assert b"Expected content on home page" in response.data
+
+
+def shoes_page_test(client):
+    response = client.get("/shoes")
+    assert response.status_code == 200
+
+
+def hats_page_test(client):
+    response = client.get("/hat")
+    assert response.status_code == 200
+
+
+def jumper_page_test(client):
+    response = client.get("/jumper")
+    assert response.status_code == 200
+
+
+def airforce_page_test(client):
+    response = client.get("/airforce")
+    assert response.status_code == 200
+
+
+def vans_page_test(client):
+    response = client.get("/vans")
+    assert response.status_code == 200
+
+
+def uniqlojumper_page_test(client):
+    response = client.get("/uniqlojumper")
+    assert response.status_code == 200
+
+
+def hugoboss_page_test(client):
+    response = client.get("/hugojumper")
+    assert response.status_code == 200
+
+
+def greenbeanie_page_test(client):
+    response = client.get("/greenbeanie")
+    assert response.status_code == 200
+
+
+def blackbeanie_page_test(client):
+    response = client.get("/blackbeanie")
+    assert response.status_code == 200
+
+
+def contact_page_test(client):
+    response = client.get("/contact")
+    assert response.status_code == 200
+
+
+def basket_page_test(client):
+    response = client.get("/basket")
+    assert response.status_code == 200
+
+
+def checkout_page_test(client):
+    response = client.get("/checkout")
+    assert response.status_code == 200
+
+
+def database_page_test(client):
+    response = client.get("/database")
+    assert response.status_code == 200
 
 
 def form_test(client):
@@ -33,16 +100,6 @@ def basket_test(client):
     assert b"Adidas" in response.data
 
 
-def form_test(client):
-    response = client.post("/thankyou", data={
-        "name": "Alan Smith",
-        "email": "asmith@gmail.com",
-        "message": "Fantastic Service!"
-    })
-    assert response.status_code == 200
-    assert b"Expected response" in response.data
-
-
 def search_test(client):
     search_query = "shoes"
     response = client.get(f"/search?query={search_query}")
@@ -58,7 +115,42 @@ def currency_convert_test(client):
     assert "Price converted" in response.json
 
 
+def mock_db_connection(mocker):
+    with patch('app.connectDB') as mock_connect:
+        mock_conn = MagicMock()
+        mock_curs = MagicMock()
+        mock_connect.return_value = (mock_conn, mock_curs)
+        yield mock_conn, mock_curs
 
 
+def test_db_query(mock_db_connection):
+    _, mock_curs = mock_db_connection
+    mock_curs.fetchall.return_value = [
+        (1, "'Product1'", 20.0, "'Hat'", 5, "'Red'", "'M'", 'URL1'),
+    ]
+    result = dbQuery()
+    assert result == [
+        (1, "'Product1'", 20.0, "'Hat'", 5, "'Red'", "'M'", 'URL1')
+    ]
 
 
+def test_reduce_stock(mock_db_connection):
+    mock_conn, mock_curs = mock_db_connection
+    item_id, reduce_by = 1, 2
+
+    reduceStock(item_id, reduce_by)
+    mock_curs.execute.assert_called_with("""
+        UPDATE item
+        SET stock = GREATEST(stock - %s, 0)
+        WHERE item_id = %s
+    """, (reduce_by, item_id))
+    mock_conn.commit.assert_called_once()
+
+
+def test_select_attribute(mock_db_connection):
+    _, mock_curs = mock_db_connection
+    mock_curs.fetchone.side_effect = [[5], (1, "'Product1'", 20.0, "'Hat'", 5, "'Red'", "'M'", 'URL1')]
+
+    item_id = 1
+    result = selectAttribute(item_id)
+    assert result == [1, "Product1", "20.00", "Hat", "5", "Red", "M", 'URL1']
