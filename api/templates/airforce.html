@@ -37,10 +37,10 @@
                     <label for="size">Size:</label>
                     <select id="size" name="size">
                         <option value="{{ _3_attributes[6] }}">3</option>
-			<option value="{{ _5_attributes[6] }}">5</option>
-			<option value="{{ _7_attributes[6] }}">7</option>
-			<option value="{{ _9_attributes[6] }}">9</option>
-			<option value="{{ _11_attributes[6] }}">11</option>
+                        <option value="{{ _5_attributes[6] }}">5</option>
+                        <option value="{{ _7_attributes[6] }}">7</option>
+                        <option value="{{ _9_attributes[6] }}">9</option>
+                        <option value="{{ _11_attributes[6] }}">11</option>
                     </select>
                 </div>
                 <div>
@@ -60,16 +60,17 @@
         }
         
         document.querySelector('.btn-primary').addEventListener('click', function(){
+            var itemPicture = '{{ _7_attributes[7] }}'
             var itemName = '{{ _7_attributes[1] }}'
             var price = '{{ _7_attributes[2] }}'
             var sizeSelect = document.getElementById('size');
             var size = sizeSelect.options[sizeSelect.selectedIndex].value;
             var quantity = document.getElementById('quantity').value;
-            addToCart(itemName, price, size, quantity);
+            addToCart(itemPicture, itemName, price, size, quantity);
         });
 
-        function addToCart(itemName, price, size, quantity){
-            var data = { itemName: itemName, price: price, size: size, quantity: quantity };
+        function addToCart(itemPicture, itemName, price, size, quantity){
+            var data = { itemPicture: itemPicture, itemName: itemName, price: price, size: size, quantity: quantity };
             
             fetch('/add-to-cart', {
                 method: 'POST',

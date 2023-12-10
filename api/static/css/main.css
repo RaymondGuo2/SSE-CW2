@@ -121,3 +121,16 @@ h1, h2, h3, p, a, span, strong, em, ul, ol, li, blockquote, pre, code, img, tabl
   background-color: #ddd;
   color: black;
 }
+
+.table td{
+  vertical-align: middle;
+}
+
+.left-border {
+  border-left: 2px solid #ccc;
+  height: auto;
+}
+
+.form-vertical .form-group {
+  margin-bottom: 15px; /* Adjust spacing as needed */
+}

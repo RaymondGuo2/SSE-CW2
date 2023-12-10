@@ -16,6 +16,7 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th></th>
                     <th>Product</th>
                     <th>Size</th>
                     <th>Quantity</th>
@@ -26,7 +27,10 @@
                 <!-- This section will be dynamically filled with cart items -->
                 {% for item in basket_items %}
                 <tr>
-                    <td>{{ item.product_name }}</td>
+                    <td><img src = "{{ item.itemPicture }}" style="width: 100px; height: auto;"></td>
+                    <td>
+                        {{ item.itemName }}
+                    </td>
                     <td>{{ item.size }}</td>
                     <td>
                         <input type="number" value="{{ item.quantity }}" min="1">
@@ -42,9 +46,27 @@
 
         <!-- Checkout Button -->
         <div class="text-right">
-            <button class="btn btn-success">Proceed to Checkout</button>
+            <button id="checkoutButton" class = "btn btn-primary">Proceed to Checkout</button>
         </div>
     </div>
     {% include 'footer.html' %}
+    <div id="basketData" style="display: none;">
+        {{ basket_items | tojson }}
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var basketDataElement = document.getElementById('basketData');
+            var basketItems = JSON.parse(basketDataElement.textContent);
+
+            var checkoutButton = document.getElementById('checkoutButton');
+            checkoutButton.addEventListener('click', saveToCheckout);
+
+            function saveToCheckout() {
+                localStorage.setItem('basketItems', JSON.stringify(basketItems));
+                window.location.href = '/checkout';
+            }
+        });    
+    </script>
 </body>
 </html>
