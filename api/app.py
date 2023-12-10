@@ -417,11 +417,6 @@ def uniqlojumper():
     )
 
 
-def process_query(query):
-    if query == "dinosaurs":
-        return "Dinosaurs ruled the Earth 200 million years ago"
-
-
 @app.route('/add-to-cart', methods=['POST'])
 def add_to_cart():
     data = request.json

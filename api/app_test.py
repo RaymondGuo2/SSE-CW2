@@ -1,5 +1,4 @@
 from app import app as flask_app
-from app import process_query
 
 
 def app():
@@ -58,8 +57,3 @@ def currency_convert_test(client):
     assert response.status_code == 200
     assert "Price converted" in response.json
 
-
-def test_knows_about_dinosaurs():
-    assert process_query("dinosaurs") == (
-        "Dinosaurs ruled the Earth 200 million years ago"
-    )
