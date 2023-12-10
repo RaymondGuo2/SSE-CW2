@@ -357,6 +357,3 @@ def place_order():
         address=input_address
     )
 
-"""
-app.run(debug=True)
-"""
