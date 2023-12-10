@@ -1,3 +1,4 @@
+import pytest
 from app import app as flask_app, dbQuery, reduceStock, selectAttribute
 
 
@@ -115,6 +116,7 @@ def currency_convert_test(client):
     assert "Price converted" in response.json
 
 
+@pytest.fixture
 def mock_db_connection(mocker):
     mock_connect = mocker.patch('app.connectDB')
     mock_conn = mocker.MagicMock()
@@ -134,6 +136,7 @@ def test_db_query(mock_db_connection):
     ]
 
 
+@pytest.fixture
 def test_reduce_stock(mock_db_connection):
     mock_conn, mock_curs = mock_db_connection
     item_id, reduce_by = 1, 2
@@ -146,6 +149,8 @@ def test_reduce_stock(mock_db_connection):
     """, (reduce_by, item_id))
     mock_conn.commit.assert_called_once()
 
+
+@pytest.fixture
 
 def test_select_attribute(mock_db_connection):
     _, mock_curs = mock_db_connection
