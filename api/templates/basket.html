@@ -16,7 +16,8 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th></th>
+                  <th></th>
+		    <th>Item Id</th>
                     <th>Product</th>
                     <th>Size</th>
                     <th>Quantity</th>
@@ -28,7 +29,10 @@
                 {% for item in basket_items %}
                 <tr>
                     <td><img src = "{{ item.itemPicture }}" style="width: 100px; height: auto;"></td>
-                    <td>
+		    <td>
+		      {{ item.itemId }}
+		      </td>
+		    <td>
                         {{ item.itemName }}
                     </td>
                     <td>{{ item.size }}</td>

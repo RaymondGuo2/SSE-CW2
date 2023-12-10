@@ -32,9 +32,9 @@
                 <div>
                     <label for="size">Size:</label>
                     <select id="size" name="size" onchange="updateMaxQuantity()">
-                        <option value="{{ _S_attributes[6] }}" >Small</option>
-                        <option value="{{ _M_attributes[6] }}" >Medium</option>
-                        <option value="{{ _L_attributes[6] }}" >Large</option>
+                        <option value="{{ _S_attributes[6] }}" data-id="{{ _S_attributes[0] }}">Small</option>
+                        <option value="{{ _M_attributes[6] }}" data-id="{{ _M_attributes[0] }}">Medium</option>
+                        <option value="{{ _L_attributes[6] }}" data-id="{{ _L_attributes[0] }}">Large</option>
                     </select>
                 </div>
                 <div>
@@ -113,8 +113,8 @@
       });
     
         // Function to add items to the cart
-      function addToCart(itemPicture, itemName, price, size, quantity) {
-          var data = { itemPicture: itemPicture, itemName: itemName, price: price, size: size, quantity: quantity };
+      function addToCart(itemPicture, itemName, price, size, quantity, itemId) {
+          var data = { itemPicture: itemPicture, itemName: itemName, price: price, size: size, quantity: quantity, itemId: itemId };
     
           fetch('/add-to-cart', {
               method: 'POST',
@@ -142,9 +142,11 @@
           var itemName = '{{ _S_attributes[1] }}';
           var price = originalPriceGBP; // Get the current displayed price
           var sizeSelect = document.getElementById('size');
-          var size = sizeSelect.options[sizeSelect.selectedIndex].value;
+	  var selectedOption =  sizeSelect.options[sizeSelect.selectedIndex];
+          var size = selectedOption.value;
           var quantity = document.getElementById('quantity').value;
-          addToCart(itemPicture, itemName, price, size, quantity);
+	  var itemId = selectedOption.getAttribute('data-id');
+          addToCart(itemPicture, itemName, price, size, quantity, itemId);
       });
     
         // Trigger the currency conversion on page load

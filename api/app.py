@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify, session
 import psycopg as db
 import requests
 import os
+import json
 from dotenv import load_dotenv, find_dotenv
 
 app = Flask(__name__, static_folder='static')
@@ -28,38 +29,10 @@ def submit():
     )
 
 
-@app.route("/checkout")
-def checkout():
-    return render_template("checkout.html")
-
-
 @app.route("/basket")
 def basket():
     cart_items = session.get('cart', [])
     return render_template("basket.html", basket_items=cart_items)
-
-
-@app.route("/thankyou", methods=["POST"])
-def place_order():
-    input_name = request.form.get("name")
-    input_email = request.form.get("email")
-    input_address = request.form.get("address")
-
-    # Call the function to send an email
-    response = send_simple_message(input_email, input_name, input_address)
-
-    # Handle the email response (Optional)
-    if response.status_code == 200:
-        print("Email sent successfully!")
-    else:
-        print("Email sending failed. Status code:", response.status_code)
-
-    return render_template(
-        "thankyou.html",
-        name=input_name,
-        email=input_email,
-        address=input_address
-    )
 
 
 def send_simple_message(to_email, name, address):
@@ -214,7 +187,7 @@ def reduceStock(itemID: int, reduceBy: int):
         WHERE item_id = %s
     """, (reduceBy, itemID))
     conn.commit()
-    conn.close
+    conn.close()
 
 
 def selectAttribute(itemID: int):
@@ -402,6 +375,39 @@ def add_to_cart():
     session.modified = True
     return jsonify(success=True)
 
+
+@app.route("/checkout")
+def checkout():
+    return render_template("checkout.html")
+
+
+@app.route("/thankyou", methods=["POST"])
+def place_order():
+    input_name = request.form.get("name")
+    input_email = request.form.get("email")
+    input_address = request.form.get("address")
+
+    # Call the function to send an email
+    response = send_simple_message(input_email, input_name, input_address)
+
+    # Handle the email response (Optional)
+    if response.status_code == 200:
+        print("Email sent successfully!")
+    else:
+        print("Email sending failed. Status code:", response.status_code)
+
+    basket_items = json.loads(request.form.get('basketItems', '[]'))
+    for item in basket_items:
+        item_id = int(item.get('itemId'))
+        quantity = int(item.get('quantity'))
+        reduceStock(item_id, quantity)
+
+    return render_template(
+        "thankyou.html",
+        name=input_name,
+        email=input_email,
+        address=input_address
+    )
 
 """
 app.run(debug=True)
