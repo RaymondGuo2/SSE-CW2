@@ -37,7 +37,8 @@ type VARCHAR(20) NOT NULL,
 stock INTEGER NOT NULL,
 color VARCHAR(20) NOT NULL,
 size VARCHAR(2) NOT NULL,
-url VARCHAR(400) NOT NULL
+url VARCHAR(400) NOT NULL,
+link VARCHAR(400) NOT NULL
 )
 """)
     conn.commit()
@@ -52,12 +53,13 @@ def insertItem(
         stock: int,
         color: str,
         size: str,
-        url: str):
+        url: str,
+        link: str):
     conn, curs = connectDB()
     curs.execute("""
-INSERT INTO item (item_name, price, type, stock, color, size, url)
-VALUES (%s, %s, %s, %s, %s, %s, %s)
-""", (name, price, itemType, stock, color, size, url))
+INSERT INTO item (item_name, price, type, stock, color, size, url, link)
+VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+""", (name, price, itemType, stock, color, size, url, link))
     conn.commit()
     conn.close()
     print("Item Added to Item Table: ", (name), " Size: ", (size))
@@ -71,7 +73,8 @@ def setupDB():
                10,
                'Black',
                'M',
-               'https://www.footasylum.com/images/products/medium/127357.jpg')
+               'https://www.footasylum.com/images/products/medium/127357.jpg',
+               'blackbeanie')
     insertItem('Northface Green Beanie',
                12,
                'Hat',
@@ -79,7 +82,8 @@ def setupDB():
                'Green',
                'M',
                ('https://i.pinimg.com/736x/45/'
-                '98/86/4598863f4b9d99b8c26cdc1684a36466.jpg'))
+                '98/86/4598863f4b9d99b8c26cdc1684a36466.jpg'),
+               'greenbeanie')
     insertItem('Hugo Boss Jumper',
                60,
                'Jumper',
@@ -87,7 +91,8 @@ def setupDB():
                'Grey',
                'M',
                ('https://brandrunner.co.uk/wp-content/uploads/2021/01/'
-                'Hugo-Boss-Jumper-Boys-1.jpg'))
+                'Hugo-Boss-Jumper-Boys-1.jpg'),
+               'hugojumper')
     insertItem('Uniqlo Jumper',
                40,
                'Jumper',
@@ -95,7 +100,8 @@ def setupDB():
                'Green',
                'M',
                ('https://www.uniqlo.com/jp/ja/contents/feature/masterpiece/'
-                'common_22fw/img/item_12_01.jpg'))
+                'common_22fw/img/item_12_01.jpg'),
+               'uniqlojumper')
     insertItem('Air Force 1s',
                60,
                'Shoe',
@@ -103,7 +109,8 @@ def setupDB():
                'White',
                '11',
                ('https://d2ob0iztsaxy5v.cloudfront.net/product/270104/'
-                '2701041020_zm.jpg'))
+                '2701041020_zm.jpg'),
+               'airforce')
     insertItem('Vans',
                50,
                'Shoe',
@@ -112,21 +119,24 @@ def setupDB():
                '11',
                ('https://i8.amplience.net/t/jpl/sz_product_list?plu=sz_'
                 '284146_a&qlt=85&qlt=92&w=363&h=281&v=1&fmt'
-                '=auto&fmt=auto'))
+                '=auto&fmt=auto'),
+               'vans')
     insertItem('Northface Black Beanie',
                12,
                'Hat',
                10,
                'Black',
                'S',
-               'https://www.footasylum.com/images/products/medium/127357.jpg')
+               'https://www.footasylum.com/images/products/medium/127357.jpg',
+               'blackbeanie')
     insertItem('Northface Black Beanie',
                12,
                'Hat',
                10,
                'Black',
                'L',
-               'https://www.footasylum.com/images/products/medium/127357.jpg')
+               'https://www.footasylum.com/images/products/medium/127357.jpg',
+               'blackbeanie')
     insertItem('Air Force 1s',
                60,
                'Shoe',
@@ -134,7 +144,8 @@ def setupDB():
                'White',
                '3',
                ('https://d2ob0iztsaxy5v.cloudfront.net/product/270104/'
-                '2701041020_zm.jpg'))
+                '2701041020_zm.jpg'),
+               'airforce')
     insertItem('Air Force 1s',
                60,
                'Shoe',
@@ -142,7 +153,8 @@ def setupDB():
                'White',
                '5',
                ('https://d2ob0iztsaxy5v.cloudfront.net/product/270104/'
-                '2701041020_zm.jpg'))
+                '2701041020_zm.jpg'),
+               'airforce')
     insertItem('Air Force 1s',
                60,
                'Shoe',
@@ -150,7 +162,8 @@ def setupDB():
                'White',
                '7',
                ('https://d2ob0iztsaxy5v.cloudfront.net/product/270104/'
-                '2701041020_zm.jpg'))
+                '2701041020_zm.jpg'),
+               'airforce')
     insertItem('Air Force 1s',
                60,
                'Shoe',
@@ -158,7 +171,8 @@ def setupDB():
                'White',
                '9',
                ('https://d2ob0iztsaxy5v.cloudfront.net/product/270104/'
-                '2701041020_zm.jpg'))
+                '2701041020_zm.jpg'),
+               'airforce')
     insertItem('Vans',
                50,
                'Shoe',
@@ -167,7 +181,8 @@ def setupDB():
                '3',
                ('https://i8.amplience.net/t/jpl/sz_product_list?plu=sz_'
                 '284146_a&qlt=85&qlt=92&w=363&h=281&v=1&fmt'
-                '=auto&fmt=auto'))
+                '=auto&fmt=auto'),
+               'vans')
     insertItem('Vans',
                50,
                'Shoe',
@@ -176,7 +191,8 @@ def setupDB():
                '5',
                ('https://i8.amplience.net/t/jpl/sz_product_list?plu=sz_'
                 '284146_a&qlt=85&qlt=92&w=363&h=281&v=1&fmt'
-                '=auto&fmt=auto'))
+                '=auto&fmt=auto'),
+               'vans')
     insertItem('Vans',
                50,
                'Shoe',
@@ -185,7 +201,8 @@ def setupDB():
                '7',
                ('https://i8.amplience.net/t/jpl/sz_product_list?plu=sz_'
                 '284146_a&qlt=85&qlt=92&w=363&h=281&v=1&fmt'
-                '=auto&fmt=auto'))
+                '=auto&fmt=auto'),
+               'vans')
     insertItem('Vans',
                50,
                'Shoe',
@@ -194,7 +211,8 @@ def setupDB():
                '9',
                ('https://i8.amplience.net/t/jpl/sz_product_list?plu=sz_'
                 '284146_a&qlt=85&qlt=92&w=363&h=281&v=1&fmt'
-                '=auto&fmt=auto'))
+                '=auto&fmt=auto'),
+               'vans')
     print('Full Setup Complete')
 
 
