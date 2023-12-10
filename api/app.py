@@ -82,12 +82,38 @@ def send_simple_message(to_email, name, address):
         })
 
 
-""" @app.route("/search")
+@app.route("/search")
 def search():
     query = request.args.get("query")
-    search_results = process_query(query)
-    return render_template("search_results.html", results=search_results)
-"""
+    search_results = search_db(query)
+    return render_template("searchresults.html", results=search_results)
+
+
+def search_db(search_query):
+    if not search_query:
+        return[]
+
+    conn, curs = connectDB()
+    curs.execute("""
+    SELECT * 
+    FROM item 
+    WHERE item_name ILIKE %s
+    """,('%' + search_query + '%',)
+    )
+    unformatted_response = curs.fetchall()
+    response = [
+        (item[0],
+         item[1].strip("'"),
+         f"{item[2]:.2f}",
+         item[3].strip("'"),
+         str(item[4]),
+         item[5].strip("'"),
+         item[6].strip("'"),
+         item[7])
+        for item in unformatted_response
+    ]
+    conn.close()
+    return response
 
 
 @app.route('/convert_currency')
