@@ -162,17 +162,15 @@ def connectDB():
 
 def dbQuery():
     conn, curs = connectDB()
-    curs.execute("SELECT* FROM item ORDER BY item_id")
+    curs.execute("SELECT* FROM item ORDER BY  item_name, size DESC")
     unformatted_response = curs.fetchall()
     response = [
-        (item[0],
-         item[1].strip("'"),
+        (item[1].strip("'"),
          f"{item[2]:.2f}",
          item[3].strip("'"),
          str(item[4]),
          item[5].strip("'"),
-         item[6].strip("'"),
-         item[7])
+         item[6].strip("'"))
         for item in unformatted_response
     ]
     conn.close()
@@ -223,26 +221,9 @@ def selectAttribute(itemID: int):
 @app.route("/database")
 def database_page():
     Sql = dbQuery()
-    Attributes = selectAttribute(3)
-    Id = Attributes[0]
-    Item_Name = Attributes[1]
-    Price = Attributes[2]
-    Type = Attributes[3]
-    Stock = Attributes[4]
-    Color = Attributes[5]
-    Size = Attributes[6]
-    Url = Attributes[7]
     return render_template(
         "database.html",
         response=Sql,
-        response_id=Id,
-        response_name=Item_Name,
-        response_price=Price,
-        response_type=Type,
-        response_stock=Stock,
-        response_color=Color,
-        response_size=Size,
-        response_url=Url
     )
 
 
@@ -295,73 +276,40 @@ def blackbeanie():
 
 @app.route('/greenbeanie')
 def greenbeanie():
-    Attributes = selectAttribute(2)
-    Id = Attributes[0]
-    Item_Name = Attributes[1]
-    Price = Attributes[2]
-    _Type = Attributes[3]
-    Stock = Attributes[4]
-    Color = Attributes[5]
-    Size = Attributes[6]
-    Url = Attributes[7]
+    _M_Attributes = selectAttribute(2)
+    _S_Attributes = selectAttribute(17)
+    _L_Attributes = selectAttribute(18)
     return render_template(
         'greenbeanie.html',
-        ID=Id,
-        item_name=Item_Name,
-        price=Price,
-        Type=_Type,
-        stock=Stock,
-        color=Color,
-        size=Size,
-        url=Url
+        _S_attributes=_S_Attributes,
+        _M_attributes=_M_Attributes,
+        _L_attributes=_L_Attributes
     )
 
 
 @app.route('/hugojumper')
 def hugojumper():
-    Attributes = selectAttribute(3)
-    Id = Attributes[0]
-    Item_Name = Attributes[1]
-    Price = Attributes[2]
-    _Type = Attributes[3]
-    Stock = Attributes[4]
-    Color = Attributes[5]
-    Size = Attributes[6]
-    Url = Attributes[7]
+    _M_Attributes = selectAttribute(3)
+    _S_Attributes = selectAttribute(19)
+    _L_Attributes = selectAttribute(20)
     return render_template(
         'hugojumper.html',
-        ID=Id,
-        item_name=Item_Name,
-        price=Price,
-        Type=_Type,
-        stock=Stock,
-        color=Color,
-        size=Size,
-        url=Url
+        _S_attributes=_S_Attributes,
+        _M_attributes=_M_Attributes,
+        _L_attributes=_L_Attributes
     )
 
 
 @app.route('/uniqlojumper')
 def uniqlojumper():
-    Attributes = selectAttribute(4)
-    Id = Attributes[0]
-    Item_Name = Attributes[1]
-    Price = Attributes[2]
-    _Type = Attributes[3]
-    Stock = Attributes[4]
-    Color = Attributes[5]
-    Size = Attributes[6]
-    Url = Attributes[7]
+    _M_Attributes = selectAttribute(4)
+    _S_Attributes = selectAttribute(21)
+    _L_Attributes = selectAttribute(22)
     return render_template(
         'uniqlojumper.html',
-        ID=Id,
-        item_name=Item_Name,
-        price=Price,
-        Type=_Type,
-        stock=Stock,
-        color=Color,
-        size=Size,
-        url=Url
+        _S_attributes=_S_Attributes,
+        _M_attributes=_M_Attributes,
+        _L_attributes=_L_Attributes
     )
 
 
@@ -396,11 +344,10 @@ def place_order():
     else:
         print("Email sending failed. Status code:", response.status_code)
 
-    basket_items = json.loads(request.form.get('basketItems', '[]'))
+    basket_items_json = request.form.get("basketItems")
+    basket_items = json.loads(basket_items_json)
     for item in basket_items:
-        item_id = int(item.get('itemId'))
-        quantity = int(item.get('quantity'))
-        reduceStock(item_id, quantity)
+        reduceStock(item['itemId'], item['quantity'])
 
     return render_template(
         "thankyou.html",
@@ -408,7 +355,3 @@ def place_order():
         email=input_email,
         address=input_address
     )
-
-"""
-app.run(debug=True)
-"""

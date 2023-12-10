@@ -110,9 +110,11 @@ def search_test(client):
 def currency_convert_test(client):
     original_price = "10"
     currency = "GBP"
-    response = client.get(f"/convert_currency?price={original_price}&currency={currency}")
+    response = client.get(("/convert_currency?price="
+                           f"{original_price}&currency={currency}"))
     assert response.status_code == 200
     assert "Price converted" in response.json
+<<<<<<< HEAD
 
 
 def mock_db_connection(mocker):
@@ -154,3 +156,5 @@ def test_select_attribute(mock_db_connection):
     item_id = 1
     result = selectAttribute(item_id)
     assert result == [1, "Product1", "20.00", "Hat", "5", "Red", "M", 'URL1']
+=======
+>>>>>>> origin/main
