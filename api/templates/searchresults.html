@@ -15,7 +15,7 @@
             {% for item in response %}
                 <div class="col-lg-3">
                     <div class="thumbnail">
-                        <a href="/item/{{ item[0] }}"> <!-- change this to allow for having the name of each page assigned to the database in html form-->
+                        <a href="/{{ item[8] }}"> <!-- change this to allow for having the name of each page assigned to the database in html form-->
                             <img src="{{ item[7] }}" alt="{{ item[1] }}">
                             <div class="caption text-center">
                                 <h4>{{ item[1] }}</h4>
