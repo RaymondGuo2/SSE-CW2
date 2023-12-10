@@ -314,8 +314,8 @@ def blackbeanie():
     _L_Attributes = selectAttribute(8)
     return render_template(
         'blackbeanie.html',
-        _S_attributes=_S_Attributes
-        _M_attributes=_M_Attributes
+        _S_attributes=_S_Attributes,
+        _M_attributes=_M_Attributes,
         _L_attributes=_L_Attributes
     )
 
