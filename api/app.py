@@ -91,14 +91,14 @@ def search():
 
 def search_db(search_query):
     if not search_query:
-        return[]
+        return []
 
     conn, curs = connectDB()
     curs.execute("""
-    SELECT * 
-    FROM item 
+    SELECT *
+    FROM item
     WHERE item_name ILIKE %s
-    """,('%' + search_query + '%',)
+    """, ('%' + search_query + '%',)
     )
     unformatted_response = curs.fetchall()
     response = [
