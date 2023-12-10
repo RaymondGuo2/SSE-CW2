@@ -356,4 +356,3 @@ def place_order():
         email=input_email,
         address=input_address
     )
-
