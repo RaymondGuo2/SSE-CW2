@@ -151,7 +151,6 @@ def test_reduce_stock(mock_db_connection):
 
 
 @pytest.fixture
-
 def test_select_attribute(mock_db_connection):
     _, mock_curs = mock_db_connection
     mock_curs.fetchone.side_effect = [[5], (
