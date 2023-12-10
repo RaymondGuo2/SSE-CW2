@@ -57,3 +57,8 @@ def currency_convert_test(client):
     assert response.status_code == 200
     assert "Price converted" in response.json
 
+
+
+
+
+

@@ -20,8 +20,7 @@
             <div class="col-md-6">
 
                 <h2>{{ item_name }}</h2>
-                <div id="product-price">Price: $<span id="price">{{
-                    price }}</span></div>
+                <h3 id="product-price"><span id="currency-symbol">£</span><span id = "price">{{ _S_attributes[2] }}</span></h3>
                 <select id="currency-selector">
                     <option value="GBP">GBP</option>
                     <option value="USD">USD</option>
@@ -29,7 +28,6 @@
                 </select>
                 
 
-                <!-- Checkout Options -->
                 <div>
                     <label for="size">Size:</label>
                     <select id="size" name="size">
