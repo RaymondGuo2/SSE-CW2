@@ -23,7 +23,7 @@
                         <option value="USD">USD</option>
                         <option value="EUR">EUR</option>
                     </select>
-                     <div class="product-description" style="font-size: 14px; text-align: center;">Stay warm and stylish in cold weather with The North Face Hat. This hat is a must-have accessory for outdoor adventures or city strolls.</div>
+                    <div class="product-description" style="font-size: 14px; text-align: center;">Stay warm and stylish in cold weather with The North Face Hat. This hat is a must-have accessory for outdoor adventures or city strolls.</div>
                     <div>
                         <label for="size">Size:</label>
                         <select id="size" name="size" onchange="updateMaxQuantity()">
@@ -34,10 +34,11 @@
                     </div>
                     <div>
                         <label for="quantity">Quantity:</label>
-                        <input type="number" id="quantity" name="quantity" min="1" max="{{ _S_attributes[4] }}" class="product-quantity-input" value="1">
+                        <input type="number" id="quantity"
+			       name="quantity" min="1" max="{{ _S_attributes[4] }}" class="product-quantity-input" value="1">
                     </div>
-                    <div id="outOfStockMessage" class="out-of-stock-message"></div>
                     <button id="addToCart" type="button" class="btn btn-primary product-button">Add to Cart</button>
+                    <div id="outOfStockMessage" style="color: red;"></div>
                 </div>
             </div>
         </div>
@@ -69,16 +70,14 @@
     if (parseInt(quantityInput.max) === 0) {
         quantityInput.style.display = 'none';
         addToCart.style.display = 'none';
-        buyNow.style.display = 'none';
         outOfStockMessage.style.color = 'red';
         outOfStockMessage.innerText = 'Out of Stock';
     } else {
         quantityInput.style.display = 'inline-block';
         addToCart.style.display = 'inline-block';
-        buyNow.style.display = 'inline-block';
         outOfStockMessage.style.color = 'black';
         outOfStockMessage.innerText = '';
-    }
+        }
     }
 
     var originalPriceGBP = parseFloat('{{ _S_attributes[2] }}');
@@ -104,7 +103,7 @@
     }
 
     document.getElementById('currency-selector').addEventListener('change', function() {
-    convertAndDisplayPrice(this.value);
+        convertAndDisplayPrice(this.value);
     });
 
     function addToCart(itemPicture, itemName, price, size, quantity, itemId) {
@@ -129,11 +128,11 @@
             console.error('Error:', error);
         });
     }
-
+    
     document.querySelector('.btn-primary').addEventListener('click', function() {
         var itemPicture = '{{ _S_attributes[7] }}';
         var itemName = '{{ _S_attributes[1] }}';
-        var price = originalPriceGBP; // Get the current displayed price
+        var price = originalPriceGBP;
         var sizeSelect = document.getElementById('size');
         var selectedOption =  sizeSelect.options[sizeSelect.selectedIndex];
         var size = selectedOption.value;
@@ -141,7 +140,7 @@
         var itemId = selectedOption.getAttribute('data-id');
         addToCart(itemPicture, itemName, price, size, quantity, itemId);
     });
-
+    
     window.onload = function() {
         document.getElementById('currency-selector').dispatchEvent(new Event('change'));
     };

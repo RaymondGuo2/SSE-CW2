@@ -78,13 +78,11 @@
         if (parseInt(quantityInput.max) === 0) {
             quantityInput.style.display = 'none';
             addToCart.style.display = 'none';
-            buyNow.style.display = 'none';
             outOfStockMessage.style.color = 'red';
             outOfStockMessage.innerText = 'Out of Stock';
         } else {
             quantityInput.style.display = 'inline-block';
             addToCart.style.display = 'inline-block';
-            buyNow.style.display = 'inline-block';
             outOfStockMessage.style.color = 'black';
             outOfStockMessage.innerText = '';
         }
