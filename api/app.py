@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, session, redirect
+from flask import Flask, render_template, request, jsonify, session
 import psycopg as db
 import requests
 import os
@@ -368,6 +368,7 @@ def place_order():
         email=input_email,
         address=input_address
     )
+
 
 """
 app.run(debug=True)
