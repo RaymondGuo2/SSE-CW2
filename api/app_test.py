@@ -132,7 +132,7 @@ def test_db_query(mock_db_connection):
     ]
     result = dbQuery()
     assert result == [
-        ('1', 'Product1', 20.0, 'Hat', 5, 'Red', 'M', 'URL1')
+        ('1', 'Product1', 20.00, 'Hat', 5, 'Red', 'M', 'URL1')
     ]
 
 
