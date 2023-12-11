@@ -7,23 +7,33 @@ load_dotenv()
 
 
 def connectDB():
-    DBNAME = os.environ.get('DBNAME')
-    HOST = os.environ.get('HOST')
-    PORT = os.environ.get('PORT')
-    USER = os.environ.get('USER')
-    PASSWORD = os.environ.get('PASSWORD')
-    CLIENT_ENCODING = os.environ.get('CLIENT_ENCODING')
-    server_params = {
-        'dbname': DBNAME,
-        'host': HOST,
-        'port': PORT,
-        'user': USER,
-        'password': PASSWORD,
-        'client_encoding': CLIENT_ENCODING
-    }
-    conn = db.connect(**server_params)
-    curs = conn.cursor()
-    return conn, curs
+    try:
+        DBNAME = os.environ.get('DBNAME')
+        HOST = os.environ.get('HOST')
+        PORT = os.environ.get('PORT')
+        USER = os.environ.get('USER')
+        PASSWORD = os.environ.get('PASSWORD')
+        CLIENT_ENCODING = os.environ.get('CLIENT_ENCODING')
+        
+        server_params = {
+            'dbname': DBNAME,
+            'host': HOST,
+            'port': PORT,
+            'user': USER,
+            'password': PASSWORD,
+            'client_encoding': CLIENT_ENCODING
+        }
+
+        conn = db.connect(**server_params)
+        curs = conn.cursor()
+
+    except db.Error as e:
+        print(f"Error connecting to the database: {e}")
+        conn = None
+        curs = None
+
+    finally:
+        return conn, curs
 
 
 def setupTableItem():
