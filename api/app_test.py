@@ -154,7 +154,7 @@ def test_reduce_stock(mock_db_connection):
 def test_select_attribute(mock_db_connection):
     _, mock_curs = mock_db_connection
     mock_curs.fetchone.side_effect = [[5], (
-        "'1'",
+        1,
         "'Product1'",
         20.0,
         "'Hat'",
@@ -165,4 +165,4 @@ def test_select_attribute(mock_db_connection):
     )]
     item_id = 1
     result = selectAttribute(item_id)
-    assert result == [1, "Product1", "20.00", "Hat", "5", "Red", "M", 'URL1']
+    assert result == [1, "Product1", 20.00, "Hat", 5, "Red", "M", 'URL1']
