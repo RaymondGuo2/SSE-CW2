@@ -155,12 +155,12 @@ def test_select_attribute(mock_db_connection):
     _, mock_curs = mock_db_connection
     mock_curs.fetchone.side_effect = [[5], (
         1,
-        "'Product1'",
+        "Product1",
         20.0,
-        "'Hat'",
+        "Hat",
         5,
-        "'Red'",
-        "'M'",
+        "Red",
+        "M",
         'URL1'
     )]
     item_id = 1
