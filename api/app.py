@@ -168,7 +168,7 @@ def dbQuery():
         (
          item[0].strip("'"),
          item[1].strip("'"),
-         f{item[2]:.2f},
+         f"{item[2]:.2f}",
          item[3].strip("'"),
          str(item[4]),
          item[5].strip("'"),
