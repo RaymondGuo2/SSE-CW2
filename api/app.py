@@ -337,7 +337,6 @@ def remove_item(item_id):
     return jsonify({'success': True, 'message': 'Item removed'})
 
 
-
 @app.route("/checkout")
 def checkout():
     return render_template("checkout.html")

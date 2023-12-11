@@ -134,7 +134,7 @@ def setupDB():
     insertItem('Northface Black Beanie',
                12,
                'Hat',
-               8,
+               20,
                'Black',
                'S',
                'https://www.footasylum.com/images/products/medium/127357.jpg',
@@ -150,7 +150,7 @@ def setupDB():
     insertItem('Air Force 1s',
                60,
                'Shoe',
-               4,
+               20,
                'White',
                '3',
                ('https://d2ob0iztsaxy5v.cloudfront.net/product/270104/'
@@ -186,7 +186,7 @@ def setupDB():
     insertItem('Vans',
                50,
                'Shoe',
-               10,
+               20,
                'Black',
                '3',
                ('https://i8.amplience.net/t/jpl/sz_product_list?plu=sz_'
@@ -226,7 +226,7 @@ def setupDB():
     insertItem('Northface Green Beanie',
                12,
                'Hat',
-               10,
+               20,
                'Green',
                'S',
                ('https://i.pinimg.com/736x/45/'
@@ -244,7 +244,7 @@ def setupDB():
     insertItem('Hugo Boss Jumper',
                60,
                'Jumper',
-               10,
+               20,
                'Grey',
                'S',
                ('https://brandrunner.co.uk/wp-content/uploads/2021/01/'
@@ -262,7 +262,7 @@ def setupDB():
     insertItem('Uniqlo Jumper',
                40,
                'Jumper',
-               10,
+               20,
                'Green',
                'S',
                ('https://www.uniqlo.com/jp/ja/contents/feature/masterpiece/'
