@@ -154,11 +154,11 @@ def test_reduce_stock(mock_db_connection):
 def test_select_attribute(mock_db_connection):
     _, mock_curs = mock_db_connection
     mock_curs.fetchone.side_effect = [[5], (
-        1,
+        "1",
         "'Product1'",
-        20.0,
+        '20.0',
         "'Hat'",
-        5,
+        '5',
         "'Red'",
         "'M'",
         'URL1'
