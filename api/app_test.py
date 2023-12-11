@@ -128,11 +128,11 @@ def mock_db_connection(mocker):
 def test_db_query(mock_db_connection):
     _, mock_curs = mock_db_connection
     mock_curs.fetchall.return_value = [
-        ("'1'", "'Product1'", 20.0, "'Hat'", 5, "'Red'", "'M'", 'URL1'),
+        (1, "'Product1'", 20.0, "'Hat'", 5, "'Red'", "'M'", 'URL1'),
     ]
     result = dbQuery()
     assert result == [
-        ('1', 'Product1', '20.00', 'Hat', '5', 'Red', 'M', 'URL1')
+        (1, 'Product1', '20.00', 'Hat', '5', 'Red', 'M', 'URL1')
     ]
 
 
