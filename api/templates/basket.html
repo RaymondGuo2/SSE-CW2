@@ -101,7 +101,8 @@
                     console.log('Item removed:', data);
                     basketItems = basketItems.filter(item => item.itemId !== itemId);
                     displayTotal(basketItems);
-                    document.querySelector('tr[data-item-id]="' + itemId + '"]').remove();
+
+                    document.querySelector('tr[data-item-id]="${itemId}"]').remove();
                 })
                 .catch((error) => {
                     console.error('Error:', error);
