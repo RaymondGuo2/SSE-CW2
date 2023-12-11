@@ -163,7 +163,6 @@ def test_select_attribute(mock_db_connection):
         "'M'",
         'URL1'
     )]
-
     item_id = 1
     result = selectAttribute(item_id)
     assert result == [1, "Product1", "20.00", "Hat", "5", "Red", "M", 'URL1']
