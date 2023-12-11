@@ -23,7 +23,7 @@
                         <option value="USD">USD</option>
                         <option value="EUR">EUR</option>
                     </select>
-                    <p class="product-description">Description of {{ _S_attributes[1] }}...</p>
+                     <div class="product-description" style="font-size: 14px; text-align: center;">Stay warm and stylish in cold weather with The North Face Hat. This hat is a must-have accessory for outdoor adventures or city strolls.</div>
                     <div>
                         <label for="size">Size:</label>
                         <select id="size" name="size" onchange="updateMaxQuantity()">
@@ -34,7 +34,7 @@
                     </div>
                     <div>
                         <label for="quantity">Quantity:</label>
-                        <input type="number" id="quantity" name="quantity" min="0" max="{{ _S_attributes[4] }}" class="product-quantity-input">
+                        <input type="number" id="quantity" name="quantity" min="1" max="{{ _S_attributes[4] }}" class="product-quantity-input" value="1">
                     </div>
                     <div id="outOfStockMessage" class="out-of-stock-message"></div>
                     <button id="addToCart" type="button" class="btn btn-primary product-button">Add to Cart</button>

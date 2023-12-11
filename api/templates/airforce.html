@@ -23,7 +23,7 @@
                     <option value="USD">USD</option>
                     <option value="EUR">EUR</option>
                 </select>
-                <p class="product-description">Description of {{ _3_attributes[1] }}...</p>
+                <div class="product-description" style="font-size: 14px; text-align: center;">Step up your sneaker game with the iconic Nike Air Force 1s. These sneakers redefine street style with their timeless design and unparalleled comfort.</div>
                 <div>
                     <label for="size">Size:</label>
                     <select id="size" name="size" onchange="updateMaxQuantity()">
@@ -37,7 +37,7 @@
                   
                 <div>
                     <label for="quantity">Quantity:</label>
-                    <input type="number" id="quantity" name="quantity" min="0" max="{{ _3_attributes[4] }}" class="product-quantity-input">
+                    <input type="number" id="quantity" name="quantity" min="1" max="{{ _3_attributes[4] }}" class="product-quantity-input" value="1">
                 </div>
                 <div id="outOfStockMessage" class="out-of-stock-message"></div>
                 <!-- Add Bootstrap classes 'btn btn-primary' for styling and functionality -->
