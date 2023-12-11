@@ -10,11 +10,8 @@
 
     <div class="content">
         <div class="product-page-container">
-            <!-- Product Card -->
             <div class="product-card">
-                <!-- Product Image -->
                 <img src="{{ _S_attributes[7] }}" alt="{{ _S_attributes[1] }}" class="product-image">
-                <!-- Product Information -->
                 <div class="product-info">
                     <h2 class="product-title">{{ _S_attributes[1] }}</h2>
                     <h3 id="product-price" class="product-price">
@@ -26,9 +23,7 @@
                         <option value="USD">USD</option>
                         <option value="EUR">EUR</option>
                     </select>
-
-                    <p>Description of {{ _S_attributes[1] }}...</p>
-
+                    <p class="product-description">Description of {{ _S_attributes[1] }}...</p>
                     <div>
                         <label for="size">Size:</label>
                         <select id="size" name="size" onchange="updateMaxQuantity()">
@@ -39,7 +34,8 @@
                     </div>
                     <div>
                         <label for="quantity">Quantity:</label>
-                        <input type="number" id="quantity" name="quantity" min="0" max="{{ _S_attributes[4] }}" class="product-quantity-input">
+                        <input type="number" id="quantity"
+			       name="quantity" min="1" max="{{ _S_attributes[4] }}" class="product-quantity-input" value="1">
                     </div>
                     <div id="outOfStockMessage" class="out-of-stock-message"></div>
                     <button id="addToCart" type="button" class="btn btn-primary product-button">Add to Cart</button>
