@@ -6,11 +6,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    {% include 'navbar.html' %} 
+    {% include 'navbar.html' %}
+    <h2 style="margin-top: 20px;">Your Shopping Basket</h2>
+
     <div class="product-page-container">
-        <h2>Your Shopping Basket</h2>
         
         <!-- Shopping Basket Table -->
+        <center>
         <div class="product-card">
             <table class="table">
                 <thead>
@@ -27,11 +29,11 @@
                 <tbody>
                     {% for item in basket_items %}
                     <tr>
-                        <td><img src="{{ item.itemPicture }}" style="width: 100px; height: auto;"></td>
-                        <td>{{ item.itemId }}</td>
-                        <td>{{ item.itemName }}</td>
-                        <td>{{ item.size }}</td>
-                        <td>
+                        <td data-label=""><img src="{{ item.itemPicture }}" alt="Product Image"></td>
+                        <td data-label="Item Id">{{ item.itemId }}</td>
+                        <td data-label="Product">{{ item.itemName }}</td>
+                        <td data-label="Size">{{ item.size }}</td>
+                        <td data-label="Quantity">
                             <input type="number" value="{{ item.quantity }}" min="1">
                         </td>
                         <td>£{{ item.price }}</td>
@@ -49,7 +51,7 @@
                 <h3>Total: £<span id="total-price"></span></h3>
             </div>
             <button id="checkoutButton" class="btn btn-success product-button product-button-success">Proceed to Checkout</button>
-        </div>
+        </div></center>
     </div>
     {% include 'footer.html' %}
     <div id="basketData" style="display: none;">

@@ -15,6 +15,10 @@ body {
   min-height: 100vh;
 }
 
+.center-align-text {
+  text-align: center;
+}
+
 
 /* Navbar Styles */
 .navbar {
@@ -116,16 +120,6 @@ h1, h2, h3, p, a, span, strong, em, ul, ol, li, blockquote, pre, code, img, tabl
 }
 
 
-/* Content Styles */
-.content {
-  padding: 20px;
-  font-size: 20px;
-  margin-bottom: 20px;
-}
-h1, h2, h3, p, a, span, strong, em, ul, ol, li, blockquote, pre, code, img, table, th, td {
-  text-align: center;
-  margin: 0;
-}
 
 /* Banner Image */
 .banner-image {
@@ -153,14 +147,12 @@ h1, h2, h3, p, a, span, strong, em, ul, ol, li, blockquote, pre, code, img, tabl
 
 /* Specific product page style */
 
-/* Product Page Main Container */
 .product-page-container {
   display: flex;
   justify-content: center;
-  padding: 50px;
+  padding: 20px;
   background-color: #f0f0f0;
 }
-/* Product Card */
 .product-card {
   display: flex; /* Aligns children (img and info) in a row */
   background: #fff;
@@ -172,8 +164,18 @@ h1, h2, h3, p, a, span, strong, em, ul, ol, li, blockquote, pre, code, img, tabl
   width: 100%; /* Adjust based on the desired width */
   max-width: 900px; /* Maximum width of the card */
 }
+.form-product-card {
+  display: flex; /* Aligns children (img and info) in a row */
+  background: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 20px;
+  width: relative; /* Adjust based on the desired width */
+  max-width: 600px; /* Maximum width of the card */
+}
 
-/* Product Image */
 .product-image {
   flex: 1; /* Takes up 1/2 of the flex container */
   width: 50%; /* Image takes up half the card width */
@@ -181,7 +183,6 @@ h1, h2, h3, p, a, span, strong, em, ul, ol, li, blockquote, pre, code, img, tabl
   object-fit: cover; /* Ensures the image covers the area well */
 }
 
-/* Product Information */
 .product-info {
   flex: 1; /* Takes up the remaining 1/2 of the flex container */
   padding: 20px;
@@ -191,7 +192,6 @@ h1, h2, h3, p, a, span, strong, em, ul, ol, li, blockquote, pre, code, img, tabl
   align-items: start; /* Aligns info to the start (left) */
 }
 
-/* Product Title */
 .product-title {
   font-size: 24px;
   font-weight: bold;
@@ -199,7 +199,6 @@ h1, h2, h3, p, a, span, strong, em, ul, ol, li, blockquote, pre, code, img, tabl
   margin-bottom: 10px;
 }
 
-/* Product Price and Description */
 .product-price, .product-description {
   font-size: 18px;
   color: #555;
@@ -207,7 +206,6 @@ h1, h2, h3, p, a, span, strong, em, ul, ol, li, blockquote, pre, code, img, tabl
   margin-bottom: 10px;
 }
 
-/* Buttons */
 .product-button {
   display: inline-block;
   margin: 10px;
@@ -224,7 +222,6 @@ h1, h2, h3, p, a, span, strong, em, ul, ol, li, blockquote, pre, code, img, tabl
   background-color: #28a745; /* Bootstrap success color */
 }
 
-/* Adjust the button's hover effect */
 .product-button:hover, .product-button-success:hover {
   opacity: 0.9;
 }
@@ -324,7 +321,6 @@ h1, h2, h3, p, a, span, strong, em, ul, ol, li, blockquote, pre, code, img, tabl
   bottom: 0;
   width: 100%;
   background: black;
-  border-radius: 6px;
 }
 footer .content {
   background: black;
@@ -439,41 +435,76 @@ footer .content {
   }
 }
 
-.table td{
-  vertical-align: middle;
+
+/* Basket stuff */
+
+
+
+/* Base Table Styles */
+.table {
+  width: 100%;
+  border-collapse: collapse; /* Collapse borders */
+  margin: 20px 0; /* Add space above and below the table */
 }
 
-.left-border {
-  border-left: 2px solid #ccc;
-  height: auto;
+/* Table Header Styles */
+.table thead th {
+  background-color: #f8f8f8; /* Light grey background */
+  color: #333; /* Dark text for contrast */
+  font-weight: normal; /* Normal font weight */
+  text-align: left; /* Align text to the left */
+  padding: 12px; /* Spacing inside cells */
+  border-bottom: 2px solid #e7e7e7; /* Light grey border under header */
 }
 
-.form-vertical .form-group {
-  margin-bottom: 15px; /* Adjust spacing as needed */
+/* Table Body Styles */
+.table tbody td {
+  padding: 12px; /* Spacing inside cells */
+  border-bottom: 1px solid #e7e7e7; /* Light grey border between rows */
+  vertical-align: middle; /* Align the content of the cell in the middle vertically */
 }
 
-/* Responsive Table and Form for smaller screens */
+/* Table Body Row Styling */
+.table tbody tr:hover {
+  background-color: #f1f1f1; /* Slight highlight on hover */
+}
+
+/* Responsive Table for smaller screens */
 @media screen and (max-width: 768px) {
-  .table {
-    width: 100%;
+  .table, .table thead, .table tbody, .table th, .table td, .table tr {
     display: block;
   }
+  .table thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  .table tr {
+    margin-bottom: 10px;
+  }
   .table td {
-    display: block;
-    width: 100%;
     text-align: right;
+    padding-left: 50%; /* Or adjust based on content */
+    position: relative;
   }
   .table td::before {
     content: attr(data-label);
-    float: left;
+    position: absolute;
+    left: 0;
+    width: 50%; /* Or adjust based on content */
+    padding-left: 15px; /* Space for the content */
     font-weight: bold;
-  }
-
-  .form-vertical .form-group {
-    display: flex;
-    flex-direction: column;
+    text-align: left;
   }
 }
+
+/* Table Cell Image */
+.table img {
+  width: 80px; /* Adjust the image size */
+  height: auto;
+  margin-right: 10px; /* Spacing between image and text */
+}
+
 
 /* Additional global adjustments for smaller screens */
 @media screen and (max-width: 768px) {
@@ -482,3 +513,52 @@ footer .content {
   }
 }
 
+/* Form styling */
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px; /* Adjust based on your preference */
+  margin: 0 auto; /* Center the form in the page */
+  padding: 20px;
+}
+
+.form-container .form-group {
+  margin-bottom: 15px; /* Space between form groups */
+}
+
+.form-container label {
+  display: block;
+  margin-bottom: 5px; /* Space between label and input */
+}
+
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px; /* Space after the input */
+}
+
+.form-container button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-container button:hover {
+  background-color: #0056b3; /* Darken button on hover */
+}
+
+/* Responsive adjustments for the form */
+@media screen and (max-width: 768px) {
+  .form-container {
+      width: 90%; /* Slightly narrower on small screens */
+  }
+}

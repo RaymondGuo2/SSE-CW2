@@ -3,59 +3,38 @@
 <head>
     <title>Jumpers</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='dropdown.css') }}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    {% include 'navbar.html' %} 
+    {% include 'navbar.html' %}
 
-    <h2 class="subheader">Shop our jumpers!</h2>
-
-{% block body %}
-<div class="container" style="margin-top: 40px !important;">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h2 class="subheader">Shop our jumpers!</h2>
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <div class="thumbnail">
-                                <a href="/hugojumper">
-                                    <img src="{{ hbj_attributes[7] }}"
-					 alt="{{ hbj_attributes[1] }}">
-                                    <div class="caption text-center">
-                                        <h4>{{ hbj_attributes[1] }}</h4>
-                                        <p>Purchase this {{
-                                        hbj_attributes[1] }} for £{{
-                                        hbj_attributes[2] }}.</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="thumbnail">
-                                <a href="/uniqlojumper">
-                                    <img src="{{ uj_attributes[7] }}"
-                                        alt="{{ uj_attributes[1] }}">
-                                    <div class="caption text-center">
-                                        <h4>{{ uj_attributes[1] }}</h4>
-                                        <p>Purchase this {{
-                                        uj_attributes[1] }} for £{{
-                                        uj_attributes[2] }}.</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
+    <div class="content">
+        <h2 style="font-weight: bold; text-align: center; margin-bottom: 10px;">JUMPERS</h2>
+        <div class="shoe-container">
+            <!-- Jumper Item -->
+            <div class="shoe-box">
+                <a href="/hugojumper">
+                    <img src="{{ hbj_attributes[7] }}" alt="{{ hbj_attributes[1] }}">
+                    <div class="shoe-caption">
+                        <h4>{{ hbj_attributes[1] }}</h4>
+                        <p>Purchase this {{ hbj_attributes[1] }} for £{{ hbj_attributes[2] }}.</p>
                     </div>
-                </div>
+                </a>
             </div>
+            <!-- Jumper Item -->
+            <div class="shoe-box">
+                <a href="/uniqlojumper">
+                    <img src="{{ uj_attributes[7] }}" alt="{{ uj_attributes[1] }}">
+                    <div class="shoe-caption">
+                        <h4>{{ uj_attributes[1] }}</h4>
+                        <p>Purchase this {{ uj_attributes[1] }} for £{{ uj_attributes[2] }}.</p>
+                    </div>
+                </a>
+            </div>
+            <!-- Add more jumper items as needed -->
         </div>
     </div>
-</div>
-{% endblock %}
-{% include 'footer.html' %}
+
+    {% include 'footer.html' %}
 </body>
 </html>
