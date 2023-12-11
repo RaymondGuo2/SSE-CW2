@@ -173,7 +173,7 @@ def dbQuery():
          str(item[4]),
          item[5].strip("'"),
          item[6].strip("'"),
-         item[7].strip("'") 
+         item[7].strip("'")
         )
         for item in unformatted_response
     ]
