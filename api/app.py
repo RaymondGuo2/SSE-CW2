@@ -328,6 +328,16 @@ def add_to_cart():
     return jsonify(success=True)
 
 
+@app.route('/remove-item/<item_id>', methods=['POST'])
+def remove_item(item_id):
+    basket = session.get('cart', [])
+    basket = [item for item in basket if str(item['itemId']) != item_id]
+    session['cart'] = basket
+    session.modified = True
+    return jsonify({'success': True, 'message': 'Item removed'})
+
+
+
 @app.route("/checkout")
 def checkout():
     return render_template("checkout.html")
