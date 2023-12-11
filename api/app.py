@@ -48,7 +48,7 @@ def send_simple_message(to_email, name, address):
         "https://api.eu.mailgun.net/v3/notesqa.com/messages",
         auth=("api", mail_api_key),
         data={
-            "from": "Excited User <mailgun@notesqa.com>",
+            "from": "NAP.G Clothing <mailgun@notesqa.com>",
             "to": [to_email],
             "subject": email_subject,
             "text": email_body
