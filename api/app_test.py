@@ -100,6 +100,16 @@ def basket_test(client):
     assert b"Adidas" in response.data
 
 
+def remove_item_test(client):
+    with client.session_transaction() as se:
+        se['cart'] = [{'itemId': '123'}, {'itemId': '456'}]
+    response = client.post('/remove-item/123')
+    assert response.status_code == 200
+    with client.session_transaction() as se:
+        assert len(se['cart']) == 1
+        assert se['cart'][0]['itemId'] == '456'
+
+
 def search_test(client):
     search_query = "shoes"
     response = client.get(f"/search?query={search_query}")
