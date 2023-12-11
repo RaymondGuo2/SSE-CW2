@@ -2,52 +2,47 @@
 <html>
 <head>
     <title>{{ _3_attributes[1] }}</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     {% include 'navbar.html' %} 
-    <div class="container">
-        <div class="row">
-            <!-- Image Column -->
-            <div class="col-md-6">
-                <img src="{{ _3_attributes[7] }}" alt="{{ _3_attributes[1] }}" class="img-responsive">
+
+    <div class="content">
+        <div class="product-page-container">
+            <div class="product-card">
+                <img src="{{ _3_attributes[7] }}" alt="{{ _3_attributes[1] }}" class="product-image">
+                <div class="product-info">
+                    <h2 class="product-title">{{ _3_attributes[1] }}</h2>
+                    <h3 id="product-price" class="product-price">
+                        <span id="currency-symbol">£</span>
+                        <span id="price">{{ _3_attributes[2] }}</span>
+                    </h3>
+                    <select id="currency-selector" class="product-currency-selector">
+                        <option value="GBP">GBP</option>
+                        <option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
+                    </select>
+                    <p class="product-description">Description of {{ _3_attributes[1] }}...</p>
+                    <div>
+                        <label for="size">Size:</label>
+                        <select id="size" name="size" onchange="updateMaxQuantity()">
+                            <option value="{{ _3_attributes[6] }}" data-id="{{ _3_attributes[0] }}">3</option>
+                            <option value="{{ _5_attributes[6] }}" data-id="{{ _5_attributes[0] }}">5</option>
+                            <option value="{{ _7_attributes[6] }}" data-id="{{ _7_attributes[0] }}">7</option>
+                            <option value="{{ _9_attributes[6] }}" data-id="{{ _9_attributes[0] }}">9</option>
+                            <option value="{{ _11_attributes[6] }}" data-id="{{ _11_attributes[0] }}">11</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="quantity">Quantity:</label>
+                        <input type="number" id="quantity" name="quantity" min="0" max="{{ _3_attributes[4] }}" class="product-quantity-input">
+                    </div>
+                    <div id="outOfStockMessage" class="out-of-stock-message"></div>
+                    <button id="addToCart" type="button" class="btn btn-primary product-button">Add to Cart</button>
+                    <button id="buyNow" type="button" class="btn btn-success product-button product-button-success">Buy Now</button>
+                </div>
             </div>
-
-            <!-- Information Column -->
-            <div class="col-md-6">
-
-                <h2>{{ _3_attributes[1] }}</h2>
-                <h3 id="product-price"><span id="currency-symbol">£</span><span id = "price">{{ _3_attributes[2] }}</span></h3>
-                <select id="currency-selector">
-                    <option value="GBP">GBP</option>
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                </select>
-
-		<p>Description of {{ _3_attributes[1] }}...</p>
-
-                <div>
-                    <label for="size">Size:</label>
-                    <select id="size" name="size" onchange="updateMaxQuantity()">
-                        <option value="{{ _3_attributes[6] }}" data-id="{{ _3_attributes[0] }}">3</option>
-                        <option value="{{ _5_attributes[6] }}" data-id="{{ _5_attributes[0] }}">5</option>
-                        <option value="{{ _7_attributes[6] }}" data-id="{{ _7_attributes[0] }}">7</option>
-			<option value="{{ _9_attributes[6] }}" data-id="{{ _9_attributes[0] }}">9</option>
-                        <option value="{{ _11_attributes[6] }}" data-id="{{ _11_attributes[0] }}">11</option>
-		    </select>
-                </div>
-                <div>
-                    <label for="quantity">Quantity:</label>
-                    <input type="number" id="quantity" name="quantity"
-			   min="0" max="{{ _3_attributes[4] }}">
-                </div>
-		<div id="outOfStockMessage" style="color: red;"></div>
-                <button id="addToCart" type="button" class="btn btn-primary">Add to Cart</button>
-                <button id="buyNow" type="button" class="btn btn-success">Buy Now</button>
-	    </div>
         </div>
     </div>
     {% include 'footer.html' %}
