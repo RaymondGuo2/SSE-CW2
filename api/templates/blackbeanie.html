@@ -70,13 +70,11 @@
     if (parseInt(quantityInput.max) === 0) {
         quantityInput.style.display = 'none';
         addToCart.style.display = 'none';
-        buyNow.style.display = 'none';
         outOfStockMessage.style.color = 'red';
         outOfStockMessage.innerText = 'Out of Stock';
     } else {
         quantityInput.style.display = 'inline-block';
         addToCart.style.display = 'inline-block';
-        buyNow.style.display = 'inline-block';
         outOfStockMessage.style.color = 'black';
         outOfStockMessage.innerText = '';
         }
@@ -136,10 +134,10 @@
         var itemName = '{{ _S_attributes[1] }}';
         var price = originalPriceGBP; // Get the current displayed price
         var sizeSelect = document.getElementById('size');
-    var selectedOption =  sizeSelect.options[sizeSelect.selectedIndex];
+        var selectedOption =  sizeSelect.options[sizeSelect.selectedIndex];
         var size = selectedOption.value;
         var quantity = document.getElementById('quantity').value;
-    var itemId = selectedOption.getAttribute('data-id');
+        var itemId = selectedOption.getAttribute('data-id');
         addToCart(itemPicture, itemName, price, size, quantity, itemId);
     });
     
