@@ -40,7 +40,6 @@
                     </div>
                     <div id="outOfStockMessage" class="out-of-stock-message"></div>
                     <button id="addToCart" type="button" class="btn btn-primary product-button">Add to Cart</button>
-                    <button id="buyNow" type="button" class="btn btn-success product-button product-button-success">Buy Now</button>
                 </div>
             </div>
         </div>
@@ -152,6 +151,42 @@
           addToCart(itemPicture, itemName, price, size, quantity, itemId);
       });
     
+      function buyNow(itemPicture, itemName, price, size, quantity, itemId) {
+        var data = { itemPicture: itemPicture, itemName: itemName, price: price, size: size, quantity: quantity, itemId: itemId };
+
+        fetch('/add-to-cart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.success) {
+                window.location.href = '/checkout';
+            } else {
+                console.error('Error adding item to cart');
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+
+
+    document.querySelector('.btn-success').addEventListener('click', function() {
+        var itemPicture = '{{ _3_attributes[7] }}';
+        var itemName = '{{ _3_attributes[1] }}';
+        var price = originalPriceGBP;
+        var sizeSelect = document.getElementById('size');
+        var selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
+        var size = selectedOption.value;
+        var quantity = document.getElementById('quantity').value;
+        var itemId = selectedOption.getAttribute('data-id');
+        buyNow(itemPicture, itemName, price, size, quantity, itemId);
+    });
+
         // Trigger the currency conversion on page load
       window.onload = function() {
           document.getElementById('currency-selector').dispatchEvent(new Event('change'));

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, session
+from flask import Flask, render_template, request, jsonify, session, redirect
 import psycopg as db
 import requests
 import os
@@ -337,7 +337,6 @@ def remove_item(item_id):
     return jsonify({'success': True, 'message': 'Item removed'})
 
 
-
 @app.route("/checkout")
 def checkout():
     return render_template("checkout.html")
@@ -369,3 +368,5 @@ def place_order():
         email=input_email,
         address=input_address
     )
+    
+app.run(debug=True)
