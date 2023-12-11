@@ -43,6 +43,21 @@ body {
   color: black;
 }
 
+/* Responsive Navbar for smaller screens */
+@media screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+  }
+  .navbar a {
+    padding: 10px;
+    font-size: 14px;
+  }
+  .navbar strong {
+    font-size: 20px;
+  }
+}
+
+
 .content {
   flex: 1;
   padding: 20px;
@@ -228,6 +243,27 @@ h1, h2, h3, p, a, span, strong, em, ul, ol, li, blockquote, pre, code, img, tabl
   margin: 10px 0;
 }
 
+@media screen and (max-width: 768px) {
+  .product-page-container {
+    padding: 20px;
+  }
+  .product-card {
+    flex-direction: column;
+  }
+  .product-image {
+    width: 100%;
+  }
+  .product-info {
+    padding: 15px;
+  }
+  .product-title, .product-price, .product-description {
+    font-size: 16px;
+  }
+  .product-button {
+    padding: 8px 15px;
+    font-size: 14px;
+  }
+}
 
 
 /* Shoes Styles */
@@ -385,28 +421,22 @@ footer .content {
   color: #fff;
 }
 
-/* Media Queries */
-@media (max-width: 768px) {
-  .footer {
-      position: relative;
-      bottom: 0;
-      left: 0;
-      transform: none;
-      width: 100%;
-      border-radius: 0;
+/* Additional Responsive Styles */
+@media screen and (max-width: 768px) {
+  h1, h2, h3 {
+    font-size: 22px;
   }
-  .footer .footer-row {
-      padding: 20px;
-      gap: 1rem;
+
+  .content, .shoe-caption h4, .shoe-caption p {
+    font-size: 16px;
   }
-  .footer-col form {
-      display: block;
+
+  .shoe-box {
+    width: 100%;
   }
-  .footer-col form :where(input, button) {
-      width: 100%;
-  }
-  .footer-col form button {
-      margin: 10px 0 0 0;
+
+  .fpimage-container {
+    flex-direction: column;
   }
 }
 
@@ -422,3 +452,34 @@ footer .content {
 .form-vertical .form-group {
   margin-bottom: 15px; /* Adjust spacing as needed */
 }
+
+/* Responsive Table and Form for smaller screens */
+@media screen and (max-width: 768px) {
+  .table {
+    width: 100%;
+    display: block;
+  }
+  .table td {
+    display: block;
+    width: 100%;
+    text-align: right;
+  }
+  .table td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+  }
+
+  .form-vertical .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* Additional global adjustments for smaller screens */
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+}
+
