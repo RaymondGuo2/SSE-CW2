@@ -8,7 +8,7 @@
 <body>
     {% include 'navbar.html' %}
     <h2 style="margin-top: 20px;">Your Shopping Basket</h2>
-
+    <div class="content">
     <div class="product-page-container">
         
         <!-- Shopping Basket Table -->
@@ -52,12 +52,13 @@
             </div>
             <button id="checkoutButton" class="btn btn-success product-button product-button-success">Proceed to Checkout</button>
         </div></center>
-    </div>
-    {% include 'footer.html' %}
+
     <div id="basketData" style="display: none;">
         {{ basket_items | tojson }}
     </div>
-
+    </div>
+    </div>
+    {% include 'footer.html' %}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var basketDataElement = document.getElementById('basketData');

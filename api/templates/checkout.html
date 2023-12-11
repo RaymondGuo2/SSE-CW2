@@ -7,8 +7,31 @@
 </head>
 <body>
     {% include 'navbar.html' %} 
+    <div class="content">
     <h2 style="margin-top: 20px;">Checkout</h2>
     <div class="product-page-container">
+        <div class="product-card">
+            <table id="products-table" class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Product</th>
+                        <th>Size</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody id="products-details">
+                    <!-- Populated by JavaScript -->
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" style="text-align:right;">Total:</td>
+                        <td>£<span id="total-price"></span></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
         <div class="form-product-card">
             <form action="/thankyou" method="post" class="form-container">
                 <div class="form-group">
@@ -23,29 +46,13 @@
                     <label for="address">Shipping Address:</label>
                     <input type="text" id="address" name="address" class="form-input">
                 </div>
+                <h3>Total: £<span id="form-total-price"></span></h3>
                 <input type="hidden" id="basketItems" name="basketItems" value="">
                 <button type="submit" class="submit-button">Place Order</button>
             </form>
-            
-        </div>
-        
-        <div class="product-card">
-            <table id="products-table" class="table">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Product</th>
-                        <th>Size</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                    </tr>
-                </thead>
-                <tbody id="products-details">
-                </tbody>
-            </table>
         </div>
     </div>
-
+    </div>
     {% include 'footer.html' %}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -65,6 +72,28 @@
                 productsDetails.appendChild(row);
             });
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+        // Retrieve basket items from local storage
+        var basketItems = JSON.parse(localStorage.getItem('basketItems'));
+
+        // Function to calculate and display total
+        function displayTotal(basketItems) {
+            var total = 0;
+            basketItems.forEach(item => {
+                total += parseFloat(item.price) * parseInt(item.quantity);
+            });
+            document.getElementById('total-price').innerText = total.toFixed(2);
+            document.getElementById('form-total-price').innerText = total.toFixed(2);
+        }
+
+        // Call the function to display total
+        if (basketItems) {
+            displayTotal(basketItems);
+        }
+    });
     </script>
+
+    
 </body>
 </html>
