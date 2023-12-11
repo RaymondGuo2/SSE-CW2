@@ -3,17 +3,28 @@
 <head>
     <title>Thank You!</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .stacked-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-  {% include 'navbar.html' %} 
+    {% include 'navbar.html' %} 
 
-    <h1 class="header">RZ Clothing</h1>
-    <h2>Hello {{ name }}, thank you for making a purchase on RZ Clothing!</h2>
-    <h3>Your order confirmation has been sent to {{ email }}. </h3>
-    <p> We aim to ship your order in the next 3-5 working days! </p>
+    <div class="product-page-container">
+        <div class="product-card stacked-container">
+            <h1 style="margin-top: 20px;">😴 NAP.G</h1>
+            <h2 style="margin-top: 20px;">Hello {{ name }}, thank you for making a purchase on 😴 NAP.G Clothing!</h2>
+            <h3 style="margin-top: 20px;">Your order confirmation has been sent to {{ email }}.</h3>
+            <p style="margin-top: 20px; margin-bottom: 20px;">We aim to ship your order in the next 3-5 working days!</p>
+        </div>
+    </div>
+
     {% include 'footer.html' %}
 </body>
 </html>
