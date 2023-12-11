@@ -1,9 +1,8 @@
-/* General Styles and Resets */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Helvetica, Arial, sans-serif; /* Set Helvetica as the default font */
+  font-family: Helvetica, Arial, sans-serif;
 }
 html, body {
   height: 100%;
@@ -19,8 +18,6 @@ body {
   text-align: center;
 }
 
-
-/* Navbar Styles */
 .navbar {
   z-index: 1;
   overflow: visible;
@@ -47,7 +44,6 @@ body {
   color: black;
 }
 
-/* Responsive Navbar for smaller screens */
 @media screen and (max-width: 768px) {
   .navbar {
     flex-direction: column;
@@ -76,7 +72,7 @@ h1{
 
 h1, h2, h3, p, a, span, strong, em, ul, ol, li, blockquote, pre, code, img, table, th, td {
   text-align: center;
-  margin: 0; /* Optional: Remove default margin for better centering */
+  margin: 0;
 }
 
 .price {
@@ -115,9 +111,6 @@ h1, h2, h3, p, a, span, strong, em, ul, ol, li, blockquote, pre, code, img, tabl
   color: black;
 }
 
-
-
-/* Banner Image */
 .banner-image {
   width: auto;
   max-width: 100%;
@@ -127,7 +120,6 @@ h1, h2, h3, p, a, span, strong, em, ul, ol, li, blockquote, pre, code, img, tabl
   margin-right: auto;
 }
 
-/* Front Page Image Styles */
 .fpimage-container {
   display: flex;
   justify-content: center;
@@ -141,8 +133,6 @@ h1, h2, h3, p, a, span, strong, em, ul, ol, li, blockquote, pre, code, img, tabl
   height: auto;
 }
 
-/* Specific product page style */
-
 .product-page-container {
   display: flex;
   justify-content: center;
@@ -150,42 +140,42 @@ h1, h2, h3, p, a, span, strong, em, ul, ol, li, blockquote, pre, code, img, tabl
   background-color: #f0f0f0;
 }
 .product-card {
-  display: flex; /* Aligns children (img and info) in a row */
+  display: flex;
   background: #fff;
   border: 1px solid #ddd;
   box-shadow: 0 3px 6px rgba(0,0,0,0.1);
   border-radius: 10px;
   overflow: hidden;
   margin: 20px;
-  width: 100%; /* Adjust based on the desired width */
-  max-width: 900px; /* Maximum width of the card */
+  width: 100%;
+  max-width: 900px;
 }
 .form-product-card {
-  display: flex; /* Aligns children (img and info) in a row */
+  display: flex;
   background: #fff;
   border: 1px solid #ddd;
   box-shadow: 0 3px 6px rgba(0,0,0,0.1);
   border-radius: 10px;
   overflow: hidden;
   margin: 20px;
-  width: relative; /* Adjust based on the desired width */
-  max-width: 600px; /* Maximum width of the card */
+  width: relative;
+  max-width: 600px;
 }
 
 .product-image {
-  flex: 1; /* Takes up 1/2 of the flex container */
-  width: 50%; /* Image takes up half the card width */
-  height: auto; /* Maintain aspect ratio */
-  object-fit: cover; /* Ensures the image covers the area well */
+  flex: 1; 
+  width: 50%;
+  height: auto;
+  object-fit: cover;
 }
 
 .product-info {
-  flex: 1; /* Takes up the remaining 1/2 of the flex container */
+  flex: 1;
   padding: 20px;
   display: flex;
-  flex-direction: column; /* Stacks info items vertically */
-  justify-content: center; /* Centers info vertically */
-  align-items: start; /* Aligns info to the start (left) */
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
 }
 
 .product-title {
@@ -208,14 +198,14 @@ h1, h2, h3, p, a, span, strong, em, ul, ol, li, blockquote, pre, code, img, tabl
   padding: 10px 20px;
   font-size: 16px;
   color: #fff;
-  background-color: #007bff; /* Bootstrap primary color */
+  background-color: #007bff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .product-button-success {
-  background-color: #28a745; /* Bootstrap success color */
+  background-color: #28a745;
 }
 
 .product-button:hover, .product-button-success:hover {
@@ -267,51 +257,49 @@ h1, h2, h3, p, a, span, strong, em, ul, ol, li, blockquote, pre, code, img, tabl
 
 .shoe-container {
   display: flex;
-  justify-content: center; /* Distribute cards evenly */
+  justify-content: center;
   flex-wrap: wrap;
   gap: 25px;
 }
 
 .shoe-box {
-  width: 250px; /* Width of each card */
-  background: #fff; /* Card background color */
-  border: 8px solid #fff; /* Card border */
-  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.2); /* Card shadow */
-  border-radius: 5px; /* Rounded corners for card */
-  overflow: hidden; /* Ensures the content fits in the card */
-  margin-bottom: 30px; /* Space below each card */
-  text-align: center; /* Center text */
-  transition: box-shadow 0.2s ease; /* Gradual transition for shadow and border */
+  width: 250px;
+  background: #fff;
+  border: 8px solid #fff;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 30px;
+  text-align: center;
+  transition: box-shadow 0.2s ease;
 }
 
 .shoe-box:hover {
-  box-shadow: 0 4px 2px rgba(0, 0, 0, 0.3); /* Darker shadow on hover */
-  border: 8px solid #fff; /* Card border */
+  box-shadow: 0 4px 2px rgba(0, 0, 0, 0.3);
+  border: 8px solid #fff;
 }
 
 .shoe-box img {
   max-width: 100%;
-  height: auto; /* Image takes the card width */
+  height: auto;
 }
 
 .shoe-caption {
-  padding: 20px 15px; /* Padding inside the card */
+  padding: 20px 15px;
 }
 
 .shoe-caption h4 {
-  font-size: 18px; /* Title font size */
-  font-weight: 600; /* Title font weight */
-  margin-bottom: 10px; /* Space below title */
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 
 .shoe-caption p {
-  font-size: 16px; /* Price font size */
-  color: #333; /* Price font color */
-  margin-bottom: 20px; /* Space below price */
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 20px;
 }
 
-
-/* Footer Styles */
 .footer {
   position: relative;
   bottom: 0;
@@ -412,7 +400,6 @@ footer .content {
   color: #fff;
 }
 
-/* Additional Responsive Styles */
 @media screen and (max-width: 768px) {
   h1, h2, h3 {
     font-size: 22px;
@@ -431,41 +418,31 @@ footer .content {
   }
 }
 
-
-/* Basket stuff */
-
-
-
-/* Base Table Styles */
 .table {
   width: 100%;
-  border-collapse: collapse; /* Collapse borders */
-  margin: 20px 0; /* Add space above and below the table */
+  border-collapse: collapse;
+  margin: 20px 0;
 }
 
-/* Table Header Styles */
 .table thead th {
-  background-color: #f8f8f8; /* Light grey background */
-  color: #333; /* Dark text for contrast */
-  font-weight: normal; /* Normal font weight */
-  text-align: left; /* Align text to the left */
-  padding: 12px; /* Spacing inside cells */
-  border-bottom: 2px solid #e7e7e7; /* Light grey border under header */
+  background-color: #f8f8f8;
+  color: #333;
+  font-weight: normal;
+  text-align: left;
+  padding: 12px;
+  border-bottom: 2px solid #e7e7e7;
 }
 
-/* Table Body Styles */
 .table tbody td {
-  padding: 12px; /* Spacing inside cells */
-  border-bottom: 1px solid #e7e7e7; /* Light grey border between rows */
-  vertical-align: middle; /* Align the content of the cell in the middle vertically */
+  padding: 12px;
+  border-bottom: 1px solid #e7e7e7;
+  vertical-align: middle;
 }
 
-/* Table Body Row Styling */
 .table tbody tr:hover {
-  background-color: #f1f1f1; /* Slight highlight on hover */
+  background-color: #f1f1f1;
 }
 
-/* Responsive Table for smaller screens */
 @media screen and (max-width: 768px) {
   .table, .table thead, .table tbody, .table th, .table td, .table tr {
     display: block;
@@ -480,52 +457,47 @@ footer .content {
   }
   .table td {
     text-align: right;
-    padding-left: 50%; /* Or adjust based on content */
+    padding-left: 50%;
     position: relative;
   }
   .table td::before {
     content: attr(data-label);
     position: absolute;
     left: 0;
-    width: 50%; /* Or adjust based on content */
-    padding-left: 15px; /* Space for the content */
+    width: 50%;
+    padding-left: 15px;
     font-weight: bold;
     text-align: left;
   }
 }
 
-/* Table Cell Image */
 .table img {
-  width: 80px; /* Adjust the image size */
+  width: 80px;
   height: auto;
-  margin-right: 10px; /* Spacing between image and text */
+  margin-right: 10px;
 }
 
-
-/* Additional global adjustments for smaller screens */
 @media screen and (max-width: 768px) {
   body {
     font-size: 16px;
   }
 }
 
-/* Form styling */
-
 .form-container {
   display: flex;
   flex-direction: column;
-  max-width: 500px; /* Adjust based on your preference */
-  margin: 0 auto; /* Center the form in the page */
+  max-width: 500px;
+  margin: 0 auto;
   padding: 20px;
 }
 
 .form-container .form-group {
-  margin-bottom: 15px; /* Space between form groups */
+  margin-bottom: 15px;
 }
 
 .form-container label {
   display: block;
-  margin-bottom: 5px; /* Space between label and input */
+  margin-bottom: 5px;
 }
 
 .form-container input[type="text"],
@@ -535,7 +507,7 @@ footer .content {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin-bottom: 10px; /* Space after the input */
+  margin-bottom: 10px;
 }
 
 .form-container button {
@@ -549,12 +521,11 @@ footer .content {
 }
 
 .form-container button:hover {
-  background-color: #0056b3; /* Darken button on hover */
+  background-color: #0056b3;
 }
 
-/* Responsive adjustments for the form */
 @media screen and (max-width: 768px) {
   .form-container {
-      width: 90%; /* Slightly narrower on small screens */
+      width: 90%;
   }
 }

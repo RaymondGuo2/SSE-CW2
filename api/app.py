@@ -193,7 +193,6 @@ def reduceStock(itemID: int, reduceBy: int):
 
 
 def selectAttribute(itemID: int):
-    # attribute = "item_name" "price" "type" "stock" "color" "size" "url"
     conn, curs = connectDB()
     curs.execute("""
         SELECT COUNT(*)
@@ -348,10 +347,8 @@ def place_order():
     input_email = request.form.get("email")
     input_address = request.form.get("address")
 
-    # Call the function to send an email
     response = send_simple_message(input_email, input_name, input_address)
 
-    # Handle the email response (Optional)
     if response.status_code == 200:
         print("Email sent successfully!")
     else:

@@ -48,118 +48,116 @@
     </div>
     {% include 'footer.html' %}
     <script>
-      function updateMaxQuantity() {
-	  var sizeSelect = document.getElementById('size');
-	  var quantityInput = document.getElementById('quantity');
-	  var outOfStockMessage = document.getElementById('outOfStockMessage');
-	  var addToCart = document.getElementById('addToCart');
-	  var buyNow = document.getElementById('buyNow');
-	  switch (sizeSelect.value) {
-	  case "{{ _3_attributes[6] }}":
-	      quantityInput.max = "{{ _3_attributes[4] }}";
-	      break;
-	  case "{{ _5_attributes[6] }}":
-	      quantityInput.max = "{{ _5_attributes[4] }}";
-	      break;
-	  case "{{ _7_attributes[6] }}":
-	      quantityInput.max = "{{ _7_attributes[4] }}";
-	      break;
-	  case "{{ _9_attributes[6] }}":
-	      quantityInput.max = "{{ _9_attributes[4] }}";
-	      break;
-	  case "{{ _11_attributes[6] }}":
-	      quantityInput.max = "{{ _11_attributes[4] }}";
-	      break;
-	  default:
-	      quantityInput.max = "{{ _3_attributes[4] }}";
-	      break;
-	  }
-	  quantityInput.value = 1;
-	  if (parseInt(quantityInput.max) === 0) {
-	      quantityInput.style.display = 'none';
-	      addToCart.style.display = 'none';
-	      buyNow.style.display = 'none';
-	      outOfStockMessage.style.color = 'red';
-	      outOfStockMessage.innerText = 'Out of Stock';
-	  } else {
-	      quantityInput.style.display = 'inline-block';
-	      addToCart.style.display = 'inline-block';
-	      buyNow.style.display = 'inline-block';
-	      outOfStockMessage.style.color = 'black';
-	      outOfStockMessage.innerText = '';
-	  }
-      }
+        function updateMaxQuantity() {
+        var sizeSelect = document.getElementById('size');
+        var quantityInput = document.getElementById('quantity');
+        var outOfStockMessage = document.getElementById('outOfStockMessage');
+        var addToCart = document.getElementById('addToCart');
+        var buyNow = document.getElementById('buyNow');
+        switch (sizeSelect.value) {
+        case "{{ _3_attributes[6] }}":
+            quantityInput.max = "{{ _3_attributes[4] }}";
+            break;
+        case "{{ _5_attributes[6] }}":
+            quantityInput.max = "{{ _5_attributes[4] }}";
+            break;
+        case "{{ _7_attributes[6] }}":
+            quantityInput.max = "{{ _7_attributes[4] }}";
+            break;
+        case "{{ _9_attributes[6] }}":
+            quantityInput.max = "{{ _9_attributes[4] }}";
+            break;
+        case "{{ _11_attributes[6] }}":
+            quantityInput.max = "{{ _11_attributes[4] }}";
+            break;
+        default:
+            quantityInput.max = "{{ _3_attributes[4] }}";
+            break;
+        }
+        quantityInput.value = 1;
+        if (parseInt(quantityInput.max) === 0) {
+            quantityInput.style.display = 'none';
+            addToCart.style.display = 'none';
+            buyNow.style.display = 'none';
+            outOfStockMessage.style.color = 'red';
+            outOfStockMessage.innerText = 'Out of Stock';
+        } else {
+            quantityInput.style.display = 'inline-block';
+            addToCart.style.display = 'inline-block';
+            buyNow.style.display = 'inline-block';
+            outOfStockMessage.style.color = 'black';
+            outOfStockMessage.innerText = '';
+        }
+        }
 
-      var originalPriceGBP = parseFloat('{{ _3_attributes[2] }}');
+        var originalPriceGBP = parseFloat('{{ _3_attributes[2] }}');
 
-      function updatePriceDisplay(price, currencySymbol) {
-	  document.getElementById('price').innerText = price.toFixed(2);
-          document.getElementById('currency-symbol').innerText = currencySymbol;
-      }
-    
-      function convertAndDisplayPrice(selectedCurrency) {
-          if (selectedCurrency === 'GBP') {
-              updatePriceDisplay(originalPriceGBP, '£');
-          } else {
-              fetch('/convert_currency?price=' + originalPriceGBP + '&currency=' + selectedCurrency)
-                  .then(response => response.json())
-                  .then(data => {
-                      var currencySymbols = { 'USD': '$', 'EUR': '€', 'GBP': '£' };
-                      var symbol = currencySymbols[selectedCurrency];
-                      updatePriceDisplay(data.convertedPrice, symbol);
-                  })
-                  .catch(error => console.error('Error:', error));
-          }
-      }
+    function updatePriceDisplay(price, currencySymbol) {
+        document.getElementById('price').innerText = price.toFixed(2);
+        document.getElementById('currency-symbol').innerText = currencySymbol;
+    }
 
-      document.getElementById('currency-selector').addEventListener('change', function() {
-	  convertAndDisplayPrice(this.value);
-      });
-    
-        // Function to add items to the cart
-      function addToCart(itemPicture, itemName, price, size, quantity, itemId) {
-          var data = { itemPicture: itemPicture, itemName: itemName, price: price, size: size, quantity: quantity, itemId: itemId };
-    
-          fetch('/add-to-cart', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(data),
-          })
-          .then(response => response.json())
-          .then(data => {
-              if(data.success) {
-                  window.location.href = '/basket';
-              } else {
-                  console.error('Error adding item to cart');
-              }
-          })
-          .catch((error) => {
-              console.error('Error:', error);
-          });
-      }
-    
-        // Event listener for the Add to Cart button
-      document.querySelector('.btn-primary').addEventListener('click', function() {
-          var itemPicture = '{{ _3_attributes[7] }}';
-          var itemName = '{{ _3_attributes[1] }}';
-          var price = originalPriceGBP; // Get the current displayed price
-          var sizeSelect = document.getElementById('size');
-	  var selectedOption =  sizeSelect.options[sizeSelect.selectedIndex];
-          var size = selectedOption.value;
-          var quantity = document.getElementById('quantity').value;
-	  var itemId = selectedOption.getAttribute('data-id');
-          addToCart(itemPicture, itemName, price, size, quantity, itemId);
-      });
-    
-      function buyNow(itemPicture, itemName, price, size, quantity, itemId) {
+    function convertAndDisplayPrice(selectedCurrency) {
+        if (selectedCurrency === 'GBP') {
+            updatePriceDisplay(originalPriceGBP, '£');
+        } else {
+            fetch('/convert_currency?price=' + originalPriceGBP + '&currency=' + selectedCurrency)
+                .then(response => response.json())
+                .then(data => {
+                    var currencySymbols = { 'USD': '$', 'EUR': '€', 'GBP': '£' };
+                    var symbol = currencySymbols[selectedCurrency];
+                    updatePriceDisplay(data.convertedPrice, symbol);
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    }
+
+    document.getElementById('currency-selector').addEventListener('change', function() {
+        convertAndDisplayPrice(this.value);
+        });
+
+    function addToCart(itemPicture, itemName, price, size, quantity, itemId) {
+            var data = { itemPicture: itemPicture, itemName: itemName, price: price, size: size, quantity: quantity, itemId: itemId };
+
+            fetch('/add-to-cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.success) {
+                    window.location.href = '/basket';
+                } else {
+                    console.error('Error adding item to cart');
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+
+    document.querySelector('.btn-primary').addEventListener('click', function() {
+        var itemPicture = '{{ _3_attributes[7] }}';
+        var itemName = '{{ _3_attributes[1] }}';
+        var price = originalPriceGBP;
+        var sizeSelect = document.getElementById('size');
+        var selectedOption =  sizeSelect.options[sizeSelect.selectedIndex];
+        var size = selectedOption.value;
+        var quantity = document.getElementById('quantity').value;
+        var itemId = selectedOption.getAttribute('data-id');
+        addToCart(itemPicture, itemName, price, size, quantity, itemId);
+    });
+
+    function buyNow(itemPicture, itemName, price, size, quantity, itemId) {
         var data = { itemPicture: itemPicture, itemName: itemName, price: price, size: size, quantity: quantity, itemId: itemId };
 
         fetch('/add-to-cart', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
         })
@@ -189,10 +187,9 @@
         buyNow(itemPicture, itemName, price, size, quantity, itemId);
     });
 
-        // Trigger the currency conversion on page load
-      window.onload = function() {
-          document.getElementById('currency-selector').dispatchEvent(new Event('change'));
-      };
+        window.onload = function() {
+            document.getElementById('currency-selector').dispatchEvent(new Event('change'));
+        };
     </script>
 </body>
 </html>

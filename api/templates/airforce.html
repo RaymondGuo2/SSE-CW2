@@ -3,18 +3,14 @@
 <head>
     <title>{{ _3_attributes[1] }}</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
-    <!-- Include Bootstrap CSS for button functionality -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     {% include 'navbar.html' %} 
     <div class="content">
     <div class="product-page-container">
-        <!-- Product Card -->
         <div class="product-card">
-            <!-- Product Image -->
             <img src="{{ _3_attributes[7] }}" alt="{{ _3_attributes[1] }}" class="product-image">
-            <!-- Product Information -->
             <div class="product-info">
                 <h2 class="product-title">{{ _3_attributes[1] }}</h2>
                 <h3 id="product-price" class="product-price"><span id="currency-symbol">£</span><span id="price">{{ _3_attributes[2] }}</span></h3>
@@ -40,7 +36,6 @@
                     <input type="number" id="quantity" name="quantity" min="1" max="{{ _3_attributes[4] }}" class="product-quantity-input" value="1">
                 </div>
                 <div id="outOfStockMessage" class="out-of-stock-message"></div>
-                <!-- Add Bootstrap classes 'btn btn-primary' for styling and functionality -->
                 <button id="addToCart" type="button" class="btn btn-primary product-button">Add to Cart</button>
             </div>
         </div>
@@ -116,7 +111,6 @@
 	  convertAndDisplayPrice(this.value);
       });
     
-        // Function to add items to the cart
       function addToCart(itemPicture, itemName, price, size, quantity, itemId) {
           var data = { itemPicture: itemPicture, itemName: itemName, price: price, size: size, quantity: quantity, itemId: itemId };
     
@@ -140,11 +134,10 @@
           });
       }
     
-        // Event listener for the Add to Cart button
       document.querySelector('.btn-primary').addEventListener('click', function() {
           var itemPicture = '{{ _3_attributes[7] }}';
           var itemName = '{{ _3_attributes[1] }}';
-          var price = originalPriceGBP; // Get the current displayed price
+          var price = originalPriceGBP;
           var sizeSelect = document.getElementById('size');
 	  var selectedOption =  sizeSelect.options[sizeSelect.selectedIndex];
           var size = selectedOption.value;
@@ -153,7 +146,6 @@
           addToCart(itemPicture, itemName, price, size, quantity, itemId);
       });
     
-        // Trigger the currency conversion on page load
       window.onload = function() {
           document.getElementById('currency-selector').dispatchEvent(new Event('change'));
       };

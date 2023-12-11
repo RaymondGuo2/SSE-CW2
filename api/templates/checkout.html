@@ -22,7 +22,6 @@
                     </tr>
                 </thead>
                 <tbody id="products-details">
-                    <!-- Populated by JavaScript -->
                 </tbody>
                 <tfoot>
                     <tr>
@@ -74,10 +73,7 @@
         });
 
         document.addEventListener('DOMContentLoaded', function() {
-        // Retrieve basket items from local storage
         var basketItems = JSON.parse(localStorage.getItem('basketItems'));
-
-        // Function to calculate and display total
         function displayTotal(basketItems) {
             var total = 0;
             basketItems.forEach(item => {
@@ -87,7 +83,6 @@
             document.getElementById('form-total-price').innerText = total.toFixed(2);
         }
 
-        // Call the function to display total
         if (basketItems) {
             displayTotal(basketItems);
         }
