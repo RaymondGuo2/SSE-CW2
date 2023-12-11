@@ -36,7 +36,7 @@ def basket():
 
 
 def send_simple_message(to_email, name, address):
-    mail_api_key = os.environ.get('mailAPIKEY')
+    mail_api_key = os.environ.get('mailAPIKEY2')
     email_subject = f"Thank You for Your Order, {name}!"
     email_body = (
         f"Dear {name},\n\n"
@@ -45,10 +45,10 @@ def send_simple_message(to_email, name, address):
     )
 
     return requests.post(
-        "https://api.eu.mailgun.net/v3/noteqa.com/messages",
+        "https://api.eu.mailgun.net/v3/notesqa.com/messages",
         auth=("api", mail_api_key),
         data={
-            "from": "Excited User <mailgun@noteqa.com>",
+            "from": "Excited User <mailgun@notesqa.com>",
             "to": [to_email],
             "subject": email_subject,
             "text": email_body

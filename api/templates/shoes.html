@@ -2,59 +2,40 @@
 <html>
 <head>
     <title>Shoes</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" >
 </head>
 <body>
-    {% include 'navbar.html' %} 
+    {% include 'navbar.html' %}
 
-    <h2 class="subheader">Shop our shoes!</h2>
-
-{% block body %}
-<div class="container" style="margin-top: 40px !important;">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h2 class="subheader">Shop our shoes!</h2>
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <div class="thumbnail">
-                                <a href="/airforce">
-                                    <img src="{{ af_attributes[7] }}">
-                                    <div class="caption text-center">
-                                        <h4>{{ af_attributes[1] }}</h4>
-                                        <p>Purchase this pair of {{
-                                        af_attributes[1] }} for £{{
-                                        af_attributes[2] }}.</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="thumbnail">
-                                <a href="/vans">
-                                    <img src="{{ v_attributes[7] }}"
-                                        alt="{{ v_attributes[1] }}">
-                                    <div class="caption text-center">
-                                        <h4>{{ v_attributes[1] }}</h4>
-                                        <p>Purchase this pair of {{
-                                        v_attributes[1] }} for £{{
-                                        v_attributes[2] }}.</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
+    <div class="content">
+        <h2 style="font-weight: bold; text-align: center; margin-bottom: 10px;">SHOES</h2>
+        <div class="shoe-container">
+            <!-- Shoe Item -->
+            <div class="shoe-box">
+                <a href="/airforce">
+                    <img src="{{ af_attributes[7] }}" alt="Air Force Shoes">
+                    <div class="shoe-caption">
+                        <h4>{{ af_attributes[1] }}</h4>
+                        <p>Purchase this pair of {{ af_attributes[1] }} for £{{ af_attributes[2] }}.</p>
                     </div>
-                </div>
+                </a>
             </div>
+            <!-- Shoe Item -->
+            <div class="shoe-box">
+                <a href="/vans">
+                    <img src="{{ v_attributes[7] }}" alt="Vans Shoes">
+                    <div class="shoe-caption">
+                        <h4>{{ v_attributes[1] }}</h4>
+                        <p>Purchase this pair of {{ v_attributes[1] }} for £{{ v_attributes[2] }}.</p>
+                    </div>
+                </a>
+            </div>
+            <!-- Add more shoe items as needed -->
         </div>
     </div>
-</div>
-{% endblock %}
 
-{% include 'footer.html' %}
+    {% include 'footer.html' %}
 </body>
 </html>

@@ -2,57 +2,55 @@
 <html>
 <head>
     <title>Your Basket</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" >
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     {% include 'navbar.html' %} 
-    <div class="container">
+    <div class="product-page-container">
         <h2>Your Shopping Basket</h2>
         
         <!-- Shopping Basket Table -->
-        <table class="table">
-            <thead>
-                <tr>
-                  <th></th>
-		    <th>Item Id</th>
-                    <th>Product</th>
-                    <th>Size</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- This section will be dynamically filled with cart items -->
-                {% for item in basket_items %}
-                <tr>
-                    <td><img src = "{{ item.itemPicture }}" style="width: 100px; height: auto;"></td>
-		    <td>
-		      {{ item.itemId }}
-		      </td>
-		    <td>
-                        {{ item.itemName }}
-                    </td>
-                    <td>{{ item.size }}</td>
-                    <td>
-                        <input type="number" value="{{ item.quantity }}" min="1">
-                    </td>
-                    <td> £{{ item.price }}</td>
-                    <td>
-                        <button class="btn btn-danger">Remove</button>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="product-card">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Item Id</th>
+                        <th>Product</th>
+                        <th>Size</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in basket_items %}
+                    <tr>
+                        <td><img src="{{ item.itemPicture }}" style="width: 100px; height: auto;"></td>
+                        <td>{{ item.itemId }}</td>
+                        <td>{{ item.itemName }}</td>
+                        <td>{{ item.size }}</td>
+                        <td>
+                            <input type="number" value="{{ item.quantity }}" min="1">
+                        </td>
+                        <td>£{{ item.price }}</td>
+                        <td>
+                            <button class="btn btn-danger">Remove</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
-        <div class="text-right">
+        <div class="product-info text-right">
             <div class="total-price">
                 <h3>Total: £<span id="total-price"></span></h3>
             </div>
-            <button id="checkoutButton" class = "btn btn-primary">Proceed to Checkout</button>
+            <button id="checkoutButton" class="btn btn-success product-button product-button-success">Proceed to Checkout</button>
         </div>
     </div>
     {% include 'footer.html' %}
