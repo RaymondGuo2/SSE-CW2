@@ -320,12 +320,11 @@ h1, h2, h3, p, a, span, strong, em, ul, ol, li, blockquote, pre, code, img, tabl
 
 /* Footer Styles */
 .footer {
-  position: fixed;
+  position: relative;
   bottom: 0;
   width: 100%;
   background: black;
   border-radius: 6px;
-  font-family: "Staatliches", sans-serif;
 }
 footer .content {
   background: black;
