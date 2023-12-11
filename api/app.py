@@ -166,6 +166,7 @@ def dbQuery():
     unformatted_response = curs.fetchall()
     response = [
         (
+         item[0],
          item[1].strip("'"),
          f"{item[2]:.2f}",
          item[3].strip("'"),
