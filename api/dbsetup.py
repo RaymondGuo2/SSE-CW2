@@ -14,7 +14,7 @@ def connectDB():
         USER = os.environ.get('USER')
         PASSWORD = os.environ.get('PASSWORD')
         CLIENT_ENCODING = os.environ.get('CLIENT_ENCODING')
-        
+
         server_params = {
             'dbname': DBNAME,
             'host': HOST,

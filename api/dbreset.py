@@ -14,7 +14,7 @@ def resetTableItem():
         USER = os.environ.get('USER')
         PASSWORD = os.environ.get('PASSWORD')
         CLIENT_ENCODING = os.environ.get('CLIENT_ENCODING')
-        
+
         server_params = {
             'dbname': DBNAME,
             'host': HOST,
@@ -31,7 +31,7 @@ def resetTableItem():
         conn.commit()
         print("All Rows Deleted")
         print("Item Table Deleted")
-        
+
     except db.Error as e:
         print(f"Error connecting to the database: {e}")
 
