@@ -36,9 +36,9 @@
                         <td data-label="Quantity">
                             <input type="number" value="{{ item.quantity }}" min="1">
                         </td>
-                        <td data-label="Price">£{{ item.price }}</td>
-                        <td data-label="Action">
-                            <button class="btn btn-danger">Remove</button>
+                        <td>£{{ item.price }}</td>
+                        <td>
+                            <button class="btn btn-danger" data-item-id="{{ item.itemId }}">Remove</button>
                         </td>
                     </tr>
                     {% endfor %}
@@ -67,6 +67,14 @@
             var checkoutButton = document.getElementById('checkoutButton');
             checkoutButton.addEventListener('click', saveToCheckout);
 
+            var removeButtons = document.querySelectorAll('.btn-danger');
+            removeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    var itemId = this.getAttribute('data-item-id');
+                    removeItem(itemId);
+                });
+            });
+
             function saveToCheckout() {
                 localStorage.setItem('basketItems', JSON.stringify(basketItems));
                 window.location.href = '/checkout';
@@ -78,6 +86,26 @@
                     total += parseFloat(item.price) * parseInt(item.quantity);
                 });
                 document.getElementById('total-price').innerText = total.toFixed(2);
+            }
+
+            function removeItem(itemId) {
+                fetch('/remove-item/' + itemId, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ itemId: itemId}),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Item removed:', data);
+                    basketItems = basketItems.filter(item => item.itemId !== itemId);
+                    displayTotal(basketItems);
+                    document.querySelector('tr[data-item-id]="' + itemId + '"]').remove();
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
             }
         });    
     </script>

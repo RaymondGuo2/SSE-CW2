@@ -166,7 +166,7 @@ def dbQuery():
     unformatted_response = curs.fetchall()
     response = [
         (
-         item[0].strip("'"),
+         item[0],
          item[1].strip("'"),
          f"{item[2]:.2f}",
          item[3].strip("'"),
@@ -326,6 +326,16 @@ def add_to_cart():
     session['cart'].append(data)
     session.modified = True
     return jsonify(success=True)
+
+
+@app.route('/remove-item/<item_id>', methods=['POST'])
+def remove_item(item_id):
+    basket = session.get('cart', [])
+    basket = [item for item in basket if str(item['itemId']) != item_id]
+    session['cart'] = basket
+    session.modified = True
+    return jsonify({'success': True, 'message': 'Item removed'})
+
 
 
 @app.route("/checkout")
